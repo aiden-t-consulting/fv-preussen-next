@@ -113,7 +113,7 @@ export function Header() {
         <div className="mx-auto max-w-[1280px] px-4">
           <div
             className={cn(
-              "relative flex items-center justify-between transition-all duration-300",
+              "flex items-center justify-between transition-all duration-300",
               scrolled ? "h-[64px] lg:h-[72px]" : "h-[72px] lg:h-[88px]"
             )}
           >
@@ -134,7 +134,7 @@ export function Header() {
             </Link>
 
             {/* Desktop left nav */}
-            <div className="hidden flex-1 items-center gap-0 pr-20 lg:flex">
+            <div className="hidden flex-1 items-center gap-0 lg:flex">
               {nav.slice(0, 4).map((item, index) => (
                 <div key={item.href} className="flex items-center">
                   {index > 0 && (
@@ -145,27 +145,28 @@ export function Header() {
               ))}
             </div>
 
-            {/* Desktop centered logo */}
-            <Link
-              href="/"
-              className="absolute left-1/2 hidden -translate-x-1/2 lg:block"
-              aria-label="FV Preussen Eberswalde – Startseite"
-            >
-              <Image
-                src="/logo.png"
-                alt="FV Preussen Eberswalde"
-                width={80}
-                height={80}
-                className={cn(
-                  "w-auto transition-all duration-300",
-                  scrolled ? "h-[48px]" : "h-[68px]"
-                )}
-                priority
-              />
-            </Link>
+            {/* Desktop centered logo – fixed-width slot so it never overlaps nav */}
+            <div className="hidden w-[130px] shrink-0 justify-center lg:flex">
+              <Link
+                href="/"
+                aria-label="FV Preussen Eberswalde – Startseite"
+              >
+                <Image
+                  src="/logo.png"
+                  alt="FV Preussen Eberswalde"
+                  width={80}
+                  height={80}
+                  className={cn(
+                    "w-auto max-w-[100px] transition-all duration-300",
+                    scrolled ? "h-[48px]" : "h-[68px]"
+                  )}
+                  priority
+                />
+              </Link>
+            </div>
 
             {/* Desktop right nav + CTAs */}
-            <div className="hidden flex-1 items-center justify-end gap-0 pl-20 lg:flex">
+            <div className="hidden flex-1 items-center justify-end gap-0 lg:flex">
               {nav.slice(4).map((item, index) => (
                 <div key={item.href} className="flex items-center">
                   {index > 0 && (
