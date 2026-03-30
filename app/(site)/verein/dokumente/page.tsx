@@ -16,22 +16,18 @@ const documents = [
     category: "Vereinsdokumente",
     items: [
       {
-        title: "Vereinssatzung",
-        description: "Die gültige Satzung des FV Preussen Eberswalde e.V. in der aktuellen Fassung.",
+        title: "DIE SATZUNG",
+        description: "Satzung des FV Preussen Eberswalde in der auf der Bestandsseite veroffentlichten Fassung.",
         type: "PDF",
-        available: false,
+        available: true,
+        url: "https://fvpreussen-eberswalde.de/wp-content/uploads/2024/08/Satzung-FVP-16-11-2023.pdf",
       },
       {
-        title: "Beitragsordnung",
-        description: "Aktuelle Mitgliedsbeiträge und Zahlungsmodalitäten für alle Mitgliedskategorien.",
+        title: "Die Finanz- und Beitragsordnung",
+        description: "Regelung zu Beitragen und finanziellen Rahmenbedingungen des Vereins.",
         type: "PDF",
-        available: false,
-      },
-      {
-        title: "Jugendordnung",
-        description: "Regelwerk und Richtlinien für den Jugendbereich des Vereins.",
-        type: "PDF",
-        available: false,
+        available: true,
+        url: "https://fvpreussen-eberswalde.de/wp-content/uploads/2024/08/Finanz-und-Beitragsordnung-2024-2.pdf",
       },
     ],
   },
@@ -39,10 +35,11 @@ const documents = [
     category: "Formulare",
     items: [
       {
-        title: "Mitgliedsantrag",
-        description: "Antrag zur Aufnahme als ordentliches Mitglied des FV Preussen Eberswalde.",
+        title: "DER AUFNAHMEANTRAG",
+        description: "Mitgliedsantrag in der auf der Bestandsseite veroffentlichten Fassung.",
         type: "PDF",
-        available: false,
+        available: true,
+        url: "https://fvpreussen-eberswalde.de/wp-content/uploads/2024/07/FVP-Mitgliedsantrag-Neu-2024.pdf",
       },
       {
         title: "SEPA-Lastschriftmandat",
@@ -59,18 +56,12 @@ const documents = [
     ],
   },
   {
-    category: "Protokolle",
+    category: "Hinweise",
     items: [
       {
-        title: "Protokoll Jahreshauptversammlung 2024",
-        description: "Offizielles Protokoll der Jahreshauptversammlung 2024.",
-        type: "PDF",
-        available: false,
-      },
-      {
-        title: "Protokoll Jahreshauptversammlung 2023",
-        description: "Offizielles Protokoll der Jahreshauptversammlung 2023.",
-        type: "PDF",
+        title: "Weitere Dokumente auf Anfrage",
+        description: "Falls ein Dokument nicht direkt verfugbar ist, senden wir es gerne per E-Mail zu.",
+        type: "Info",
         available: false,
       },
     ],
@@ -148,11 +139,16 @@ export default function DokumentePage() {
                     </div>
                     <p className="text-xs text-gray-500 mt-0.5">{doc.description}</p>
                   </div>
-                  {doc.available ? (
-                    <button className="shrink-0 flex items-center gap-1.5 bg-[#21a530] text-white text-xs font-semibold px-4 py-2 rounded-lg hover:bg-[#1a8f28] transition-colors">
+                  {doc.available && doc.url ? (
+                    <a
+                      href={doc.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="shrink-0 flex items-center gap-1.5 bg-[#21a530] text-white text-xs font-semibold px-4 py-2 rounded-lg hover:bg-[#1a8f28] transition-colors"
+                    >
                       <Download className="w-3.5 h-3.5" />
                       Download
-                    </button>
+                    </a>
                   ) : (
                     <button
                       disabled

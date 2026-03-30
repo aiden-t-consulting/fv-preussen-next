@@ -8,6 +8,7 @@ import { MatchSection } from "@/components/home/MatchSection";
 import { getTeamBySlug, getTeamSlugs } from "@/lib/sanity/queries";
 import { getUpcomingMatches, getRecentResults, getLeagueTable } from "@/lib/fupa/client";
 import { urlFor } from "@/lib/sanity/client";
+import { LEGACY_TEAMS, getLegacyTeamBySlug } from "@/lib/legacy/teams";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -15,13 +16,14 @@ interface Props {
 
 export async function generateStaticParams() {
   const slugs = await getTeamSlugs();
-  return slugs.map((slug) => ({ slug }));
+  const fallbackSlugs = LEGACY_TEAMS.map((team) => team.slug?.current).filter(Boolean) as string[];
+  return Array.from(new Set([...slugs, ...fallbackSlugs])).map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const team = await getTeamBySlug(slug);
-  if (!team) return {};
+  const team = (await getTeamBySlug(slug)) ?? getLegacyTeamBySlug(slug);
+  if (!team?.name) return {};
   return {
     title: team.name,
     description: `Kader, Spielplan und Infos zu ${team.name} – FV Preussen Eberswalde.`,
@@ -32,7 +34,7 @@ export const revalidate = 300;
 
 export default async function TeamPage({ params }: Props) {
   const { slug } = await params;
-  const team = await getTeamBySlug(slug);
+  const team = (await getTeamBySlug(slug)) ?? getLegacyTeamBySlug(slug);
   if (!team) notFound();
 
   const [upcoming, results, table] = await Promise.all([
@@ -76,6 +78,14 @@ export default async function TeamPage({ params }: Props) {
                 height={80}
                 className="object-contain"
               />
+            ) : "photo" in team && team.photo ? (
+              <Image
+                src={team.photo}
+                alt={team.name ?? "Teamfoto"}
+                width={112}
+                height={112}
+                className="object-cover w-28 h-28 rounded-xl"
+              />
             ) : (
               <Trophy className="w-12 h-12 text-white/60" />
             )}
@@ -107,6 +117,9 @@ export default async function TeamPage({ params }: Props) {
             </div>
             {team.description && (
               <p className="mt-4 text-gray-300 max-w-2xl">{team.description}</p>
+            )}
+            {"legacyNote" in team && team.legacyNote && (
+              <p className="mt-4 text-sm text-green-100 max-w-2xl">{team.legacyNote}</p>
             )}
           </div>
         </div>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import {
   ArrowLeft,
   MapPin,
@@ -10,6 +11,7 @@ import {
   Mail,
   Navigation,
   ParkingCircle,
+  BookOpen,
 } from "lucide-react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
@@ -38,6 +40,19 @@ const publicTransport = [
       "Linie 862 – Haltestelle «Westend»",
       "Linie 901 – Haltestelle «Pfefferwerkerstraße»",
     ],
+  },
+];
+
+const stadionhefte = [
+  {
+    title: "Preussen Stadionheft 2018/19",
+    image: "/images/legacy/stadion/stadionheft-18-19.jpg",
+    source: "https://fvpreussen-eberswalde.de/wp-content/uploads/2018/10/PreussenStadionheft-18-19.jpg",
+  },
+  {
+    title: "Preussen Stadionheft 2017/18",
+    image: "/images/legacy/stadion/stadionheft-17-18.jpg",
+    source: "https://fvpreussen-eberswalde.de/wp-content/uploads/2018/10/PreussenStadionheft-17-18.jpg",
   },
 ];
 
@@ -164,6 +179,37 @@ export default function StadionPage() {
                 <h3 className="font-bold text-gray-900 text-sm mb-1">{f.label}</h3>
                 <p className="text-xs text-gray-500 leading-relaxed">{f.desc}</p>
               </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Legacy stadium magazine */}
+        <section>
+          <SectionHeading label="Archiv" title="Stadionheft" align="left" />
+          <div className="grid sm:grid-cols-2 gap-6">
+            {stadionhefte.map((item) => (
+              <a
+                key={item.title}
+                href={item.source}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group bg-white rounded-2xl border border-gray-100 overflow-hidden hover:border-[#21a530]/40 hover:shadow-md transition-all"
+              >
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  width={640}
+                  height={420}
+                  className="w-full h-52 object-cover"
+                />
+                <div className="p-4 flex items-center justify-between gap-3">
+                  <p className="font-semibold text-gray-900 text-sm">{item.title}</p>
+                  <span className="inline-flex items-center gap-1.5 text-xs text-[#21a530] font-semibold">
+                    <BookOpen className="w-4 h-4" />
+                    Offnen
+                  </span>
+                </div>
+              </a>
             ))}
           </div>
         </section>

@@ -2,10 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { Users, Trophy, ArrowLeft } from "lucide-react";
-import { SectionHeading } from "@/components/ui/SectionHeading";
 import { getAllTeams } from "@/lib/sanity/queries";
 import { urlFor } from "@/lib/sanity/client";
-import type { Team } from "@/types";
+import { LEGACY_TEAMS, type LegacyTeam } from "@/lib/legacy/teams";
 
 export const metadata: Metadata = {
   title: "Unsere Teams",
@@ -15,105 +14,9 @@ export const metadata: Metadata = {
 
 export const revalidate = 3600;
 
-// Fallback teams if Sanity is not yet connected
-type FallbackTeam = Partial<Team> & {
-  photo?: string;
-  source?: string;
-};
+const FALLBACK_TEAMS: LegacyTeam[] = LEGACY_TEAMS;
 
-// Legacy fallback teams sourced from the old Vereinsseite
-const FALLBACK_TEAMS: FallbackTeam[] = [
-  {
-    _id: "legacy-1-herren",
-    name: "1. Manner",
-    slug: { current: "herren" },
-    division: "Grossfeld",
-    coach: "N.N.",
-    photo: "/images/legacy/teams/1-mannschaft.jpg",
-    source: "https://fvpreussen-eberswalde.de/grossfeld/",
-  },
-  {
-    _id: "legacy-2-herren",
-    name: "2. Manner",
-    slug: { current: "herren-ii" },
-    division: "Grossfeld",
-    coach: "N.N.",
-    photo: "/images/legacy/teams/2-mannschaft.jpg",
-    source: "https://fvpreussen-eberswalde.de/grossfeld/",
-  },
-  {
-    _id: "legacy-u19",
-    name: "A-Junioren (U19)",
-    slug: { current: "u19" },
-    division: "Nachwuchs",
-    coach: "N.N.",
-  },
-  {
-    _id: "legacy-u17",
-    name: "B-Junioren (U17)",
-    slug: { current: "u17" },
-    division: "Nachwuchs",
-    coach: "N.N.",
-  },
-  {
-    _id: "legacy-u15",
-    name: "C-Junioren (U15)",
-    slug: { current: "u15" },
-    division: "Nachwuchs",
-    coach: "N.N.",
-  },
-  {
-    _id: "legacy-u13",
-    name: "D-Junioren (U13)",
-    slug: { current: "u13" },
-    division: "Nachwuchs",
-    coach: "N.N.",
-  },
-  {
-    _id: "legacy-u11",
-    name: "E-Junioren (U11)",
-    slug: { current: "u11" },
-    division: "Nachwuchs",
-    coach: "N.N.",
-  },
-  {
-    _id: "legacy-u9",
-    name: "F-Junioren (U9)",
-    slug: { current: "u9" },
-    division: "Nachwuchs",
-    coach: "N.N.",
-  },
-  {
-    _id: "legacy-u7",
-    name: "G-Junioren (U7)",
-    slug: { current: "u7" },
-    division: "Nachwuchs",
-    coach: "N.N.",
-  },
-  {
-    _id: "legacy-ue35",
-    name: "U35",
-    slug: { current: "u35" },
-    division: "Altherren",
-    coach: "N.N.",
-  },
-  {
-    _id: "legacy-ue45",
-    name: "U45",
-    slug: { current: "u45" },
-    division: "Altherren",
-    coach: "N.N.",
-  },
-  {
-    _id: "legacy-ue50",
-    name: "U50",
-    slug: { current: "u50" },
-    division: "Altherren",
-    coach: "N.N.",
-  },
-];
-
-function TeamCard({ team }: { team: FallbackTeam }) {
+function TeamCard({ team }: { team: LegacyTeam }) {
   return (
     <Link
       href={`/teams/${team.slug?.current}`}
@@ -169,7 +72,7 @@ function TeamCard({ team }: { team: FallbackTeam }) {
 }
 
 export default async function TeamsPage() {
-  let teams: FallbackTeam[] = await getAllTeams();
+  let teams: LegacyTeam[] = await getAllTeams();
   if (teams.length === 0) teams = FALLBACK_TEAMS;
 
   const herren = teams.filter((t) =>

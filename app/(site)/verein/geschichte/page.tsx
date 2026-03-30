@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowLeft, Calendar } from "lucide-react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
@@ -13,62 +14,63 @@ export const revalidate = 3600;
 
 const eras = [
   {
-    period: "1909 – 1933",
-    title: "Die Gründerjahre",
+    period: "1909 - 1945",
+    title: "Von Preussen 09 bis zum Kriegsende",
     description:
-      "Am 1. Mai 1909 wurde der Fußball-Club Preussen 09 in Eberswalde ins Leben gerufen. Eine Handvoll fußballbegeisterter junger Männer legten den Grundstein für einen Verein, der die sportliche Geschichte der Stadt nachhaltig prägen sollte. In den ersten Jahren spielte der Club im städtischen Ligenbetrieb und erwarb sich schnell einen guten Ruf.",
+      "Am 1. Juli 1909 wurde der Fussball-Club Preussen 09 gegrundet und nahm direkt am organisierten Spielbetrieb teil. Bis zum Ersten Weltkrieg arbeitete sich die Mannschaft von der dritten in die erste Kreisklasse vor. In den 1920er Jahren folgte der Aufstieg in die Kreisliga, damals die zweithochste Spielklasse. Mit Beginn des Zweiten Weltkriegs brach der regelmassige Spielbetrieb weitgehend zusammen.",
     milestones: [
       { year: "1909", event: "Gründung als FC Preussen 09 Eberswalde" },
-      { year: "1912", event: "Erste Teilnahme an der Kreismeisterschaft" },
-      { year: "1920", event: "Aufstieg in die Bezirksklasse" },
+      { year: "1922/23", event: "Aufstieg in die Kreisliga" },
+      { year: "1936", event: "Abstieg in die Kreisliga" },
+      { year: "1939", event: "Spielbetrieb durch den Krieg stark eingeschrankt" },
     ],
   },
   {
-    period: "1933 – 1945",
-    title: "Die Kriegsjahre",
+    period: "1946 - 1971",
+    title: "Neustart als ZSG und BSG Motor",
     description:
-      "Wie viele Vereine litt auch FC Preussen 09 unter den Folgen des Zweiten Weltkriegs. Der Spielbetrieb wurde durch Einberufungen und Kriegswirren stark eingeschränkt. Zahlreiche Mitglieder mussten an die Front; ein geregelter Trainingsbetrieb war kaum möglich.",
-    milestones: [
-      { year: "1939", event: "Stark eingeschränkter Spielbetrieb durch Kriegsbeginn" },
-      { year: "1945", event: "Kriegsende – Vereinsaktivitäten vollständig eingestellt" },
-    ],
-  },
-  {
-    period: "1945 – 1989",
-    title: "Neustart in der DDR",
-    description:
-      "Nach Kriegsende wurde der Verein 1946 als ZSG Eberswalde Nord neu gegründet. In der DDR-Zeit durchlief der Club mehrere Umbenennungen und Strukturveränderungen. Mit dem Aufstieg in die DDR-Liga 1972 erreichte der Verein den sportlichen Höhepunkt dieser Epoche.",
+      "1946 wurde der alte Vereinsname abgelegt und der Neustart erfolgte als ZSG Eberswalde Nord. Nach mehreren Umbenennungen spielte der Verein als BSG Motor Eberswalde. In den 1950er und 1960er Jahren gewann Motor zahlreiche Bezirksmeisterschaften und erreichte mehrfach Aufstiegsrunden zur DDR-Liga.",
     milestones: [
       { year: "1946", event: "Neustart als ZSG Eberswalde Nord" },
-      { year: "1950", event: "Umbenennung zur BSG Motor Eberswalde" },
-      { year: "1972", event: "Historischer Aufstieg in die DDR-Liga" },
-      { year: "1985", event: "Rückkehr in den Landesligabetrieb" },
+      { year: "1948", event: "Umbenennung in ZSG Eintracht Eberswalde" },
+      { year: "1949", event: "Neuer Name: BSG Stahl, kurz darauf BSG Motor" },
+      { year: "1955/56", event: "Bezirksmeisterschaft Frankfurt/Oder" },
+      { year: "1960", event: "Wiederaufstieg in die II. DDR-Liga" },
     ],
   },
   {
-    period: "1990 – 2010",
-    title: "Wende und Neuausrichtung",
+    period: "1972 - 1990",
+    title: "Zwischen DDR-Liga und Bezirksliga",
     description:
-      "Nach der Wende wurde der Verein 1990 in FC Preussen Eberswalde umbenannt und kehrte zu seinen Wurzeln zurück. Die Neunziger Jahre brachten sportliche Erfolge: 1994 errang der Verein die Landesmeisterschaft Brandenburg und kämpfte um den Aufstieg in den überregionalen Fußball.",
+      "In der Saison 1971/72 gelang der Aufstieg in die DDR-Liga. In den folgenden Jahren wechselte Motor mehrfach zwischen DDR-Liga und Bezirksliga, blieb aber sportlich eine der pragnenden Mannschaften im Bezirk. 1990 sicherte sich das Team den Verbleib auf NOFV-Ebene.",
     milestones: [
-      { year: "1990", event: "Umbenennung in FC Preussen Eberswalde" },
+      { year: "1972", event: "Aufstieg in die DDR-Liga" },
+      { year: "1975", event: "Direkter Wiederaufstieg nach Bezirksliga-Meistertitel" },
+      { year: "1983", event: "Letzter DDR-Liga-Aufstieg der Motor-Phase" },
+      { year: "1990", event: "Eingliederung in die NOFV-Liga" },
+    ],
+  },
+  {
+    period: "1991 - heute",
+    title: "Vom SV Motor zum FV Preussen",
+    description:
+      "Nach dem Ende der Betriebssportgemeinschaft wurde aus Motor wieder ein eingetragener Sportverein. 1994 gelang die Landesmeisterschaft Brandenburg. 1995 trat die Fussballabteilung als FV Motor Eberswalde eigenstandig an. 2011 wurde die Fusion zum FV Preussen Eberswalde urkundlich besiegelt. Seitdem entwickelt der Verein seine Nachwuchsarbeit, Infrastruktur und Heimstatte im Westendstadion kontinuierlich weiter.",
+    milestones: [
       { year: "1994", event: "Landesmeisterschaft Brandenburg" },
-      { year: "2001", event: "Gründung der Nachwuchsabteilung mit eigenem Konzept" },
-      { year: "2008", event: "Erneuerung der Vereinsinfrastruktur am Westendstadion" },
+      { year: "1995", event: "Neustart als FV Motor Eberswalde" },
+      { year: "2011", event: "Fusion zum FV Preussen Eberswalde" },
+      { year: "2012/13", event: "Bau und Einweihung des Bernhard-Hensch-Hauses" },
+      { year: "2016", event: "Erneuerung des Kunstrasenplatzes im Westendstadion" },
     ],
   },
-  {
-    period: "2011 – heute",
-    title: "Der FV Preussen Eberswalde",
-    description:
-      "2011 fusionierten FC Preussen Eberswalde und weitere lokale Vereine zum heutigen FV Preussen Eberswalde e.V. Seitdem wächst der Club kontinuierlich – mit modernen Strukturen, einem starken Nachwuchsbereich und dem Westendstadion als sportlichem Herzstück. Als «Motor des Barnim» ist der FVP heute einer der mitgliederstärksten Vereine in der Region.",
-    milestones: [
-      { year: "2011", event: "Fusion zum FV Preussen Eberswalde e.V." },
-      { year: "2016", event: "Modernisierung des Kunstrasenplatzes im Westendstadion" },
-      { year: "2020", event: "Über 500 Mitglieder – neuer Vereinsrekord" },
-      { year: "2024", event: "Weiterentwicklung des Jugendleistungszentrums" },
-    ],
-  },
+];
+
+const historyPhotos = [
+  { src: "/images/legacy/history/preussen09team.jpg", title: "Preussen 09" },
+  { src: "/images/legacy/history/svp09team.jpg", title: "SVP 09" },
+  { src: "/images/legacy/history/svp43team.jpg", title: "SVP 43" },
+  { src: "/images/legacy/history/ewnordteam.jpg", title: "Eberswalde Nord" },
+  { src: "/images/legacy/history/motor52team.jpg", title: "Motor 52" },
 ];
 
 export default function GeschichtePage() {
@@ -98,11 +100,30 @@ export default function GeschichtePage() {
         {/* Intro */}
         <div className="max-w-3xl mb-14">
           <p className="text-gray-600 leading-relaxed text-lg">
-            Der FV Preussen Eberswalde blickt auf eine bewegte Geschichte zurück, die eng mit der
-            Geschichte der Stadt Eberswalde verwoben ist. Kriege, politische Systeme und gesellschaftliche
-            Umbrüche haben den Verein geprägt – und doch steht er heute stärker denn je.
+            Der Verein wurde am 1. Juli 1909 als Fussballclub Preussen 09 gegrundet.
+            Die Historie fuhrt uber ZSG Eberswalde Nord und BSG Motor Eberswalde bis zum
+            heutigen FV Preussen Eberswalde. Die Entwicklung des Clubs spiegelt mehr als
+            ein Jahrhundert regionaler Fussballgeschichte im Barnim wider.
           </p>
         </div>
+
+        <section className="mb-14">
+          <SectionHeading label="Archiv" title="Historische Mannschaftsfotos" align="left" />
+          <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
+            {historyPhotos.map((photo) => (
+              <div key={photo.src} className="bg-white rounded-xl border border-gray-100 overflow-hidden">
+                <Image
+                  src={photo.src}
+                  alt={photo.title}
+                  width={300}
+                  height={220}
+                  className="w-full h-32 object-cover"
+                />
+                <p className="text-xs font-semibold text-gray-600 p-3">{photo.title}</p>
+              </div>
+            ))}
+          </div>
+        </section>
 
         {/* Eras */}
         <div className="space-y-14">
