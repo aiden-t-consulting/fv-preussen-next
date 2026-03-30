@@ -121,7 +121,7 @@ export function QuickMatchStrip({
   const lostPct = played ? ((tableEntry?.lost ?? 0) / played) * 100 : 0;
 
   return (
-    <section className="relative overflow-hidden bg-[#f4f8f4]">
+    <section className="relative overflow-hidden bg-[#dce8dc]">
       {/* top accent bar */}
       <div className="h-[3px] w-full bg-gradient-to-r from-[#1b5e20] via-[#4caf50] to-[#1b5e20]" />
 

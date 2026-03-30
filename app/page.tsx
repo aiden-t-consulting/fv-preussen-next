@@ -81,10 +81,7 @@ export default async function HomePage() {
       <Hero nextMatch={nextMatch.status === "fulfilled" ? nextMatch.value : null} />
 
       <HeroEditorialRail
-        lastArticle={
-          articles.status === "fulfilled" ? articles.value[0] ?? null : null
-        }
-        nextMatch={nextMatch.status === "fulfilled" ? nextMatch.value : null}
+        articles={articles.status === "fulfilled" ? articles.value : []}
       />
 
       <QuickMatchStrip
