@@ -7,7 +7,24 @@ import { useState, useEffect } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const nav = [
+interface NavChild {
+  label: string;
+  href: string;
+}
+
+interface NavGroup {
+  label: string;
+  children: NavChild[];
+}
+
+interface NavEntry {
+  label: string;
+  href: string;
+  children?: NavChild[];
+  groups?: NavGroup[];
+}
+
+const nav: NavEntry[] = [
   {
     label: "NEWS",
     href: "/aktuelles",
@@ -31,30 +48,31 @@ const nav = [
   {
     label: "TEAMS",
     href: "/teams",
-    children: [
-      { label: "Männer", href: "/teams/herren" },
-      { label: "Männer II", href: "/teams/herren-ii" },
-      { label: "Männer Ü50", href: "/teams/ue50" },
-      { label: "A-Junioren U19", href: "/teams/u19" },
-      { label: "B-Junioren U17", href: "/teams/u17" },
-      { label: "C-Junioren U15", href: "/teams/u15" },
-      { label: "D-Junioren U13", href: "/teams/u13" },
-      { label: "E-Junioren U11", href: "/teams/u11" },
-      { label: "F-Junioren U9", href: "/teams/u9" },
-      { label: "G-Junioren U7", href: "/teams/u7" },
+    groups: [
+      {
+        label: "Männer",
+        children: [
+          { label: "Männer", href: "/teams/herren" },
+          { label: "Männer II", href: "/teams/herren-ii" },
+          { label: "Männer Ü50", href: "/teams/ue50" },
+        ],
+      },
+      {
+        label: "Nachwuchs",
+        children: [
+          { label: "A-Junioren U19", href: "/teams/u19" },
+          { label: "B-Junioren U17", href: "/teams/u17" },
+          { label: "C-Junioren U15", href: "/teams/u15" },
+          { label: "D-Junioren U13", href: "/teams/u13" },
+          { label: "E-Junioren U11", href: "/teams/u11" },
+          { label: "F-Junioren U9", href: "/teams/u9" },
+          { label: "G-Junioren U7", href: "/teams/u7" },
+        ],
+      },
     ],
   },
   { label: "SPIELE", href: "/berichte" },
-  {
-    label: "SPONSOREN",
-    href: "/sponsoren",
-    children: [
-      { label: "Hauptsponsor", href: "/sponsoren" },
-      { label: "Premium Partner", href: "/sponsoren" },
-      { label: "Exklusiv Partner", href: "/sponsoren" },
-      { label: "Business Partner", href: "/sponsoren" },
-    ],
-  },
+  { label: "SPONSOREN", href: "/sponsoren" },
   {
     label: "FANS",
     href: "/fan-shop",
@@ -107,15 +125,15 @@ export function Header() {
               <Image
                 src="/logo.png"
                 alt="FV Preussen Eberswalde"
-                width={56}
-                height={56}
-                className="h-11 w-auto"
+                width={48}
+                height={48}
+                className="h-10 w-auto"
                 priority
               />
             </Link>
 
             {/* Desktop left nav */}
-            <div className="hidden flex-1 items-center gap-0 pr-16 lg:flex">
+            <div className="hidden flex-1 items-center gap-0 pr-14 lg:flex">
               {nav.slice(0, 4).map((item, index) => (
                 <div key={item.href} className="flex items-center">
                   {index > 0 && (
@@ -135,18 +153,18 @@ export function Header() {
               <Image
                 src="/logo.png"
                 alt="FV Preussen Eberswalde"
-                width={96}
-                height={96}
+                width={80}
+                height={80}
                 className={cn(
-                  "w-auto drop-shadow-sm transition-all duration-300",
-                  scrolled ? "h-[56px]" : "h-[72px]"
+                  "w-auto transition-all duration-300",
+                  scrolled ? "h-[40px]" : "h-[52px]"
                 )}
                 priority
               />
             </Link>
 
             {/* Desktop right nav + CTAs */}
-            <div className="hidden flex-1 items-center justify-end gap-0 pl-16 lg:flex">
+            <div className="hidden flex-1 items-center justify-end gap-0 pl-14 lg:flex">
               {nav.slice(4).map((item, index) => (
                 <div key={item.href} className="flex items-center">
                   {index > 0 && (
@@ -193,42 +211,12 @@ export function Header() {
         aria-hidden={!mobileOpen}
       >
         <div className="space-y-1 px-4 py-4">
-          {nav.map((item) => (
-            <div key={item.href}>
-              {item.children ? (
-                <>
-                  <button
-                    onClick={() =>
-                      setOpenDropdown(openDropdown === item.href ? null : item.href)
-                    }
-                    className="flex w-full items-center justify-between px-4 py-3 text-sm font-bold uppercase tracking-widest text-gray-800 transition-colors hover:text-[#039139]"
-                    aria-expanded={openDropdown === item.href}
-                  >
-                    {item.label}
-                    <ChevronDown
-                      className={cn(
-                        "h-4 w-4 transition-transform",
-                        openDropdown === item.href && "rotate-180"
-                      )}
-                    />
-                  </button>
-                  {openDropdown === item.href && (
-                    <div className="ml-4 space-y-1 border-l-2 border-[#039139]/30 pl-3">
-                      {item.children.map((child) => (
-                        <Link
-                          key={child.href}
-                          href={child.href}
-                          onClick={closeMobileMenu}
-                          className="block py-2 text-sm text-gray-500 transition-colors hover:text-[#039139]"
-                        >
-                          {child.label}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
-                </>
-              ) : (
+          {nav.map((item) => {
+            const hasDropdown = !!(item.children || item.groups);
+            if (!hasDropdown) {
+              return (
                 <Link
+                  key={item.href}
                   href={item.href}
                   onClick={closeMobileMenu}
                   className={cn(
@@ -240,9 +228,61 @@ export function Header() {
                 >
                   {item.label}
                 </Link>
-              )}
-            </div>
-          ))}
+              );
+            }
+            return (
+              <div key={item.href}>
+                <button
+                  onClick={() =>
+                    setOpenDropdown(openDropdown === item.href ? null : item.href)
+                  }
+                  className="flex w-full items-center justify-between px-4 py-3 text-sm font-bold uppercase tracking-widest text-gray-800 transition-colors hover:text-[#039139]"
+                  aria-expanded={openDropdown === item.href}
+                >
+                  {item.label}
+                  <ChevronDown
+                    className={cn(
+                      "h-4 w-4 transition-transform",
+                      openDropdown === item.href && "rotate-180"
+                    )}
+                  />
+                </button>
+                {openDropdown === item.href && (
+                  <div className="ml-4 space-y-1 border-l-2 border-[#039139]/30 pl-3">
+                    {/* Flat children */}
+                    {item.children?.map((child) => (
+                      <Link
+                        key={child.href}
+                        href={child.href}
+                        onClick={closeMobileMenu}
+                        className="block py-2 text-sm text-gray-500 transition-colors hover:text-[#039139]"
+                      >
+                        {child.label}
+                      </Link>
+                    ))}
+                    {/* Grouped children */}
+                    {item.groups?.map((group) => (
+                      <div key={group.label} className="pt-2">
+                        <span className="block pb-1 text-[10px] font-bold uppercase tracking-widest text-gray-400">
+                          {group.label}
+                        </span>
+                        {group.children.map((child) => (
+                          <Link
+                            key={child.href}
+                            href={child.href}
+                            onClick={closeMobileMenu}
+                            className="block py-1.5 text-sm text-gray-500 transition-colors hover:text-[#039139]"
+                          >
+                            {child.label}
+                          </Link>
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            );
+          })}
 
           {/* Mobile CTAs */}
           <div className="mt-4 flex flex-col gap-2 border-t border-gray-100 pt-4">
@@ -270,11 +310,13 @@ export function Header() {
 function NavItem({
   item,
   isActive,
-}: Readonly<{
-  item: Readonly<(typeof nav)[0]>;
+}: {
+  item: NavEntry;
   isActive: (href: string) => boolean;
-}>) {
-  if (!item.children) {
+}) {
+  const hasDropdown = !!(item.children || item.groups);
+
+  if (!hasDropdown) {
     return (
       <Link
         href={item.href}
@@ -305,18 +347,47 @@ function NavItem({
         {item.label}
         <ChevronDown className="h-3 w-3 transition-transform group-hover:rotate-180" />
       </button>
-      <div className="invisible absolute left-0 top-full z-50 min-w-[200px] pt-2 opacity-0 transition-all duration-150 group-hover:visible group-hover:opacity-100">
+
+      <div className="invisible absolute left-0 top-full z-50 pt-2 opacity-0 transition-all duration-150 group-hover:visible group-hover:opacity-100">
         <div className="rounded-xl border border-gray-100 bg-white shadow-lg">
           <div className="h-0.5 rounded-t-xl bg-[#039139]" />
-          {item.children.map((child) => (
-            <Link
-              key={child.href}
-              href={child.href}
-              className="block border-b border-gray-50 px-4 py-2.5 text-xs font-semibold uppercase tracking-wider text-gray-600 transition-colors hover:bg-gray-50 hover:text-[#039139] last:border-0"
-            >
-              {child.label}
-            </Link>
-          ))}
+
+          {/* Flat dropdown */}
+          {item.children && (
+            <div className="min-w-[180px]">
+              {item.children.map((child) => (
+                <Link
+                  key={child.href}
+                  href={child.href}
+                  className="block border-b border-gray-50 px-4 py-2.5 text-xs font-semibold uppercase tracking-wider text-gray-600 transition-colors hover:bg-gray-50 hover:text-[#039139] last:border-0"
+                >
+                  {child.label}
+                </Link>
+              ))}
+            </div>
+          )}
+
+          {/* Grouped mega dropdown */}
+          {item.groups && (
+            <div className="flex gap-0 divide-x divide-gray-100">
+              {item.groups.map((group) => (
+                <div key={group.label} className="min-w-[140px] p-4">
+                  <span className="mb-2 block text-[9px] font-bold uppercase tracking-[0.15em] text-gray-400">
+                    {group.label}
+                  </span>
+                  {group.children.map((child) => (
+                    <Link
+                      key={child.href}
+                      href={child.href}
+                      className="block py-1.5 text-xs font-semibold uppercase tracking-wide text-gray-600 transition-colors hover:text-[#039139]"
+                    >
+                      {child.label}
+                    </Link>
+                  ))}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>
