@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { FacebookIcon, InstagramIcon, YoutubeIcon } from "@/components/ui/SocialIcons";
 
 interface NavChild {
   label: string;
@@ -133,7 +134,7 @@ export function Header() {
             </Link>
 
             {/* Desktop left nav */}
-            <div className="hidden flex-1 items-center gap-0 pr-14 lg:flex">
+            <div className="hidden flex-1 items-center gap-0 pr-20 lg:flex">
               {nav.slice(0, 4).map((item, index) => (
                 <div key={item.href} className="flex items-center">
                   {index > 0 && (
@@ -157,14 +158,14 @@ export function Header() {
                 height={80}
                 className={cn(
                   "w-auto transition-all duration-300",
-                  scrolled ? "h-[40px]" : "h-[52px]"
+                  scrolled ? "h-[48px]" : "h-[68px]"
                 )}
                 priority
               />
             </Link>
 
             {/* Desktop right nav + CTAs */}
-            <div className="hidden flex-1 items-center justify-end gap-0 pl-14 lg:flex">
+            <div className="hidden flex-1 items-center justify-end gap-0 pl-20 lg:flex">
               {nav.slice(4).map((item, index) => (
                 <div key={item.href} className="flex items-center">
                   {index > 0 && (
@@ -186,6 +187,17 @@ export function Header() {
                 >
                   Sponsor werden
                 </Link>
+              </div>
+              <div className="ml-3 flex items-center gap-2 border-l border-gray-200 pl-3">
+                <a href="https://www.facebook.com/fvpreusseneberswalde" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-gray-400 transition-colors hover:text-[#039139]">
+                  <FacebookIcon className="h-3.5 w-3.5" />
+                </a>
+                <a href="https://www.instagram.com/fvpreusseneberswalde" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-gray-400 transition-colors hover:text-[#039139]">
+                  <InstagramIcon className="h-3.5 w-3.5" />
+                </a>
+                <a href="https://www.youtube.com/@fvpreusseneberswalde" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="text-gray-400 transition-colors hover:text-[#039139]">
+                  <YoutubeIcon className="h-3.5 w-3.5" />
+                </a>
               </div>
             </div>
 
@@ -300,6 +312,17 @@ export function Header() {
             >
               Sponsor werden
             </Link>
+            <div className="flex justify-center gap-5 pt-2">
+              <a href="https://www.facebook.com/fvpreusseneberswalde" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-gray-400 transition-colors hover:text-[#039139]">
+                <FacebookIcon className="h-5 w-5" />
+              </a>
+              <a href="https://www.instagram.com/fvpreusseneberswalde" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-gray-400 transition-colors hover:text-[#039139]">
+                <InstagramIcon className="h-5 w-5" />
+              </a>
+              <a href="https://www.youtube.com/@fvpreusseneberswalde" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="text-gray-400 transition-colors hover:text-[#039139]">
+                <YoutubeIcon className="h-5 w-5" />
+              </a>
+            </div>
           </div>
         </div>
       </div>
