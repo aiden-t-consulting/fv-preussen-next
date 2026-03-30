@@ -1,8 +1,10 @@
+"use client";
+
 import Link from "next/link";
-import { Calendar, MapPin, Trophy, ArrowRight, Clock } from "lucide-react";
+import { Calendar, Trophy, ArrowRight, Clock } from "lucide-react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { Button } from "@/components/ui/Button";
-import { cn, formatShortDate, formatMatchTime } from "@/lib/utils";
+import { FadeIn, StaggerContainer, StaggerItem } from "@/components/ui/Motion";
+import { cn, formatShortDate } from "@/lib/utils";
 import type { FuPaMatch, FuPaTableEntry } from "@/types";
 
 interface MatchSectionProps {
@@ -27,7 +29,6 @@ function MatchRow({ match, showResult }: { match: FuPaMatch; showResult: boolean
 
   return (
     <div className="flex items-center gap-3 py-3 border-b border-white/10 last:border-0">
-      {/* Date */}
       <div className="text-center shrink-0 w-12">
         <div className="text-[#81d742] text-xs font-bold">
           {new Date(match.date).toLocaleDateString("de-DE", { day: "2-digit", month: "2-digit" })}
@@ -40,7 +41,6 @@ function MatchRow({ match, showResult }: { match: FuPaMatch; showResult: boolean
         )}
       </div>
 
-      {/* Teams */}
       <div className="flex-1 min-w-0">
         <div className={cn("text-sm font-semibold truncate", isHome ? "text-white" : "text-gray-300")}>
           {match.homeTeam}
@@ -50,14 +50,13 @@ function MatchRow({ match, showResult }: { match: FuPaMatch; showResult: boolean
         </div>
       </div>
 
-      {/* Score / vs */}
       <div className="shrink-0 text-center w-16">
         {showResult && match.homeScore !== undefined ? (
           <span
             className={cn(
               "inline-block px-2 py-1 rounded-md text-sm font-bold",
               won
-                ? "bg-[#21a530] text-white"
+                ? "bg-[#039139] text-white"
                 : drew
                 ? "bg-gray-600 text-white"
                 : "bg-red-800 text-white"
@@ -78,7 +77,7 @@ function TableRow({ entry }: { entry: FuPaTableEntry }) {
     <tr
       className={cn(
         "text-sm border-b border-white/10",
-        entry.isCurrentTeam && "bg-[#21a530]/20"
+        entry.isCurrentTeam && "bg-[#039139]/20"
       )}
     >
       <td className={cn("py-2 pl-3 w-8 font-bold", entry.isCurrentTeam ? "text-[#81d742]" : "text-gray-400")}>
@@ -102,80 +101,88 @@ export function MatchSection({ upcoming, results, table }: MatchSectionProps) {
   return (
     <section className="py-20 lg:py-28 bg-[#0e3a07]">
       <div className="max-w-7xl mx-auto px-4">
-        <SectionHeading
-          label="Spielbetrieb"
-          title="Spiele & Tabelle"
-          subtitle="Landesliga Nord – Saison 2024/25"
-          light
-        />
+        <FadeIn>
+          <SectionHeading
+            label="Spielbetrieb"
+            title="Spiele & Tabelle"
+            subtitle="Landesliga Nord – Saison 2024/25"
+            light
+          />
+        </FadeIn>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <StaggerContainer stagger={0.15} className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Upcoming matches */}
-          <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
-            <div className="flex items-center justify-between mb-5">
-              <div className="flex items-center gap-2 text-white font-bold">
-                <Calendar className="w-4 h-4 text-[#81d742]" />
-                Nächste Spiele
+          <StaggerItem>
+            <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 h-full">
+              <div className="flex items-center justify-between mb-5">
+                <div className="flex items-center gap-2 text-white font-bold">
+                  <Calendar className="w-4 h-4 text-[#81d742]" />
+                  Nächste Spiele
+                </div>
+                <Link href="/teams/herren" className="text-xs text-[#81d742] hover:text-[#a5e068] transition-colors flex items-center gap-1">
+                  Alle <ArrowRight className="w-3 h-3" />
+                </Link>
               </div>
-              <Link href="/teams/herren" className="text-xs text-[#81d742] hover:text-[#a5e068] transition-colors flex items-center gap-1">
-                Alle <ArrowRight className="w-3 h-3" />
-              </Link>
+              <div>
+                {upcoming.map((m) => (
+                  <MatchRow key={m.id} match={m} showResult={false} />
+                ))}
+              </div>
             </div>
-            <div>
-              {upcoming.map((m) => (
-                <MatchRow key={m.id} match={m} showResult={false} />
-              ))}
-            </div>
-          </div>
+          </StaggerItem>
 
           {/* Recent results */}
-          <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
-            <div className="flex items-center justify-between mb-5">
-              <div className="flex items-center gap-2 text-white font-bold">
-                <Trophy className="w-4 h-4 text-[#81d742]" />
-                Letzte Ergebnisse
+          <StaggerItem>
+            <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 h-full">
+              <div className="flex items-center justify-between mb-5">
+                <div className="flex items-center gap-2 text-white font-bold">
+                  <Trophy className="w-4 h-4 text-[#81d742]" />
+                  Letzte Ergebnisse
+                </div>
+                <Link href="/berichte" className="text-xs text-[#81d742] hover:text-[#a5e068] transition-colors flex items-center gap-1">
+                  Berichte <ArrowRight className="w-3 h-3" />
+                </Link>
               </div>
-              <Link href="/berichte" className="text-xs text-[#81d742] hover:text-[#a5e068] transition-colors flex items-center gap-1">
-                Berichte <ArrowRight className="w-3 h-3" />
-              </Link>
+              <div>
+                {results.map((m) => (
+                  <MatchRow key={m.id} match={m} showResult />
+                ))}
+              </div>
             </div>
-            <div>
-              {results.map((m) => (
-                <MatchRow key={m.id} match={m} showResult />
-              ))}
-            </div>
-          </div>
+          </StaggerItem>
 
           {/* League table */}
-          <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
-            <div className="flex items-center justify-between mb-5">
-              <div className="flex items-center gap-2 text-white font-bold">
-                <Trophy className="w-4 h-4 text-[#81d742]" />
-                Tabelle
+          <StaggerItem>
+            <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 h-full">
+              <div className="flex items-center justify-between mb-5">
+                <div className="flex items-center gap-2 text-white font-bold">
+                  <Trophy className="w-4 h-4 text-[#81d742]" />
+                  Tabelle
+                </div>
+              </div>
+              <div className="overflow-x-auto">
+                <table className="w-full text-left text-xs">
+                  <thead>
+                    <tr className="text-gray-500 border-b border-white/10">
+                      <th className="pb-2 pl-3 w-8">#</th>
+                      <th className="pb-2">Team</th>
+                      <th className="pb-2 text-center w-8">Sp</th>
+                      <th className="pb-2 text-center w-8">S</th>
+                      <th className="pb-2 text-center w-8">U</th>
+                      <th className="pb-2 text-center w-8">N</th>
+                      <th className="pb-2 text-center w-10 pr-3">Pkt</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {table.slice(0, 8).map((entry) => (
+                      <TableRow key={entry.position} entry={entry} />
+                    ))}
+                  </tbody>
+                </table>
               </div>
             </div>
-            <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs">
-                <thead>
-                  <tr className="text-gray-500 border-b border-white/10">
-                    <th className="pb-2 pl-3 w-8">#</th>
-                    <th className="pb-2">Team</th>
-                    <th className="pb-2 text-center w-8">Sp</th>
-                    <th className="pb-2 text-center w-8">S</th>
-                    <th className="pb-2 text-center w-8">U</th>
-                    <th className="pb-2 text-center w-8">N</th>
-                    <th className="pb-2 text-center w-10 pr-3">Pkt</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {table.slice(0, 8).map((entry) => (
-                    <TableRow key={entry.position} entry={entry} />
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
+          </StaggerItem>
+        </StaggerContainer>
       </div>
     </section>
   );

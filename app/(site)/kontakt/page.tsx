@@ -36,12 +36,12 @@ export default function KontaktPage() {
               <div className="space-y-5">
                 <div className="flex gap-4">
                   <div className="w-10 h-10 rounded-xl bg-[#e8f5e9] flex items-center justify-center shrink-0">
-                    <MapPin className="w-5 h-5 text-[#21a530]" />
+                    <MapPin className="w-5 h-5 text-[#039139]" />
                   </div>
                   <div>
                     <p className="font-semibold text-gray-800 text-sm">Adresse</p>
                     <p className="text-gray-600 text-sm mt-0.5">
-                      Pfefferwerkerstraße 9<br />
+                      Heegermühler Str. 69a<br />
                       16225 Eberswalde
                     </p>
                   </div>
@@ -49,28 +49,28 @@ export default function KontaktPage() {
 
                 <div className="flex gap-4">
                   <div className="w-10 h-10 rounded-xl bg-[#e8f5e9] flex items-center justify-center shrink-0">
-                    <Phone className="w-5 h-5 text-[#21a530]" />
+                    <Phone className="w-5 h-5 text-[#039139]" />
                   </div>
                   <div>
                     <p className="font-semibold text-gray-800 text-sm">Telefon</p>
                     <a
-                      href="tel:+4933342000"
-                      className="text-[#21a530] text-sm hover:underline mt-0.5 block"
+                      href="tel:+4933342 35848"
+                      className="text-[#039139] text-sm hover:underline mt-0.5 block"
                     >
-                      +49 3334 2000
+                      +49 3334 235848
                     </a>
                   </div>
                 </div>
 
                 <div className="flex gap-4">
                   <div className="w-10 h-10 rounded-xl bg-[#e8f5e9] flex items-center justify-center shrink-0">
-                    <Mail className="w-5 h-5 text-[#21a530]" />
+                    <Mail className="w-5 h-5 text-[#039139]" />
                   </div>
                   <div>
                     <p className="font-semibold text-gray-800 text-sm">E-Mail</p>
                     <a
                       href="mailto:info@fvpreussen-eberswalde.de"
-                      className="text-[#21a530] text-sm hover:underline mt-0.5 block"
+                      className="text-[#039139] text-sm hover:underline mt-0.5 block"
                     >
                       info@fvpreussen-eberswalde.de
                     </a>
@@ -79,7 +79,7 @@ export default function KontaktPage() {
 
                 <div className="flex gap-4">
                   <div className="w-10 h-10 rounded-xl bg-[#e8f5e9] flex items-center justify-center shrink-0">
-                    <Clock className="w-5 h-5 text-[#21a530]" />
+                    <Clock className="w-5 h-5 text-[#039139]" />
                   </div>
                   <div>
                     <p className="font-semibold text-gray-800 text-sm">Bürozeiten</p>

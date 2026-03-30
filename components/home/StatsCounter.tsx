@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Users, Trophy, Calendar, Star } from "lucide-react";
+import { StaggerContainer, StaggerItem } from "@/components/ui/Motion";
 
 const stats = [
   {
@@ -47,7 +48,6 @@ function useCountUp(target: number, duration = 2000, enabled: boolean) {
     const step = (currentTime: number) => {
       const elapsed = currentTime - startTime;
       const progress = Math.min(elapsed / duration, 1);
-      // Ease out cubic
       const eased = 1 - Math.pow(1 - progress, 3);
       setCount(Math.floor(eased * target));
       if (progress < 1) requestAnimationFrame(step);
@@ -58,19 +58,13 @@ function useCountUp(target: number, duration = 2000, enabled: boolean) {
   return count;
 }
 
-function StatCard({
-  stat,
-  animate,
-}: {
-  stat: (typeof stats)[0];
-  animate: boolean;
-}) {
+function StatCard({ stat, animate }: { stat: (typeof stats)[0]; animate: boolean }) {
   const count = useCountUp(stat.value, 2200, animate);
   const Icon = stat.icon;
 
   return (
     <div className="text-center group">
-      <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-[#21a530]/20 mb-4 group-hover:bg-[#21a530] transition-colors duration-300">
+      <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-[#039139]/20 mb-4 group-hover:bg-[#039139] transition-colors duration-300">
         <Icon className="w-6 h-6 text-[#81d742] group-hover:text-white transition-colors duration-300" />
       </div>
       <div className="text-4xl md:text-5xl font-bold text-white mb-1">
@@ -105,16 +99,15 @@ export function StatsCounter() {
   }, []);
 
   return (
-    <section
-      ref={sectionRef}
-      className="py-20 lg:py-24 bg-[#15540a]"
-    >
+    <section ref={sectionRef} className="py-20 lg:py-24 bg-[#15540a]">
       <div className="max-w-7xl mx-auto px-4">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
+        <StaggerContainer stagger={0.12} className="grid grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
           {stats.map((stat) => (
-            <StatCard key={stat.label} stat={stat} animate={visible} />
+            <StaggerItem key={stat.label}>
+              <StatCard stat={stat} animate={visible} />
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
       </div>
     </section>
   );

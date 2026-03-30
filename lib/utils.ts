@@ -43,7 +43,7 @@ export function categoryLabel(category: string): string {
 
 export function categoryColor(category: string): string {
   const colors: Record<string, string> = {
-    news: "bg-[#21a530] text-white",
+    news: "bg-[#039139] text-white",
     bericht: "bg-[#15540a] text-white",
     jugend: "bg-[#81d742] text-[#15540a]",
     verein: "bg-neutral-600 text-white",

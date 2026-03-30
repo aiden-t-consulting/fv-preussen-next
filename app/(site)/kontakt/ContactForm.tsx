@@ -54,10 +54,10 @@ function FieldWrapper({ label, error, children, htmlFor }: {
 const inputClass = (hasError: boolean) =>
   cn(
     "w-full px-4 py-2.5 rounded-xl border text-sm transition-colors",
-    "focus:outline-none focus:ring-2 focus:ring-[#21a530] focus:border-transparent",
+    "focus:outline-none focus:ring-2 focus:ring-[#039139] focus:border-transparent",
     hasError
       ? "border-red-300 bg-red-50"
-      : "border-gray-200 bg-white hover:border-[#21a530]/40"
+      : "border-gray-200 bg-white hover:border-[#039139]/40"
   );
 
 export function ContactForm() {
@@ -92,7 +92,7 @@ export function ContactForm() {
     return (
       <div className="flex flex-col items-center text-center py-12 gap-4">
         <div className="w-16 h-16 rounded-full bg-[#e8f5e9] flex items-center justify-center">
-          <CheckCircle className="w-8 h-8 text-[#21a530]" />
+          <CheckCircle className="w-8 h-8 text-[#039139]" />
         </div>
         <h3 className="text-xl font-bold text-gray-900">Nachricht gesendet!</h3>
         <p className="text-gray-500 max-w-sm">
@@ -160,12 +160,12 @@ export function ContactForm() {
         <label className="flex items-start gap-3 cursor-pointer">
           <input
             type="checkbox"
-            className="mt-0.5 w-4 h-4 rounded accent-[#21a530]"
+            className="mt-0.5 w-4 h-4 rounded accent-[#039139]"
             {...register("privacy")}
           />
           <span className="text-sm text-gray-600">
             Ich stimme der{" "}
-            <a href="/datenschutz" className="text-[#21a530] underline underline-offset-2" target="_blank">
+            <a href="/datenschutz" className="text-[#039139] underline underline-offset-2" target="_blank">
               Datenschutzerklärung
             </a>{" "}
             zu und erkläre mich damit einverstanden, dass meine Daten zur Bearbeitung meiner

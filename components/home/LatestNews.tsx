@@ -1,14 +1,16 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Calendar } from "lucide-react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
+import { FadeIn, SlideIn, StaggerContainer, StaggerItem } from "@/components/ui/Motion";
 import { formatDate, categoryLabel, categoryColor } from "@/lib/utils";
 import { urlFor } from "@/lib/sanity/client";
 import type { Article } from "@/types";
 
-// Static fallback articles (shown before Sanity is connected)
 const FALLBACK_ARTICLES: Article[] = [
   {
     _id: "1",
@@ -49,7 +51,7 @@ export function LatestNews({ articles = FALLBACK_ARTICLES }: LatestNewsProps) {
   return (
     <section className="py-20 lg:py-28 bg-white">
       <div className="max-w-7xl mx-auto px-4">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
+        <FadeIn className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
           <SectionHeading
             label="Neuigkeiten"
             title="Aktuelles"
@@ -63,85 +65,88 @@ export function LatestNews({ articles = FALLBACK_ARTICLES }: LatestNewsProps) {
               <ArrowRight className="w-4 h-4" />
             </Link>
           </Button>
-        </div>
+        </FadeIn>
 
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
           {/* Featured article */}
           {featured && (
-            <Link
-              href={`/aktuelles/${featured.slug.current}`}
-              className="lg:col-span-3 group relative flex flex-col overflow-hidden rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300"
-            >
-              <div className="relative aspect-[16/9] bg-[#e8f5e9] overflow-hidden">
-                {featured.coverImage ? (
-                  <Image
-                    src={urlFor(featured.coverImage).width(800).height(450).url()}
-                    alt={featured.coverImage.alt ?? featured.title}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    sizes="(max-width: 1024px) 100vw, 60vw"
-                    priority
-                  />
-                ) : (
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-6xl font-bold text-[#21a530]/20 font-['Playfair_Display',serif]">FVP</div>
-                  </div>
-                )}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                <div className="absolute bottom-4 left-4 right-4">
-                  <Badge className={categoryColor(featured.category)}>
-                    {categoryLabel(featured.category)}
-                  </Badge>
-                  <h3 className="mt-2 text-white font-bold text-xl md:text-2xl leading-snug group-hover:text-[#81d742] transition-colors">
-                    {featured.title}
-                  </h3>
-                  <div className="flex items-center gap-1.5 mt-2 text-gray-300 text-sm">
-                    <Calendar className="w-3.5 h-3.5" />
-                    {formatDate(featured.publishedAt)}
-                  </div>
-                </div>
-              </div>
-            </Link>
-          )}
-
-          {/* Side articles */}
-          <div className="lg:col-span-2 flex flex-col gap-5">
-            {rest.map((article) => (
+            <SlideIn direction="left" delay={0.1} className="lg:col-span-3">
               <Link
-                key={article._id}
-                href={`/aktuelles/${article.slug.current}`}
-                className="group flex gap-4 p-4 rounded-xl border border-gray-100 hover:border-[#21a530]/30 hover:shadow-md transition-all duration-200 bg-white"
+                href={`/aktuelles/${featured.slug.current}`}
+                className="group relative flex flex-col overflow-hidden rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300"
               >
-                <div className="relative w-24 h-20 shrink-0 rounded-lg overflow-hidden bg-[#e8f5e9]">
-                  {article.coverImage ? (
+                <div className="relative aspect-[16/9] bg-[#e8f5e9] overflow-hidden">
+                  {featured.coverImage ? (
                     <Image
-                      src={urlFor(article.coverImage).width(200).height(160).url()}
-                      alt={article.coverImage.alt ?? article.title}
+                      src={urlFor(featured.coverImage).width(800).height(450).url()}
+                      alt={featured.coverImage.alt ?? featured.title}
                       fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-300"
-                      sizes="96px"
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      sizes="(max-width: 1024px) 100vw, 60vw"
+                      priority
                     />
                   ) : (
-                    <div className="absolute inset-0 flex items-center justify-center text-[#21a530]/30 font-bold text-lg font-['Playfair_Display',serif]">
-                      FVP
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="text-6xl font-bold text-[#039139]/20 font-['Playfair_Display',serif]">FVP</div>
                     </div>
                   )}
-                </div>
-                <div className="flex-1 min-w-0">
-                  <Badge className={`${categoryColor(article.category)} mb-1.5`}>
-                    {categoryLabel(article.category)}
-                  </Badge>
-                  <h3 className="text-sm font-bold text-gray-900 leading-snug group-hover:text-[#21a530] transition-colors line-clamp-2">
-                    {article.title}
-                  </h3>
-                  <div className="flex items-center gap-1 mt-1.5 text-xs text-gray-400">
-                    <Calendar className="w-3 h-3" />
-                    {formatDate(article.publishedAt)}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                  <div className="absolute bottom-4 left-4 right-4">
+                    <Badge className={categoryColor(featured.category)}>
+                      {categoryLabel(featured.category)}
+                    </Badge>
+                    <h3 className="mt-2 text-white font-bold text-xl md:text-2xl leading-snug group-hover:text-[#039139] transition-colors">
+                      {featured.title}
+                    </h3>
+                    <div className="flex items-center gap-1.5 mt-2 text-gray-300 text-sm">
+                      <Calendar className="w-3.5 h-3.5" />
+                      {formatDate(featured.publishedAt)}
+                    </div>
                   </div>
                 </div>
               </Link>
+            </SlideIn>
+          )}
+
+          {/* Side articles */}
+          <StaggerContainer stagger={0.12} className="lg:col-span-2 flex flex-col gap-5">
+            {rest.map((article) => (
+              <StaggerItem key={article._id}>
+                <Link
+                  href={`/aktuelles/${article.slug.current}`}
+                  className="group flex gap-4 p-4 rounded-xl border border-gray-100 hover:border-[#039139]/30 hover:shadow-md transition-all duration-200 bg-white"
+                >
+                  <div className="relative w-24 h-20 shrink-0 rounded-lg overflow-hidden bg-[#e8f5e9]">
+                    {article.coverImage ? (
+                      <Image
+                        src={urlFor(article.coverImage).width(200).height(160).url()}
+                        alt={article.coverImage.alt ?? article.title}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-300"
+                        sizes="96px"
+                      />
+                    ) : (
+                      <div className="absolute inset-0 flex items-center justify-center text-[#039139]/30 font-bold text-lg font-['Playfair_Display',serif]">
+                        FVP
+                      </div>
+                    )}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <Badge className={`${categoryColor(article.category)} mb-1.5`}>
+                      {categoryLabel(article.category)}
+                    </Badge>
+                    <h3 className="text-sm font-bold text-gray-900 leading-snug group-hover:text-[#039139] transition-colors line-clamp-2">
+                      {article.title}
+                    </h3>
+                    <div className="flex items-center gap-1 mt-1.5 text-xs text-gray-400">
+                      <Calendar className="w-3 h-3" />
+                      {formatDate(article.publishedAt)}
+                    </div>
+                  </div>
+                </Link>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
         </div>
       </div>
     </section>

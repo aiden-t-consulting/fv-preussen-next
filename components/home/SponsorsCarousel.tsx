@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRef, useState } from "react";
 import { cn } from "@/lib/utils";
+import { FadeIn } from "@/components/ui/Motion";
 
 // Real sponsors from the original site assets
 const SPONSORS = [
@@ -76,7 +77,7 @@ export function SponsorsCarousel() {
 		<section className="py-16 bg-[#f5f5f5] border-t-4 border-[#039139]">
 			<div className="max-w-7xl mx-auto px-4">
 				{/* Header row */}
-				<div className="flex items-center justify-between mb-10">
+				<FadeIn className="flex items-center justify-between mb-10">
 					<div>
 						<span className="text-[#039139] text-xs font-bold uppercase tracking-[0.25em] block mb-1">
 							Unsere Partner
@@ -92,7 +93,7 @@ export function SponsorsCarousel() {
 						<span className="absolute inset-0 bg-[#039139] -translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
 						<span className="relative">Alle Sponsoren</span>
 					</Link>
-				</div>
+				</FadeIn>
 
 				{/* Carousel track */}
 				<div
@@ -134,7 +135,7 @@ export function SponsorsCarousel() {
 				</div>
 
 				{/* Become a sponsor CTA */}
-				<div className="mt-12 border-l-4 border-[#039139] bg-white px-8 py-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+				<FadeIn delay={0.1} className="mt-12 border-l-4 border-[#039139] bg-white px-8 py-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
 					<div>
 						<h3 className="font-bold text-[#1a1a1a] text-lg uppercase tracking-wide">
 							Werden Sie unser Partner!
@@ -150,7 +151,7 @@ export function SponsorsCarousel() {
 					>
 						Jetzt anfragen
 					</Link>
-				</div>
+				</FadeIn>
 			</div>
 
 			{/* Keyframe animation injected via style tag */}
