@@ -6,6 +6,7 @@ import {
   LayoutDashboard,
   BarChart3,
   FileText,
+  Newspaper,
   ExternalLink,
   LogOut,
   ChevronRight,
@@ -15,6 +16,7 @@ import { cn } from "@/lib/utils";
 const NAV = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard, exact: true },
   { href: "/admin/analytics", label: "Traffic & Analytics", icon: BarChart3, exact: false },
+  { href: "/admin/news", label: "Beiträge", icon: Newspaper, exact: false },
   { href: "/admin/content", label: "Inhalte", icon: FileText, exact: false },
 ];
 
