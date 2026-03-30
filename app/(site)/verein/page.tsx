@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import {
   History,
   Users,
@@ -18,21 +19,51 @@ export const metadata: Metadata = {
 };
 
 const boardMembers = [
-  { role: "1. Vorsitzender", name: "N.N.", email: "vorsitzender@fvpreussen-eberswalde.de" },
-  { role: "2. Vorsitzender", name: "N.N.", email: "" },
-  { role: "Kassenwart", name: "N.N.", email: "" },
-  { role: "Schriftführer", name: "N.N.", email: "" },
-  { role: "Sportlicher Leiter", name: "N.N.", email: "" },
-  { role: "Jugendwart", name: "N.N.", email: "" },
+  {
+    role: "Präsident",
+    name: "Danko Jur",
+    email: "info@fvpreussen-eberswalde.de",
+    photo: "/images/legacy/board/danko-jur.jpg",
+  },
+  {
+    role: "1. Stellvertreter",
+    name: "Kristian Stelse",
+    email: "",
+    photo: "/images/legacy/board/kristian-stelse.jpg",
+  },
+  {
+    role: "2. Stellvertreter / Nachwuchsleiter",
+    name: "Marcus Buelow",
+    email: "marcus.buelow@fvpreussen-eberswalde.de",
+    photo: "",
+  },
+  {
+    role: "Schatzmeister",
+    name: "Christian Mertinkat",
+    email: "",
+    photo: "/images/legacy/board/christian-melchert.jpg",
+  },
+  {
+    role: "Vorstandsmitglied",
+    name: "Christian Melchert",
+    email: "",
+    photo: "/images/legacy/board/christian-melchert.jpg",
+  },
+  {
+    role: "Vorstandsmitglied",
+    name: "Maik Wendland",
+    email: "",
+    photo: "/images/legacy/board/maik-wendland.jpg",
+  },
 ];
 
 const milestones = [
-  { year: "1919", event: "Gründung des FV Preussen Eberswalde" },
-  { year: "1950s", event: "Wiederaufbau nach dem Zweiten Weltkrieg" },
-  { year: "1990", event: "Neuausrichtung nach der Wende" },
-  { year: "2000s", event: "Aufbau der Jugendabteilung" },
-  { year: "2010s", event: "Aufstieg in die Landesliga Nord" },
-  { year: "2019", event: "100-jähriges Vereinsjubiläum" },
+  { year: "1909", event: "Gründung als Fußballclub Preussen 09" },
+  { year: "1946", event: "Neustart nach dem Krieg als ZSG Eberswalde Nord" },
+  { year: "1972", event: "Aufstieg in die DDR-Liga" },
+  { year: "1994", event: "Landesmeisterschaft Brandenburg" },
+  { year: "2011", event: "Fusion zum FV Preussen Eberswalde" },
+  { year: "2016", event: "Modernisierung des Kunstrasenplatzes im Westendstadion" },
 ];
 
 const subPages = [
@@ -94,20 +125,19 @@ export default function VereinPage() {
             </h2>
             <div className="space-y-4 text-gray-600 leading-relaxed">
               <p>
-                Der FV Preussen Eberswalde e.V. wurde 1919 gegründet und zählt zu den
-                traditionsreichsten Sportvereinen im Barnim. Mit über 600 Mitgliedern und
-                16 aktiven Mannschaften sind wir ein wichtiger Teil des gesellschaftlichen
-                Lebens in Eberswalde.
+                Der Verein wurde 1909 als FC Preussen 09 gegründet und hat sich über
+                mehr als ein Jahrhundert hinweg als feste Größe im Barnim entwickelt.
+                Nach mehreren historischen Namenswechseln entstand 2011 der heutige
+                FV Preussen Eberswalde.
               </p>
               <p>
-                Unser Ziel ist es, Fußball auf allen Ebenen zu fördern – von der frühen
-                Kindheit in der G-Jugend bis zu den erfahrenen Spielern in der Ü50.
-                Die erste Mannschaft spielt in der Landesliga Nord und ist das Aushängeschild
-                unseres Vereins.
+                Heute vereint der Club Leistungs- und Breitensport: von den Bambini- und
+                Nachwuchsteams bis in den Herren- und Altherrenbereich. Das Westendstadion
+                mit Hauptplatz, Kunstrasen und Nebenplatz bildet dabei das sportliche Zentrum.
               </p>
               <p>
-                Wir sind stolz auf unsere Gemeinschaft und freuen uns immer über neue
-                Mitglieder, Fans und Unterstützer.
+                Als "Motor des Barnim" steht der Verein für Nachwuchsförderung,
+                gesellschaftliches Engagement und eine starke lokale Gemeinschaft.
               </p>
             </div>
             <div className="mt-6 flex gap-4">
@@ -171,9 +201,21 @@ export default function VereinPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {boardMembers.map((member) => (
               <div key={member.role} className="bg-white rounded-xl border border-gray-100 p-5">
-                <div className="w-12 h-12 rounded-full bg-[#e8f5e9] flex items-center justify-center mb-3">
-                  <Users className="w-5 h-5 text-[#21a530]" />
-                </div>
+                {member.photo ? (
+                  <div className="mb-3 overflow-hidden rounded-xl border border-gray-100">
+                    <Image
+                      src={member.photo}
+                      alt={member.name}
+                      width={360}
+                      height={220}
+                      className="h-28 w-full object-cover object-top"
+                    />
+                  </div>
+                ) : (
+                  <div className="mb-3 flex h-28 items-center justify-center rounded-xl border border-gray-100 bg-[#e8f5e9]">
+                    <Users className="h-8 w-8 text-[#21a530]" />
+                  </div>
+                )}
                 <p className="text-xs font-bold text-[#21a530] uppercase tracking-wide mb-0.5">{member.role}</p>
                 <p className="font-bold text-gray-900">{member.name}</p>
                 {member.email && (
@@ -208,7 +250,7 @@ export default function VereinPage() {
                   <Users className="w-4 h-4 text-[#21a530] shrink-0 mt-0.5" />
                   <div>
                     <p className="font-semibold text-gray-800">Kapazität</p>
-                    <p>ca. 3.000 Zuschauer</p>
+                    <p>4.500 Zuschauer, davon 300 überdachte Sitzplätze</p>
                   </div>
                 </div>
               </div>
