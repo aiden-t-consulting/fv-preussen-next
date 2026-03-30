@@ -88,11 +88,11 @@ function SponsorCard({
 
   const wrapClasses = {
     featured:
-      "h-32 px-10 py-6 rounded-2xl border-2 border-[#039139]/20 bg-white shadow-md hover:shadow-xl hover:border-[#039139]/50 hover:scale-[1.02]",
+      "h-32 px-10 py-6 rounded-2xl border-2 border-[#2e7d32]/20 bg-white shadow-md hover:shadow-xl hover:border-[#2e7d32]/50 hover:scale-[1.02]",
     premium:
-      "h-24 px-8 py-4 rounded-xl border-t-4 border-t-[#039139] border border-gray-100 bg-white shadow-sm hover:shadow-md hover:border-t-[#026b29]",
+      "h-24 px-8 py-4 rounded-xl border-t-4 border-t-[#2e7d32] border border-gray-100 bg-white shadow-sm hover:shadow-md hover:border-t-[#1b5e20]",
     partner:
-      "h-16 px-6 py-3 rounded-lg border-l-4 border-l-[#039139]/60 border border-gray-100 bg-white hover:border-l-[#039139] hover:shadow-sm",
+      "h-16 px-6 py-3 rounded-lg border-l-4 border-l-[#2e7d32]/60 border border-gray-100 bg-white hover:border-l-[#2e7d32] hover:shadow-sm",
   };
 
   const imgClasses = {
@@ -151,11 +151,11 @@ export function SponsorsTiered({ sponsors }: { sponsors: Sponsor[] }) {
   return (
     <section className="overflow-hidden bg-white">
       {/* Colorful header strip */}
-      <div className="bg-gradient-to-r from-[#039139] via-[#026b29] to-[#1e2030] py-10 lg:py-14">
+      <div className="bg-gradient-to-r from-[#2e7d32] via-[#1b5e20] to-[#1e2030] py-10 lg:py-14">
         <div className="mx-auto max-w-[1280px] px-4">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <p className="mb-2 text-[11px] font-bold uppercase tracking-widest text-[#7de8a0]">
+              <p className="mb-2 text-[11px] font-bold uppercase tracking-widest text-[#a5d6a7]">
                 Partner des Vereins
               </p>
               <h2 className="text-3xl font-bold text-white [font-family:var(--font-club)] lg:text-4xl">
@@ -194,10 +194,10 @@ export function SponsorsTiered({ sponsors }: { sponsors: Sponsor[] }) {
         {premium.length > 0 && (
           <div className="mb-12">
             <div className="mb-6 flex items-center gap-3">
-              <span className="rounded-full bg-[#039139]/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.15em] text-[#039139]">
+              <span className="rounded-full bg-[#2e7d32]/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.15em] text-[#2e7d32]">
                 Premium Partner
               </span>
-              <div className="h-px flex-1 bg-gradient-to-r from-[#039139]/30 to-transparent" />
+              <div className="h-px flex-1 bg-gradient-to-r from-[#2e7d32]/30 to-transparent" />
             </div>
             <div className="flex flex-wrap gap-4">
               {premium.map((s) => (
@@ -225,7 +225,7 @@ export function SponsorsTiered({ sponsors }: { sponsors: Sponsor[] }) {
         )}
 
         {/* CTA */}
-        <div className="flex flex-col items-start justify-between gap-6 rounded-2xl bg-gradient-to-r from-[#039139] to-[#026b29] px-8 py-8 sm:flex-row sm:items-center">
+        <div className="flex flex-col items-start justify-between gap-6 rounded-2xl bg-gradient-to-r from-[#2e7d32] to-[#1b5e20] px-8 py-8 sm:flex-row sm:items-center">
           <div>
             <h3 className="text-lg font-bold uppercase tracking-wide text-white">
               Werden Sie Partner des FV Preussen Eberswalde
@@ -237,7 +237,7 @@ export function SponsorsTiered({ sponsors }: { sponsors: Sponsor[] }) {
           </div>
           <Link
             href="/kontakt?betreff=sponsoring"
-            className="shrink-0 rounded-full bg-white px-7 py-3 text-[12px] font-bold uppercase tracking-wider text-[#039139] transition-colors hover:bg-gray-100"
+            className="shrink-0 rounded-full bg-white px-7 py-3 text-[12px] font-bold uppercase tracking-wider text-[#2e7d32] transition-colors hover:bg-gray-100"
           >
             Partnerschaft anfragen
           </Link>

@@ -16,9 +16,9 @@ export function ArticleCard({ article, variant = "default" }: ArticleCardProps) 
     return (
       <Link
         href={`/aktuelles/${article.slug.current}`}
-        className="group flex gap-4 bg-white rounded-xl border border-gray-100 hover:border-[#21a530]/30 hover:shadow-md transition-all duration-200 overflow-hidden p-4"
+        className="group flex gap-4 bg-white rounded-xl border border-gray-100 hover:border-[#2e7d32]/30 hover:shadow-md transition-all duration-200 overflow-hidden p-4"
       >
-        <div className="relative w-24 h-20 shrink-0 rounded-lg overflow-hidden bg-[#e8f5e9]">
+        <div className="relative w-24 h-20 shrink-0 rounded-lg overflow-hidden bg-[#f1f8e9]">
           {article.coverImage ? (
             <Image
               src={urlFor(article.coverImage).width(200).height(160).url()}
@@ -28,7 +28,7 @@ export function ArticleCard({ article, variant = "default" }: ArticleCardProps) 
               sizes="96px"
             />
           ) : (
-            <div className="absolute inset-0 flex items-center justify-center text-[#21a530]/30 font-bold font-['Playfair_Display',serif]">
+            <div className="absolute inset-0 flex items-center justify-center text-[#2e7d32]/30 font-bold font-['Playfair_Display',serif]">
               FVP
             </div>
           )}
@@ -37,7 +37,7 @@ export function ArticleCard({ article, variant = "default" }: ArticleCardProps) 
           <Badge className={`${categoryColor(article.category)} mb-1.5`}>
             {categoryLabel(article.category)}
           </Badge>
-          <h3 className="text-sm font-bold text-gray-900 leading-snug group-hover:text-[#21a530] transition-colors line-clamp-2">
+          <h3 className="text-sm font-bold text-gray-900 leading-snug group-hover:text-[#2e7d32] transition-colors line-clamp-2">
             {article.title}
           </h3>
           <div className="flex items-center gap-1 mt-1.5 text-xs text-gray-400">
@@ -52,10 +52,10 @@ export function ArticleCard({ article, variant = "default" }: ArticleCardProps) 
   return (
     <Link
       href={`/aktuelles/${article.slug.current}`}
-      className="group flex flex-col bg-white rounded-2xl border border-gray-100 hover:border-[#21a530]/30 hover:shadow-lg transition-all duration-300 overflow-hidden"
+      className="group flex flex-col bg-white rounded-2xl border border-gray-100 hover:border-[#2e7d32]/30 hover:shadow-lg transition-all duration-300 overflow-hidden"
     >
       {/* Cover image */}
-      <div className="relative aspect-[16/10] bg-[#e8f5e9] overflow-hidden">
+      <div className="relative aspect-[16/10] bg-[#f1f8e9] overflow-hidden">
         {article.coverImage ? (
           <Image
             src={urlFor(article.coverImage).width(600).height(375).url()}
@@ -66,7 +66,7 @@ export function ArticleCard({ article, variant = "default" }: ArticleCardProps) 
           />
         ) : (
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="text-5xl font-bold text-[#21a530]/15 font-['Playfair_Display',serif]">FVP</div>
+            <div className="text-5xl font-bold text-[#2e7d32]/15 font-['Playfair_Display',serif]">FVP</div>
           </div>
         )}
         <div className="absolute top-3 left-3">
@@ -78,7 +78,7 @@ export function ArticleCard({ article, variant = "default" }: ArticleCardProps) 
 
       {/* Content */}
       <div className="flex flex-col flex-1 p-5">
-        <h3 className="font-bold text-lg text-gray-900 leading-snug group-hover:text-[#21a530] transition-colors mb-2 line-clamp-2">
+        <h3 className="font-bold text-lg text-gray-900 leading-snug group-hover:text-[#2e7d32] transition-colors mb-2 line-clamp-2">
           {article.title}
         </h3>
         {article.excerpt && (

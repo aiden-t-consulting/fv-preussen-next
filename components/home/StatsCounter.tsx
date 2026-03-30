@@ -64,15 +64,15 @@ function StatCard({ stat, animate }: { stat: (typeof stats)[0]; animate: boolean
 
   return (
     <div className="text-center group">
-      <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-[#039139]/20 mb-4 group-hover:bg-[#039139] transition-colors duration-300">
-        <Icon className="w-6 h-6 text-[#81d742] group-hover:text-white transition-colors duration-300" />
+      <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-[#2e7d32]/20 mb-4 group-hover:bg-[#2e7d32] transition-colors duration-300">
+        <Icon className="w-6 h-6 text-[#a5d6a7] group-hover:text-white transition-colors duration-300" />
       </div>
       <div className="text-4xl md:text-5xl font-bold text-white mb-1">
         {stat.prefix}
         {animate ? count.toLocaleString("de-DE") : "—"}
         {stat.suffix}
       </div>
-      <div className="text-[#81d742] font-bold text-sm uppercase tracking-widest mb-1">
+      <div className="text-[#a5d6a7] font-bold text-sm uppercase tracking-widest mb-1">
         {stat.label}
       </div>
       <div className="text-gray-400 text-sm">{stat.description}</div>
@@ -99,7 +99,7 @@ export function StatsCounter() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-20 lg:py-24 bg-[#15540a]">
+    <section ref={sectionRef} className="py-20 lg:py-24 bg-[#1b5e20]">
       <div className="max-w-7xl mx-auto px-4">
         <StaggerContainer stagger={0.12} className="grid grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
           {stats.map((stat) => (

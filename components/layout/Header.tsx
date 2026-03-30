@@ -191,25 +191,25 @@ export function Header() {
               <div className="ml-4 flex items-center gap-2 border-l border-gray-200 pl-4">
                 <Link
                   href="/verein/dokumente"
-                  className="whitespace-nowrap rounded-full border border-gray-300 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.08em] text-gray-700 transition-colors hover:border-[#039139] hover:text-[#039139] [font-family:var(--font-club)]"
+                  className="whitespace-nowrap rounded-full border border-gray-300 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.08em] text-gray-700 transition-colors hover:border-[#2e7d32] hover:text-[#2e7d32] [font-family:var(--font-club)]"
                 >
                   Mitglied werden
                 </Link>
                 <Link
                   href="/sponsoren"
-                  className="whitespace-nowrap rounded-full bg-[#039139] px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.08em] text-white transition-colors hover:bg-[#026b29] [font-family:var(--font-club)]"
+                  className="whitespace-nowrap rounded-full bg-[#2e7d32] px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.08em] text-white transition-colors hover:bg-[#1b5e20] [font-family:var(--font-club)]"
                 >
                   Sponsor werden
                 </Link>
               </div>
               <div className="ml-3 flex items-center gap-2 border-l border-gray-200 pl-3">
-                <a href="https://www.facebook.com/fvpreusseneberswalde" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-gray-400 transition-colors hover:text-[#039139]">
+                <a href="https://www.facebook.com/fvpreusseneberswalde" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-gray-400 transition-colors hover:text-[#2e7d32]">
                   <FacebookIcon className="h-3.5 w-3.5" />
                 </a>
-                <a href="https://www.instagram.com/fvpreusseneberswalde" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-gray-400 transition-colors hover:text-[#039139]">
+                <a href="https://www.instagram.com/fvpreusseneberswalde" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-gray-400 transition-colors hover:text-[#2e7d32]">
                   <InstagramIcon className="h-3.5 w-3.5" />
                 </a>
-                <a href="https://www.youtube.com/@fvpreusseneberswalde" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="text-gray-400 transition-colors hover:text-[#039139]">
+                <a href="https://www.youtube.com/@fvpreusseneberswalde" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="text-gray-400 transition-colors hover:text-[#2e7d32]">
                   <YoutubeIcon className="h-3.5 w-3.5" />
                 </a>
               </div>
@@ -217,7 +217,7 @@ export function Header() {
 
             {/* Mobile hamburger */}
             <button
-              className="ml-auto rounded border border-gray-200 p-2 text-gray-700 transition-colors hover:border-[#039139]/50 hover:text-[#039139] lg:hidden"
+              className="ml-auto rounded border border-gray-200 p-2 text-gray-700 transition-colors hover:border-[#2e7d32]/50 hover:text-[#2e7d32] lg:hidden"
               onClick={() => setMobileOpen((v) => !v)}
               aria-expanded={mobileOpen}
               aria-label="Menü öffnen"
@@ -248,8 +248,8 @@ export function Header() {
                   className={cn(
                     "block px-4 py-3 text-sm font-bold uppercase tracking-widest transition-colors",
                     isActive(item.href)
-                      ? "text-[#039139]"
-                      : "text-gray-800 hover:text-[#039139]"
+                      ? "text-[#2e7d32]"
+                      : "text-gray-800 hover:text-[#2e7d32]"
                   )}
                 >
                   {item.label}
@@ -262,7 +262,7 @@ export function Header() {
                   onClick={() =>
                     setOpenDropdown(openDropdown === item.href ? null : item.href)
                   }
-                  className="flex w-full items-center justify-between px-4 py-3 text-sm font-bold uppercase tracking-widest text-gray-800 transition-colors hover:text-[#039139]"
+                  className="flex w-full items-center justify-between px-4 py-3 text-sm font-bold uppercase tracking-widest text-gray-800 transition-colors hover:text-[#2e7d32]"
                   aria-expanded={openDropdown === item.href}
                 >
                   {item.label}
@@ -274,14 +274,14 @@ export function Header() {
                   />
                 </button>
                 {openDropdown === item.href && (
-                  <div className="ml-4 space-y-1 border-l-2 border-[#039139]/30 pl-3">
+                  <div className="ml-4 space-y-1 border-l-2 border-[#2e7d32]/30 pl-3">
                     {/* Flat children */}
                     {item.children?.map((child) => (
                       <Link
                         key={child.href}
                         href={child.href}
                         onClick={closeMobileMenu}
-                        className="block py-2 text-sm text-gray-500 transition-colors hover:text-[#039139]"
+                        className="block py-2 text-sm text-gray-500 transition-colors hover:text-[#2e7d32]"
                       >
                         {child.label}
                       </Link>
@@ -297,7 +297,7 @@ export function Header() {
                             key={child.href}
                             href={child.href}
                             onClick={closeMobileMenu}
-                            className="block py-1.5 text-sm text-gray-500 transition-colors hover:text-[#039139]"
+                            className="block py-1.5 text-sm text-gray-500 transition-colors hover:text-[#2e7d32]"
                           >
                             {child.label}
                           </Link>
@@ -315,25 +315,25 @@ export function Header() {
             <Link
               href="/verein/dokumente"
               onClick={closeMobileMenu}
-              className="block rounded-full border border-gray-300 px-5 py-3 text-center text-sm font-bold uppercase tracking-wider text-gray-700 transition-colors hover:border-[#039139] hover:text-[#039139]"
+              className="block rounded-full border border-gray-300 px-5 py-3 text-center text-sm font-bold uppercase tracking-wider text-gray-700 transition-colors hover:border-[#2e7d32] hover:text-[#2e7d32]"
             >
               Mitglied werden
             </Link>
             <Link
               href="/sponsoren"
               onClick={closeMobileMenu}
-              className="block rounded-full bg-[#039139] px-5 py-3 text-center text-sm font-bold uppercase tracking-wider text-white transition-colors hover:bg-[#026b29]"
+              className="block rounded-full bg-[#2e7d32] px-5 py-3 text-center text-sm font-bold uppercase tracking-wider text-white transition-colors hover:bg-[#1b5e20]"
             >
               Sponsor werden
             </Link>
             <div className="flex justify-center gap-5 pt-2">
-              <a href="https://www.facebook.com/fvpreusseneberswalde" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-gray-400 transition-colors hover:text-[#039139]">
+              <a href="https://www.facebook.com/fvpreusseneberswalde" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-gray-400 transition-colors hover:text-[#2e7d32]">
                 <FacebookIcon className="h-5 w-5" />
               </a>
-              <a href="https://www.instagram.com/fvpreusseneberswalde" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-gray-400 transition-colors hover:text-[#039139]">
+              <a href="https://www.instagram.com/fvpreusseneberswalde" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-gray-400 transition-colors hover:text-[#2e7d32]">
                 <InstagramIcon className="h-5 w-5" />
               </a>
-              <a href="https://www.youtube.com/@fvpreusseneberswalde" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="text-gray-400 transition-colors hover:text-[#039139]">
+              <a href="https://www.youtube.com/@fvpreusseneberswalde" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="text-gray-400 transition-colors hover:text-[#2e7d32]">
                 <YoutubeIcon className="h-5 w-5" />
               </a>
             </div>
@@ -359,10 +359,10 @@ function NavItem({
         href={item.href}
         className={cn(
           "relative whitespace-nowrap px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.08em] transition-colors [font-family:var(--font-club)]",
-          "after:absolute after:-bottom-0.5 after:left-1/2 after:h-0.5 after:w-4 after:-translate-x-1/2 after:rounded-full after:bg-[#039139] after:opacity-0 after:transition-opacity",
+          "after:absolute after:-bottom-0.5 after:left-1/2 after:h-0.5 after:w-4 after:-translate-x-1/2 after:rounded-full after:bg-[#2e7d32] after:opacity-0 after:transition-opacity",
           isActive(item.href)
-            ? "text-[#039139] after:opacity-100"
-            : "text-gray-700 hover:text-[#039139] hover:after:opacity-100"
+            ? "text-[#2e7d32] after:opacity-100"
+            : "text-gray-700 hover:text-[#2e7d32] hover:after:opacity-100"
         )}
       >
         {item.label}
@@ -375,10 +375,10 @@ function NavItem({
       <button
         className={cn(
           "relative flex items-center gap-1 whitespace-nowrap px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.08em] transition-colors [font-family:var(--font-club)]",
-          "after:absolute after:-bottom-0.5 after:left-1/2 after:h-0.5 after:w-4 after:-translate-x-1/2 after:rounded-full after:bg-[#039139] after:opacity-0 after:transition-opacity",
+          "after:absolute after:-bottom-0.5 after:left-1/2 after:h-0.5 after:w-4 after:-translate-x-1/2 after:rounded-full after:bg-[#2e7d32] after:opacity-0 after:transition-opacity",
           isActive(item.href)
-            ? "text-[#039139] after:opacity-100"
-            : "text-gray-700 hover:text-[#039139] hover:after:opacity-100"
+            ? "text-[#2e7d32] after:opacity-100"
+            : "text-gray-700 hover:text-[#2e7d32] hover:after:opacity-100"
         )}
       >
         {item.label}
@@ -387,7 +387,7 @@ function NavItem({
 
       <div className="invisible absolute left-0 top-full z-50 pt-2 opacity-0 transition-all duration-150 group-hover:visible group-hover:opacity-100">
         <div className="rounded-xl border border-gray-100 bg-white shadow-lg">
-          <div className="h-0.5 rounded-t-xl bg-[#039139]" />
+          <div className="h-0.5 rounded-t-xl bg-[#2e7d32]" />
 
           {/* Flat dropdown */}
           {item.children && (
@@ -396,7 +396,7 @@ function NavItem({
                 <Link
                   key={child.href}
                   href={child.href}
-                  className="block border-b border-gray-50 px-4 py-2.5 text-xs font-semibold uppercase tracking-wider text-gray-600 transition-colors hover:bg-gray-50 hover:text-[#039139] last:border-0"
+                  className="block border-b border-gray-50 px-4 py-2.5 text-xs font-semibold uppercase tracking-wider text-gray-600 transition-colors hover:bg-gray-50 hover:text-[#2e7d32] last:border-0"
                 >
                   {child.label}
                 </Link>
@@ -416,7 +416,7 @@ function NavItem({
                     <Link
                       key={child.href}
                       href={child.href}
-                      className="block py-1.5 text-xs font-semibold uppercase tracking-wide text-gray-600 transition-colors hover:text-[#039139]"
+                      className="block py-1.5 text-xs font-semibold uppercase tracking-wide text-gray-600 transition-colors hover:text-[#2e7d32]"
                     >
                       {child.label}
                     </Link>

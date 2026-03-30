@@ -42,8 +42,8 @@ export function QuickMatchStrip({
           {/* Next match */}
           <div className="flex flex-col gap-3 rounded-[20px] border border-gray-100 bg-white p-6 shadow-sm">
             <div className="flex items-center gap-2">
-              <Calendar className="h-4 w-4 text-[#039139]" />
-              <span className="text-[11px] font-bold uppercase tracking-widest text-[#039139]">
+              <Calendar className="h-4 w-4 text-[#2e7d32]" />
+              <span className="text-[11px] font-bold uppercase tracking-widest text-[#2e7d32]">
                 Nächstes Spiel
               </span>
             </div>
@@ -58,7 +58,7 @@ export function QuickMatchStrip({
                 </div>
                 <div className="mt-1 flex items-center gap-2">
                   <span className="text-xs text-gray-400">{nextMatch.competition}</span>
-                  <span className="rounded-full bg-[#039139]/10 px-2 py-0.5 text-[10px] font-semibold text-[#039139]">
+                  <span className="rounded-full bg-[#2e7d32]/10 px-2 py-0.5 text-[10px] font-semibold text-[#2e7d32]">
                     {getMatchType(nextMatch)}
                   </span>
                 </div>
@@ -68,7 +68,7 @@ export function QuickMatchStrip({
             )}
             <Link
               href="/berichte"
-              className="mt-auto text-[11px] font-semibold uppercase tracking-wider text-[#039139] hover:underline"
+              className="mt-auto text-[11px] font-semibold uppercase tracking-wider text-[#2e7d32] hover:underline"
             >
               Alle Spiele →
             </Link>
@@ -77,8 +77,8 @@ export function QuickMatchStrip({
           {/* Last result */}
           <div className="flex flex-col gap-3 rounded-[20px] border border-gray-100 bg-white p-6 shadow-sm">
             <div className="flex items-center gap-2">
-              <Trophy className="h-4 w-4 text-[#039139]" />
-              <span className="text-[11px] font-bold uppercase tracking-widest text-[#039139]">
+              <Trophy className="h-4 w-4 text-[#2e7d32]" />
+              <span className="text-[11px] font-bold uppercase tracking-widest text-[#2e7d32]">
                 Letztes Ergebnis
               </span>
             </div>
@@ -95,7 +95,7 @@ export function QuickMatchStrip({
             )}
             <Link
               href="/berichte"
-              className="mt-auto text-[11px] font-semibold uppercase tracking-wider text-[#039139] hover:underline"
+              className="mt-auto text-[11px] font-semibold uppercase tracking-wider text-[#2e7d32] hover:underline"
             >
               Alle Ergebnisse →
             </Link>
@@ -104,8 +104,8 @@ export function QuickMatchStrip({
           {/* Table position */}
           <div className="flex flex-col gap-3 rounded-[20px] border border-gray-100 bg-white p-6 shadow-sm">
             <div className="flex items-center gap-2">
-              <BarChart3 className="h-4 w-4 text-[#039139]" />
-              <span className="text-[11px] font-bold uppercase tracking-widest text-[#039139]">
+              <BarChart3 className="h-4 w-4 text-[#2e7d32]" />
+              <span className="text-[11px] font-bold uppercase tracking-widest text-[#2e7d32]">
                 Tabellenplatz
               </span>
             </div>
@@ -124,7 +124,7 @@ export function QuickMatchStrip({
             )}
             <Link
               href="/berichte"
-              className="mt-auto text-[11px] font-semibold uppercase tracking-wider text-[#039139] hover:underline"
+              className="mt-auto text-[11px] font-semibold uppercase tracking-wider text-[#2e7d32] hover:underline"
             >
               Zur Tabelle →
             </Link>

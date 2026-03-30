@@ -29,7 +29,7 @@ export function SectionHeading({
         <span
           className={cn(
             "inline-block text-xs font-bold uppercase tracking-[0.2em] mb-3",
-            light ? "text-[#81d742]" : "text-[#039139]"
+            light ? "text-[#a5d6a7]" : "text-[#2e7d32]"
           )}
         >
           {label}
@@ -58,7 +58,7 @@ export function SectionHeading({
         className={cn(
           "mt-4 h-1 w-16 rounded-full",
           align === "center" && "mx-auto",
-          light ? "bg-[#81d742]" : "bg-[#039139]"
+          light ? "bg-[#a5d6a7]" : "bg-[#2e7d32]"
         )}
       />
     </div>

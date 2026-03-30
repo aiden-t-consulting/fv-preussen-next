@@ -20,10 +20,10 @@ function TeamCard({ team }: { team: LegacyTeam }) {
   return (
     <Link
       href={`/teams/${team.slug?.current}`}
-      className="group bg-white rounded-2xl border border-gray-100 hover:border-[#21a530]/40 hover:shadow-lg transition-all duration-300 overflow-hidden flex flex-col"
+      className="group bg-white rounded-2xl border border-gray-100 hover:border-[#2e7d32]/40 hover:shadow-lg transition-all duration-300 overflow-hidden flex flex-col"
     >
       {/* Badge / photo area */}
-      <div className="relative h-36 bg-gradient-to-br from-[#15540a] to-[#21a530] flex items-center justify-center overflow-hidden">
+      <div className="relative h-36 bg-gradient-to-br from-[#1b5e20] to-[#2e7d32] flex items-center justify-center overflow-hidden">
         {team.badge ? (
           <Image
             src={urlFor(team.badge).width(120).height(120).url()}
@@ -57,7 +57,7 @@ function TeamCard({ team }: { team: LegacyTeam }) {
       </div>
 
       <div className="p-4 flex flex-col flex-1">
-        <h3 className="font-bold text-gray-900 text-base leading-tight group-hover:text-[#21a530] transition-colors mb-1">
+        <h3 className="font-bold text-gray-900 text-base leading-tight group-hover:text-[#2e7d32] transition-colors mb-1">
           {team.name}
         </h3>
         {team.coach && (
@@ -99,16 +99,16 @@ export default async function TeamsPage() {
   return (
     <div className="min-h-screen bg-[#f9fafb]">
       {/* Header */}
-      <div className="bg-[#15540a] text-white py-16 lg:py-20">
+      <div className="bg-[#1b5e20] text-white py-16 lg:py-20">
         <div className="max-w-7xl mx-auto px-4">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-[#81d742] hover:text-white transition-colors text-sm font-semibold mb-6"
+            className="inline-flex items-center gap-2 text-[#a5d6a7] hover:text-white transition-colors text-sm font-semibold mb-6"
           >
             <ArrowLeft className="w-4 h-4" />
             Zuruck zur Startseite
           </Link>
-          <p className="text-[#81d742] text-sm font-bold uppercase tracking-[0.2em] mb-3">
+          <p className="text-[#a5d6a7] text-sm font-bold uppercase tracking-[0.2em] mb-3">
             Mannschaften
           </p>
           <h1 className="text-3xl md:text-5xl font-bold">Unsere Teams</h1>
@@ -123,7 +123,7 @@ export default async function TeamsPage() {
         {herren.length > 0 && (
           <section>
             <h2 className="text-xl font-bold text-gray-900 flex items-center gap-2 mb-6">
-              <Trophy className="w-5 h-5 text-[#21a530]" />
+              <Trophy className="w-5 h-5 text-[#2e7d32]" />
               Herren
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
@@ -137,7 +137,7 @@ export default async function TeamsPage() {
         {jugend.length > 0 && (
           <section>
             <h2 className="text-xl font-bold text-gray-900 flex items-center gap-2 mb-6">
-              <Users className="w-5 h-5 text-[#21a530]" />
+              <Users className="w-5 h-5 text-[#2e7d32]" />
               Nachwuchs & Jugend
             </h2>
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5">
@@ -151,7 +151,7 @@ export default async function TeamsPage() {
         {freizeitAlte.length > 0 && (
           <section>
             <h2 className="text-xl font-bold text-gray-900 flex items-center gap-2 mb-6">
-              <Users className="w-5 h-5 text-[#21a530]" />
+              <Users className="w-5 h-5 text-[#2e7d32]" />
               Freizeitfußball
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">

@@ -58,7 +58,7 @@ export default async function ArticlePage({ params }: Props) {
         <div className="max-w-4xl mx-auto px-4 py-4">
           <Link
             href="/aktuelles"
-            className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-[#21a530] transition-colors"
+            className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-[#2e7d32] transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             Zurück zu Aktuelles
@@ -77,14 +77,14 @@ export default async function ArticlePage({ params }: Props) {
           </h1>
           <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500">
             <div className="flex items-center gap-1.5">
-              <Calendar className="w-4 h-4 text-[#21a530]" />
+              <Calendar className="w-4 h-4 text-[#2e7d32]" />
               <time dateTime={article.publishedAt}>
                 {formatDate(article.publishedAt)}
               </time>
             </div>
             {article.author && (
               <div className="flex items-center gap-1.5">
-                <User className="w-4 h-4 text-[#21a530]" />
+                <User className="w-4 h-4 text-[#2e7d32]" />
                 {article.author}
               </div>
             )}
@@ -129,8 +129,8 @@ export default async function ArticlePage({ params }: Props) {
 
         {/* Excerpt */}
         {article.excerpt && (
-          <div className="bg-[#e8f5e9] border-l-4 border-[#21a530] rounded-r-xl px-6 py-5 mb-8">
-            <p className="text-[#15540a] font-semibold text-lg leading-relaxed">
+          <div className="bg-[#f1f8e9] border-l-4 border-[#2e7d32] rounded-r-xl px-6 py-5 mb-8">
+            <p className="text-[#1b5e20] font-semibold text-lg leading-relaxed">
               {article.excerpt}
             </p>
           </div>

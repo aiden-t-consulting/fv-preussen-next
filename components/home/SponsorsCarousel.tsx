@@ -74,12 +74,12 @@ export function SponsorsCarousel() {
 	const [paused, setPaused] = useState(false);
 
 	return (
-		<section className="py-16 bg-[#f5f5f5] border-t-4 border-[#039139]">
+		<section className="py-16 bg-[#f5f5f5] border-t-4 border-[#2e7d32]">
 			<div className="max-w-7xl mx-auto px-4">
 				{/* Header row */}
 				<FadeIn className="flex items-center justify-between mb-10">
 					<div>
-						<span className="text-[#039139] text-xs font-bold uppercase tracking-[0.25em] block mb-1">
+						<span className="text-[#2e7d32] text-xs font-bold uppercase tracking-[0.25em] block mb-1">
 							Unsere Partner
 						</span>
 						<h2 className="text-2xl md:text-3xl font-bold text-[#1a1a1a] uppercase tracking-wide">
@@ -88,9 +88,9 @@ export function SponsorsCarousel() {
 					</div>
 					<Link
 						href="/sponsoren"
-						className="relative hidden sm:inline-flex items-center px-6 py-2.5 text-xs font-bold uppercase tracking-widest text-white border-2 border-[#039139] overflow-hidden group"
+						className="relative hidden sm:inline-flex items-center px-6 py-2.5 text-xs font-bold uppercase tracking-widest text-white border-2 border-[#2e7d32] overflow-hidden group"
 					>
-						<span className="absolute inset-0 bg-[#039139] -translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
+						<span className="absolute inset-0 bg-[#2e7d32] -translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
 						<span className="relative">Alle Sponsoren</span>
 					</Link>
 				</FadeIn>
@@ -116,7 +116,7 @@ export function SponsorsCarousel() {
 								target={sponsor.url !== "#" ? "_blank" : undefined}
 								rel="noopener noreferrer"
 								aria-label={sponsor.name}
-								className="group flex-shrink-0 w-48 h-24 bg-white border border-gray-200 hover:border-[#039139] flex items-center justify-center px-6 py-4 transition-all duration-200 hover:shadow-md"
+								className="group flex-shrink-0 w-48 h-24 bg-white border border-gray-200 hover:border-[#2e7d32] flex items-center justify-center px-6 py-4 transition-all duration-200 hover:shadow-md"
 							>
 								<Image
 									src={sponsor.logo}
@@ -135,7 +135,7 @@ export function SponsorsCarousel() {
 				</div>
 
 				{/* Become a sponsor CTA */}
-				<FadeIn delay={0.1} className="mt-12 border-l-4 border-[#039139] bg-white px-8 py-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+				<FadeIn delay={0.1} className="mt-12 border-l-4 border-[#2e7d32] bg-white px-8 py-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
 					<div>
 						<h3 className="font-bold text-[#1a1a1a] text-lg uppercase tracking-wide">
 							Werden Sie unser Partner!
@@ -147,7 +147,7 @@ export function SponsorsCarousel() {
 					</div>
 					<Link
 						href="/kontakt?betreff=sponsoring"
-						className="relative inline-flex items-center px-7 py-3 text-xs font-bold uppercase tracking-widest text-white bg-[#039139] border-2 border-[#039139] overflow-hidden group hover:bg-[#026b29] transition-colors whitespace-nowrap"
+						className="relative inline-flex items-center px-7 py-3 text-xs font-bold uppercase tracking-widest text-white bg-[#2e7d32] border-2 border-[#2e7d32] overflow-hidden group hover:bg-[#1b5e20] transition-colors whitespace-nowrap"
 					>
 						Jetzt anfragen
 					</Link>

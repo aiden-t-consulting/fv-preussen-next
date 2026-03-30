@@ -60,16 +60,16 @@ export default function StadionPage() {
   return (
     <div className="min-h-screen bg-[#f9fafb]">
       {/* Hero */}
-      <div className="bg-gradient-to-br from-[#0e3a07] to-[#21a530] text-white py-20 lg:py-28">
+      <div className="bg-gradient-to-br from-[#1b5e20] to-[#2e7d32] text-white py-20 lg:py-28">
         <div className="max-w-7xl mx-auto px-4">
           <Link
             href="/verein"
-            className="inline-flex items-center gap-2 text-[#81d742] hover:text-white transition-colors text-sm font-semibold mb-6"
+            className="inline-flex items-center gap-2 text-[#a5d6a7] hover:text-white transition-colors text-sm font-semibold mb-6"
           >
             <ArrowLeft className="w-4 h-4" />
             Zurück zum Verein
           </Link>
-          <p className="text-[#81d742] text-sm font-bold uppercase tracking-[0.2em] mb-3">
+          <p className="text-[#a5d6a7] text-sm font-bold uppercase tracking-[0.2em] mb-3">
             Heimstätte
           </p>
           <h1 className="text-4xl md:text-6xl font-bold mb-4">Stadion Pfefferwerk</h1>
@@ -101,7 +101,7 @@ export default function StadionPage() {
             {/* Address */}
             <div className="bg-white rounded-2xl border border-gray-100 p-6">
               <h2 className="font-bold text-gray-900 text-lg mb-4 flex items-center gap-2">
-                <MapPin className="w-5 h-5 text-[#21a530]" />
+                <MapPin className="w-5 h-5 text-[#2e7d32]" />
                 Adresse
               </h2>
               <address className="not-italic text-gray-600 leading-relaxed">
@@ -115,7 +115,7 @@ export default function StadionPage() {
                 href="https://maps.google.com/?q=Pfefferwerkerstra%C3%9Fe+9,+16225+Eberswalde"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-[#21a530] text-sm font-semibold mt-4 hover:underline"
+                className="inline-flex items-center gap-1.5 text-[#2e7d32] text-sm font-semibold mt-4 hover:underline"
               >
                 <Navigation className="w-4 h-4" />
                 In Google Maps öffnen
@@ -137,7 +137,7 @@ export default function StadionPage() {
                 <div className="flex gap-3">
                   <dt className="text-gray-500 w-40 shrink-0">Einlass Heimspiele</dt>
                   <dd className="font-semibold text-gray-900 flex items-center gap-1.5">
-                    <Clock className="w-3.5 h-3.5 text-[#21a530]" />
+                    <Clock className="w-3.5 h-3.5 text-[#2e7d32]" />
                     60 min vor Anpfiff
                   </dd>
                 </div>
@@ -150,16 +150,16 @@ export default function StadionPage() {
               <div className="space-y-2.5 text-sm">
                 <a
                   href="mailto:info@fvpreussen-eberswalde.de"
-                  className="flex items-center gap-2.5 text-gray-600 hover:text-[#21a530] transition-colors"
+                  className="flex items-center gap-2.5 text-gray-600 hover:text-[#2e7d32] transition-colors"
                 >
-                  <Mail className="w-4 h-4 text-[#21a530] shrink-0" />
+                  <Mail className="w-4 h-4 text-[#2e7d32] shrink-0" />
                   info@fvpreussen-eberswalde.de
                 </a>
                 <a
                   href="tel:+493334"
-                  className="flex items-center gap-2.5 text-gray-600 hover:text-[#21a530] transition-colors"
+                  className="flex items-center gap-2.5 text-gray-600 hover:text-[#2e7d32] transition-colors"
                 >
-                  <Phone className="w-4 h-4 text-[#21a530] shrink-0" />
+                  <Phone className="w-4 h-4 text-[#2e7d32] shrink-0" />
                   Telefon auf Anfrage
                 </a>
               </div>
@@ -173,8 +173,8 @@ export default function StadionPage() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {facilities.map((f) => (
               <div key={f.label} className="bg-white rounded-xl border border-gray-100 p-5">
-                <div className="w-9 h-9 rounded-lg bg-[#e8f5e9] flex items-center justify-center mb-3">
-                  <MapPin className="w-4 h-4 text-[#21a530]" />
+                <div className="w-9 h-9 rounded-lg bg-[#f1f8e9] flex items-center justify-center mb-3">
+                  <MapPin className="w-4 h-4 text-[#2e7d32]" />
                 </div>
                 <h3 className="font-bold text-gray-900 text-sm mb-1">{f.label}</h3>
                 <p className="text-xs text-gray-500 leading-relaxed">{f.desc}</p>
@@ -193,7 +193,7 @@ export default function StadionPage() {
                 href={item.source}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group bg-white rounded-2xl border border-gray-100 overflow-hidden hover:border-[#21a530]/40 hover:shadow-md transition-all"
+                className="group bg-white rounded-2xl border border-gray-100 overflow-hidden hover:border-[#2e7d32]/40 hover:shadow-md transition-all"
               >
                 <Image
                   src={item.image}
@@ -204,7 +204,7 @@ export default function StadionPage() {
                 />
                 <div className="p-4 flex items-center justify-between gap-3">
                   <p className="font-semibold text-gray-900 text-sm">{item.title}</p>
-                  <span className="inline-flex items-center gap-1.5 text-xs text-[#21a530] font-semibold">
+                  <span className="inline-flex items-center gap-1.5 text-xs text-[#2e7d32] font-semibold">
                     <BookOpen className="w-4 h-4" />
                     Offnen
                   </span>
@@ -220,8 +220,8 @@ export default function StadionPage() {
           <div className="grid md:grid-cols-3 gap-6">
             {/* By car */}
             <div className="bg-white rounded-2xl border border-gray-100 p-6">
-              <div className="w-10 h-10 rounded-xl bg-[#e8f5e9] flex items-center justify-center mb-4">
-                <Car className="w-5 h-5 text-[#21a530]" />
+              <div className="w-10 h-10 rounded-xl bg-[#f1f8e9] flex items-center justify-center mb-4">
+                <Car className="w-5 h-5 text-[#2e7d32]" />
               </div>
               <h3 className="font-bold text-gray-900 mb-3">Mit dem Auto</h3>
               <div className="text-sm text-gray-600 space-y-2 leading-relaxed">
@@ -235,8 +235,8 @@ export default function StadionPage() {
 
             {/* By public transport */}
             <div className="bg-white rounded-2xl border border-gray-100 p-6">
-              <div className="w-10 h-10 rounded-xl bg-[#e8f5e9] flex items-center justify-center mb-4">
-                <Bus className="w-5 h-5 text-[#21a530]" />
+              <div className="w-10 h-10 rounded-xl bg-[#f1f8e9] flex items-center justify-center mb-4">
+                <Bus className="w-5 h-5 text-[#2e7d32]" />
               </div>
               <h3 className="font-bold text-gray-900 mb-3">Mit Bus & Bahn</h3>
               <div className="text-sm text-gray-600 space-y-2 leading-relaxed">
@@ -252,8 +252,8 @@ export default function StadionPage() {
 
             {/* Parking */}
             <div className="bg-white rounded-2xl border border-gray-100 p-6">
-              <div className="w-10 h-10 rounded-xl bg-[#e8f5e9] flex items-center justify-center mb-4">
-                <ParkingCircle className="w-5 h-5 text-[#21a530]" />
+              <div className="w-10 h-10 rounded-xl bg-[#f1f8e9] flex items-center justify-center mb-4">
+                <ParkingCircle className="w-5 h-5 text-[#2e7d32]" />
               </div>
               <h3 className="font-bold text-gray-900 mb-3">Parken</h3>
               <div className="text-sm text-gray-600 space-y-2 leading-relaxed">
@@ -275,7 +275,7 @@ export default function StadionPage() {
           </div>
           <Link
             href="/berichte"
-            className="shrink-0 inline-flex items-center gap-2 bg-[#21a530] text-white px-6 py-3 rounded-xl font-semibold hover:bg-[#1a8f28] transition-colors text-sm"
+            className="shrink-0 inline-flex items-center gap-2 bg-[#2e7d32] text-white px-6 py-3 rounded-xl font-semibold hover:bg-[#1b5e20] transition-colors text-sm"
           >
             <MapPin className="w-4 h-4" />
             Zu den Spielberichten

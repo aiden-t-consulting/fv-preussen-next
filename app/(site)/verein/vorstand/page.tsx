@@ -76,16 +76,16 @@ export default function VorstandPage() {
   return (
     <div className="min-h-screen bg-neutral-50">
       {/* Hero */}
-      <div className="bg-linear-to-br from-[#0e3a07] to-[#21a530] text-white py-20 lg:py-28">
+      <div className="bg-linear-to-br from-[#1b5e20] to-[#2e7d32] text-white py-20 lg:py-28">
         <div className="max-w-7xl mx-auto px-4">
           <Link
             href="/verein"
-            className="inline-flex items-center gap-2 text-[#81d742] hover:text-white transition-colors text-sm font-semibold mb-6"
+            className="inline-flex items-center gap-2 text-[#a5d6a7] hover:text-white transition-colors text-sm font-semibold mb-6"
           >
             <ArrowLeft className="w-4 h-4" />
             Zurück zum Verein
           </Link>
-          <p className="text-[#81d742] text-sm font-bold uppercase tracking-[0.2em] mb-3">
+          <p className="text-[#a5d6a7] text-sm font-bold uppercase tracking-[0.2em] mb-3">
             Führung
           </p>
           <h1 className="text-4xl md:text-6xl font-bold mb-4">Unser Vorstand</h1>
@@ -120,12 +120,12 @@ export default function VorstandPage() {
                     />
                   </div>
                 ) : (
-                  <div className="flex h-48 items-center justify-center bg-[#e8f5e9]">
-                    <Users className="h-12 w-12 text-[#21a530]" />
+                  <div className="flex h-48 items-center justify-center bg-[#f1f8e9]">
+                    <Users className="h-12 w-12 text-[#2e7d32]" />
                   </div>
                 )}
                 <div className="p-5">
-                  <p className="text-xs font-bold text-[#21a530] uppercase tracking-wide mb-1">
+                  <p className="text-xs font-bold text-[#2e7d32] uppercase tracking-wide mb-1">
                     {member.role}
                   </p>
                   <h3 className="font-bold text-gray-900 text-lg mb-2">{member.name}</h3>
@@ -134,7 +134,7 @@ export default function VorstandPage() {
                     {member.email && (
                       <a
                         href={`mailto:${member.email}`}
-                        className="flex items-center gap-2 text-xs text-gray-400 hover:text-[#21a530] transition-colors"
+                        className="flex items-center gap-2 text-xs text-gray-400 hover:text-[#2e7d32] transition-colors"
                       >
                         <Mail className="w-3.5 h-3.5" />
                         {member.email}
@@ -143,7 +143,7 @@ export default function VorstandPage() {
                     {member.phone && (
                       <a
                         href={`tel:${member.phone}`}
-                        className="flex items-center gap-2 text-xs text-gray-400 hover:text-[#21a530] transition-colors"
+                        className="flex items-center gap-2 text-xs text-gray-400 hover:text-[#2e7d32] transition-colors"
                       >
                         <Phone className="w-3.5 h-3.5" />
                         {member.phone}
@@ -169,16 +169,16 @@ export default function VorstandPage() {
                 key={a.rolle}
                 className="bg-white rounded-xl border border-gray-100 p-5 flex items-center gap-4"
               >
-                <div className="w-10 h-10 rounded-xl bg-[#e8f5e9] flex items-center justify-center shrink-0">
-                  <Users className="w-5 h-5 text-[#21a530]" />
+                <div className="w-10 h-10 rounded-xl bg-[#f1f8e9] flex items-center justify-center shrink-0">
+                  <Users className="w-5 h-5 text-[#2e7d32]" />
                 </div>
                 <div>
-                  <p className="text-xs font-bold text-[#21a530] uppercase tracking-wide">{a.rolle}</p>
+                  <p className="text-xs font-bold text-[#2e7d32] uppercase tracking-wide">{a.rolle}</p>
                   <p className="font-semibold text-gray-900 text-sm">{a.name}</p>
                   {a.email && (
                     <a
                       href={`mailto:${a.email}`}
-                      className="text-xs text-gray-400 hover:text-[#21a530] transition-colors"
+                      className="text-xs text-gray-400 hover:text-[#2e7d32] transition-colors"
                     >
                       {a.email}
                     </a>
@@ -200,7 +200,7 @@ export default function VorstandPage() {
           </div>
           <Link
             href="/kontakt"
-            className="shrink-0 inline-flex items-center gap-2 bg-[#21a530] text-white px-6 py-3 rounded-xl font-semibold hover:bg-[#1a8f28] transition-colors text-sm"
+            className="shrink-0 inline-flex items-center gap-2 bg-[#2e7d32] text-white px-6 py-3 rounded-xl font-semibold hover:bg-[#1b5e20] transition-colors text-sm"
           >
             <Mail className="w-4 h-4" />
             Kontakt aufnehmen

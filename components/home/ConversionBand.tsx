@@ -35,8 +35,8 @@ export function ConversionBand() {
               key={title}
               className="flex flex-col rounded-[20px] border border-white/8 bg-white/5 p-8"
             >
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[#039139]/20">
-                <Icon className="h-6 w-6 text-[#039139]" />
+              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[#2e7d32]/20">
+                <Icon className="h-6 w-6 text-[#2e7d32]" />
               </div>
               <h3 className="mb-2 text-lg font-bold text-white [font-family:var(--font-club)]">
                 {title}
@@ -44,7 +44,7 @@ export function ConversionBand() {
               <p className="mb-6 flex-1 text-sm leading-relaxed text-white/60">{copy}</p>
               <Link
                 href={href}
-                className="inline-flex w-full items-center justify-center rounded-full bg-[#039139] px-5 py-3 text-[12px] font-bold uppercase tracking-wider text-white transition-colors hover:bg-[#026b29]"
+                className="inline-flex w-full items-center justify-center rounded-full bg-[#2e7d32] px-5 py-3 text-[12px] font-bold uppercase tracking-wider text-white transition-colors hover:bg-[#1b5e20]"
               >
                 {cta}
               </Link>

@@ -82,7 +82,7 @@ export default async function TeamPage({ params }: TeamPageProps) {
         <div className="max-w-7xl mx-auto px-4 py-4">
           <Link
             href="/teams"
-            className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-[#21a530] transition-colors"
+            className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-[#2e7d32] transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             Alle Teams
@@ -91,14 +91,14 @@ export default async function TeamPage({ params }: TeamPageProps) {
       </div>
 
       {/* Hero */}
-      <div className="bg-linear-to-br from-[#0e3a07] to-[#21a530] text-white py-16">
+      <div className="bg-linear-to-br from-[#1b5e20] to-[#2e7d32] text-white py-16">
         <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center sm:items-start gap-8">
           {/* Badge */}
           <div className="w-28 h-28 shrink-0 bg-white/20 rounded-2xl flex items-center justify-center">
             {heroBadgeContent}
           </div>
           <div>
-            <p className="text-[#81d742] text-sm font-bold uppercase tracking-[0.2em] mb-2">
+            <p className="text-[#a5d6a7] text-sm font-bold uppercase tracking-[0.2em] mb-2">
               {team.division}
             </p>
             <h1 className="text-3xl md:text-4xl font-bold mb-2">{team.name}</h1>
@@ -137,14 +137,14 @@ export default async function TeamPage({ params }: TeamPageProps) {
         {team.players && team.players.length > 0 && (
           <section>
             <h2 className="text-2xl font-bold text-gray-900 mb-8 flex items-center gap-2">
-              <Users className="w-6 h-6 text-[#21a530]" />
+              <Users className="w-6 h-6 text-[#2e7d32]" />
               Kader
             </h2>
             {Object.entries(playersByPosition).map(([position, players]) => {
               if (players.length === 0) return null;
               return (
                 <div key={position} className="mb-10">
-                  <h3 className="text-base font-bold text-[#15540a] uppercase tracking-wider mb-4 pb-2 border-b border-[#21a530]/20">
+                  <h3 className="text-base font-bold text-[#1b5e20] uppercase tracking-wider mb-4 pb-2 border-b border-[#2e7d32]/20">
                     {position}
                   </h3>
                   <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
@@ -161,7 +161,7 @@ export default async function TeamPage({ params }: TeamPageProps) {
         {/* Match data */}
         <section>
           <h2 className="text-2xl font-bold text-gray-900 mb-8 flex items-center gap-2">
-            <Trophy className="w-6 h-6 text-[#21a530]" />
+            <Trophy className="w-6 h-6 text-[#2e7d32]" />
             Spielplan & Tabelle
           </h2>
           <MatchSection upcoming={upcoming} results={results} table={table} />
@@ -175,7 +175,7 @@ export default async function TeamPage({ params }: TeamPageProps) {
               href={`https://www.fupa.net/team/${team.fupaTeamId}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-[#21a530] text-white px-5 py-3 rounded-xl font-semibold hover:bg-[#1a8f28] transition-colors"
+              className="inline-flex items-center gap-2 bg-[#2e7d32] text-white px-5 py-3 rounded-xl font-semibold hover:bg-[#1b5e20] transition-colors"
             >
               Vollständiges FuPa-Profil öffnen →
             </a>

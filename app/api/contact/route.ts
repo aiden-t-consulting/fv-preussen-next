@@ -55,11 +55,11 @@ export async function POST(request: NextRequest) {
       subject: `[Website] ${subjectLabel} – ${name}`,
       html: `
         <div style="font-family: system-ui, sans-serif; max-width: 600px; margin: 0 auto;">
-          <div style="background: #15540a; padding: 24px; border-radius: 12px 12px 0 0;">
+          <div style="background: #1b5e20; padding: 24px; border-radius: 12px 12px 0 0;">
             <h1 style="color: #fff; margin: 0; font-size: 20px;">
               Neue Kontaktanfrage
             </h1>
-            <p style="color: #81d742; margin: 4px 0 0; font-size: 14px;">
+            <p style="color: #a5d6a7; margin: 4px 0 0; font-size: 14px;">
               FV Preussen Eberswalde – Kontaktformular
             </p>
           </div>
@@ -72,7 +72,7 @@ export async function POST(request: NextRequest) {
               <tr>
                 <td style="padding: 8px 0; font-weight: bold; color: #374151;">E-Mail:</td>
                 <td style="padding: 8px 0; color: #111827;">
-                  <a href="mailto:${escapeHtml(email)}" style="color: #21a530;">${escapeHtml(email)}</a>
+                  <a href="mailto:${escapeHtml(email)}" style="color: #2e7d32;">${escapeHtml(email)}</a>
                 </td>
               </tr>
               <tr>

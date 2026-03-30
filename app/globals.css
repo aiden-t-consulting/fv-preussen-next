@@ -4,10 +4,12 @@
 
 @theme inline {
   /* Brand colours — exact values from original color.css */
-  --color-brand-green: #039139;
-  --color-brand-green-dark: #026b29;
-  --color-brand-green-light: #05b347;
-  --color-brand-green-pale: #e6f5ec;
+  --color-brand-green: #2e7d32;
+  --color-brand-green-dark: #1b5e20;
+  --color-brand-green-light: #4caf50;
+  --color-brand-green-pale: #f1f8e9;
+  --color-brand-accent: #a5d6a7;
+  --color-brand-black: #111111;
 
   /* Page shell */
   --color-page-bg: #f8f7f5;
@@ -135,7 +137,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .hero-title-glow {
-  text-shadow: 0 0 14px rgba(3, 145, 57, 0.24);
+  text-shadow: 0 0 14px rgba(46, 125, 50, 0.24);
 }
 
 .hero-player-float {

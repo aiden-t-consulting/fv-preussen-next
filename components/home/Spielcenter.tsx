@@ -29,12 +29,12 @@ function MatchRow({ match }: { match: FuPaMatch }) {
     match.status === "finished"
       ? homeIsUs
         ? (match.homeScore ?? 0) > (match.awayScore ?? 0)
-          ? "text-[#039139]"
+          ? "text-[#2e7d32]"
           : (match.homeScore ?? 0) < (match.awayScore ?? 0)
           ? "text-red-400"
           : "text-gray-400"
         : (match.awayScore ?? 0) > (match.homeScore ?? 0)
-        ? "text-[#039139]"
+        ? "text-[#2e7d32]"
         : (match.awayScore ?? 0) < (match.homeScore ?? 0)
         ? "text-red-400"
         : "text-gray-400"
@@ -88,14 +88,14 @@ function TablePanel({ entries }: { entries: FuPaTableEntry[] }) {
               key={e.position}
               className={cn(
                 "border-b border-white/5 last:border-0",
-                e.isCurrentTeam && "bg-[#039139]/10"
+                e.isCurrentTeam && "bg-[#2e7d32]/10"
               )}
             >
               <td className="py-2.5 font-mono text-xs text-gray-400">{e.position}</td>
               <td
                 className={cn(
                   "py-2.5 font-medium",
-                  e.isCurrentTeam ? "text-[#039139]" : "text-gray-100"
+                  e.isCurrentTeam ? "text-[#2e7d32]" : "text-gray-100"
                 )}
               >
                 {e.team}
@@ -137,7 +137,7 @@ export function Spielcenter({
         <div className="flex flex-col lg:flex-row lg:gap-16">
           {/* Left: intro */}
           <div className="mb-10 shrink-0 lg:mb-0 lg:w-72">
-            <p className="mb-3 text-[11px] font-bold uppercase tracking-widest text-[#039139]">
+            <p className="mb-3 text-[11px] font-bold uppercase tracking-widest text-[#2e7d32]">
               Offizielle Spielinformationen
             </p>
             <h2 className="mb-4 text-3xl font-bold text-white [font-family:var(--font-club)] lg:text-4xl">
@@ -151,7 +151,7 @@ export function Spielcenter({
               href="https://www.fussball.de"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[11px] font-semibold uppercase tracking-wider text-[#039139] hover:underline"
+              className="text-[11px] font-semibold uppercase tracking-wider text-[#2e7d32] hover:underline"
             >
               Zu FUSSBALL.DE →
             </Link>
@@ -165,8 +165,8 @@ export function Spielcenter({
                   className={cn(
                     "rounded-full border px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wider transition-colors",
                     teamFilter === f
-                      ? "border-[#039139] bg-[#039139] text-white"
-                      : "border-white/20 bg-white/10 text-gray-300 hover:border-[#039139]/60 hover:text-white"
+                      ? "border-[#2e7d32] bg-[#2e7d32] text-white"
+                      : "border-white/20 bg-white/10 text-gray-300 hover:border-[#2e7d32]/60 hover:text-white"
                   )}
                 >
                   {f}
@@ -185,7 +185,7 @@ export function Spielcenter({
                   className={cn(
                     "-mb-px shrink-0 border-b-2 px-4 pb-3 text-[12px] font-semibold uppercase tracking-wider transition-colors",
                     activeTab === tab
-                      ? "border-[#039139] text-[#039139]"
+                      ? "border-[#2e7d32] text-[#2e7d32]"
                       : "border-transparent text-gray-500 hover:text-white"
                   )}
                 >

@@ -15,15 +15,15 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 const variantClasses: Record<Variant, string> = {
   primary:
-    "bg-[#21a530] text-white hover:bg-[#1a8f28] active:bg-[#15540a] shadow-sm",
+    "bg-[#2e7d32] text-white hover:bg-[#1b5e20] active:bg-[#1b5e20] shadow-sm",
   secondary:
-    "bg-[#15540a] text-white hover:bg-[#1a6a0c] active:bg-[#0e3a07] shadow-sm",
+    "bg-[#1b5e20] text-white hover:bg-[#1a6a0c] active:bg-[#1b5e20] shadow-sm",
   outline:
-    "border-2 border-[#21a530] text-[#21a530] hover:bg-[#21a530] hover:text-white",
+    "border-2 border-[#2e7d32] text-[#2e7d32] hover:bg-[#2e7d32] hover:text-white",
   ghost:
-    "text-[#21a530] hover:bg-[#e8f5e9]",
+    "text-[#2e7d32] hover:bg-[#f1f8e9]",
   white:
-    "bg-white text-[#15540a] hover:bg-[#f0faf0] shadow-sm",
+    "bg-white text-[#1b5e20] hover:bg-[#f0faf0] shadow-sm",
 };
 
 const sizeClasses: Record<Size, string> = {
@@ -41,7 +41,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         className={cn(
           "inline-flex items-center justify-center gap-2 font-semibold",
           "transition-all duration-150 cursor-pointer",
-          "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#21a530]",
+          "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2e7d32]",
           "disabled:opacity-50 disabled:pointer-events-none",
           variantClasses[variant],
           sizeClasses[size],

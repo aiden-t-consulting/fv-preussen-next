@@ -18,8 +18,8 @@ interface PlayerCardProps {
 
 export function PlayerCard({ player }: PlayerCardProps) {
   return (
-    <div className="bg-white rounded-xl border border-gray-100 hover:border-[#21a530]/30 hover:shadow-md transition-all duration-200 overflow-hidden group">
-      <div className="relative aspect-[3/4] bg-[#e8f5e9] overflow-hidden">
+    <div className="bg-white rounded-xl border border-gray-100 hover:border-[#2e7d32]/30 hover:shadow-md transition-all duration-200 overflow-hidden group">
+      <div className="relative aspect-[3/4] bg-[#f1f8e9] overflow-hidden">
         {player.photo ? (
           <Image
             src={urlFor(player.photo).width(300).height(400).url()}
@@ -30,16 +30,16 @@ export function PlayerCard({ player }: PlayerCardProps) {
           />
         ) : (
           <div className="absolute inset-0 flex items-center justify-center">
-            <User className="w-16 h-16 text-[#21a530]/30" />
+            <User className="w-16 h-16 text-[#2e7d32]/30" />
           </div>
         )}
         {player.shirtNumber !== undefined && (
-          <div className="absolute top-2 right-2 w-8 h-8 bg-[#21a530] text-white rounded-full flex items-center justify-center text-xs font-bold">
+          <div className="absolute top-2 right-2 w-8 h-8 bg-[#2e7d32] text-white rounded-full flex items-center justify-center text-xs font-bold">
             {player.shirtNumber}
           </div>
         )}
         {/* Gradient overlay */}
-        <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-[#15540a]/70 to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-[#1b5e20]/70 to-transparent" />
       </div>
 
       <div className="p-3 text-center">

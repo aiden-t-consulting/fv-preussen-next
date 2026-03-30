@@ -1,43 +1,22 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
 import { urlFor } from "@/lib/sanity/client";
 import type { Team } from "@/types";
 
-type GroupKey = "maenner" | "nachwuchs" | "senioren";
+const MAENNER_TEAMS = [
+  { name: "Männer", slug: "herren", division: "Landesliga Nord" },
+  { name: "Männer II", slug: "herren-ii", division: "Kreisliga A Barnim" },
+  { name: "Männer Ü50", slug: "ue50", division: "Seniorenliga" },
+];
 
-const GROUP_LABELS: Record<GroupKey, string> = {
-  maenner: "Männerbereich",
-  nachwuchs: "Nachwuchs",
-  senioren: "Senioren",
-};
-
-const GROUP_ORDER: GroupKey[] = ["maenner", "nachwuchs", "senioren"];
-
-function getGroup(slug: string): GroupKey {
-  if (slug.includes("ue50") || slug.includes("ü50") || slug.includes("u50")) {
-    return "senioren";
-  }
-  if (/u\d/.test(slug)) return "nachwuchs";
-  return "maenner";
-}
-
-const FALLBACK_TEAMS: Array<{
-  name: string;
-  slug: string;
-  division: string;
-  group: GroupKey;
-}> = [
-  { name: "Männer", slug: "herren", division: "Landesliga Nord", group: "maenner" },
-  { name: "Männer II", slug: "herren-ii", division: "Kreisliga A Barnim", group: "maenner" },
-  { name: "U19", slug: "u19", division: "Landesliga Staffel 1", group: "nachwuchs" },
-  { name: "U17", slug: "u17", division: "Kreisliga B Barnim", group: "nachwuchs" },
-  { name: "U15", slug: "u15", division: "Kreisklasse", group: "nachwuchs" },
-  { name: "U13", slug: "u13", division: "Kreisklasse", group: "nachwuchs" },
-  { name: "U11", slug: "u11", division: "Spielbetrieb", group: "nachwuchs" },
-  { name: "U9", slug: "u9", division: "Spielbetrieb", group: "nachwuchs" },
-  { name: "U7", slug: "u7", division: "Spielbetrieb", group: "nachwuchs" },
-  { name: "Ü50", slug: "ue50", division: "Seniorenliga", group: "senioren" },
+const NACHWUCHS_TEAMS = [
+  { name: "U19", slug: "u19", division: "Landesliga Staffel 1" },
+  { name: "U17", slug: "u17", division: "Kreisliga B Barnim" },
+  { name: "U15", slug: "u15", division: "Kreisklasse" },
+  { name: "U13", slug: "u13", division: "Kreisklasse" },
+  { name: "U11", slug: "u11", division: "Spielbetrieb" },
+  { name: "U9", slug: "u9", division: "Spielbetrieb" },
+  { name: "U7", slug: "u7", division: "Spielbetrieb" },
 ];
 
 interface DisplayTeam {
@@ -45,106 +24,138 @@ interface DisplayTeam {
   slug: string;
   division?: string;
   badge?: Team["badge"];
-  group: GroupKey;
 }
 
-function TeamCard({ team }: { team: DisplayTeam }) {
+function MaennerCard({ team }: { team: DisplayTeam }) {
   return (
     <Link
       href={`/teams/${team.slug}`}
-      className="group flex flex-col overflow-hidden rounded-[20px] border border-white/8 bg-[#252331] p-6 transition-all duration-200 hover:border-[#039139]/40 hover:bg-[#2a2938]"
+      className="group flex flex-col overflow-hidden rounded-xl border border-white/10 bg-white/5 p-5 transition-all duration-200 hover:border-[#2e7d32]/50 hover:bg-white/[0.08]"
     >
-      <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[#039139]/15">
-        {team.badge ? (
-          <Image
-            src={urlFor(team.badge).width(48).height(48).url()}
-            alt={team.badge.alt ?? team.name}
-            width={48}
-            height={48}
-            className="h-10 w-auto object-contain"
-          />
-        ) : (
-          <span className="text-xs font-bold text-[#039139]">FVP</span>
-        )}
-      </div>
       <div className="flex-1">
-        <h3 className="font-bold text-white [font-family:var(--font-club)] group-hover:text-[#039139] transition-colors">
-          {team.name}
-        </h3>
+        <div className="mb-2 flex h-8 w-8 items-center justify-center rounded-lg bg-[#2e7d32]/20">
+          {team.badge ? (
+            <Image
+              src={urlFor(team.badge).width(32).height(32).url()}
+              alt={team.badge.alt ?? team.name}
+              width={32}
+              height={32}
+              className="h-6 w-auto object-contain"
+            />
+          ) : (
+            <span className="text-[9px] font-bold text-[#a5d6a7]">FVP</span>
+          )}
+        </div>
+        <h3 className="mt-2 font-bold text-white [font-family:var(--font-club)]">{team.name}</h3>
         {team.division && (
-          <p className="mt-1 text-xs text-gray-500">{team.division}</p>
+          <p className="mt-0.5 text-xs text-gray-400">{team.division}</p>
         )}
       </div>
-      <div className="mt-4 flex items-center gap-1 text-[11px] font-semibold uppercase tracking-wider text-[#039139]">
-        Zum Team
-        <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
+      <div className="mt-4 text-[11px] font-semibold text-[#a5d6a7] transition-colors group-hover:text-white">
+        Zum Team &rarr;
       </div>
     </Link>
   );
 }
 
-export function TeamsOverview({ teams }: { teams: Team[] }) {
-  const displayTeams: DisplayTeam[] =
-    teams.length > 0
-      ? teams.map((t) => ({
-          name: t.name,
-          slug: t.slug.current,
-          division: t.division,
-          badge: t.badge,
-          group: getGroup(t.slug.current),
-        }))
-      : FALLBACK_TEAMS;
-
-  const grouped = GROUP_ORDER.reduce<Record<GroupKey, DisplayTeam[]>>(
-    (acc, key) => {
-      acc[key] = displayTeams.filter((t) => t.group === key);
-      return acc;
-    },
-    { maenner: [], nachwuchs: [], senioren: [] }
+function NachwuchsItem({ team }: { team: DisplayTeam }) {
+  return (
+    <Link
+      href={`/teams/${team.slug}`}
+      className="group flex items-center gap-3 py-2.5 transition-colors"
+    >
+      <span className="h-2 w-2 shrink-0 rounded-full bg-[#2e7d32]" />
+      <span className="flex-1 font-semibold text-white group-hover:text-[#a5d6a7] transition-colors">
+        {team.name}
+      </span>
+      {team.division && (
+        <span className="text-xs text-gray-400">{team.division}</span>
+      )}
+    </Link>
   );
+}
+
+export function TeamsOverview({ teams }: { teams: Team[] }) {
+  let maenner: DisplayTeam[] = MAENNER_TEAMS;
+  let nachwuchs: DisplayTeam[] = NACHWUCHS_TEAMS;
+
+  if (teams.length > 0) {
+    const isNachwuchs = (slug: string) => /^u\d/.test(slug);
+    const isUe50 = (slug: string) =>
+      slug.includes("ue50") || slug.includes("ü50") || slug.includes("u50");
+
+    const sanityMaenner = teams
+      .filter((t) => !isNachwuchs(t.slug.current) && !isUe50(t.slug.current))
+      .map((t) => ({ name: t.name, slug: t.slug.current, division: t.division, badge: t.badge }));
+    const sanityUe50 = teams
+      .filter((t) => isUe50(t.slug.current))
+      .map((t) => ({ name: t.name, slug: t.slug.current, division: t.division, badge: t.badge }));
+    const sanityNachwuchs = teams
+      .filter((t) => isNachwuchs(t.slug.current))
+      .map((t) => ({ name: t.name, slug: t.slug.current, division: t.division, badge: t.badge }));
+
+    if (sanityMaenner.length > 0 || sanityUe50.length > 0) {
+      maenner = [...sanityMaenner, ...sanityUe50];
+    }
+    if (sanityNachwuchs.length > 0) {
+      nachwuchs = sanityNachwuchs;
+    }
+  }
 
   return (
-    <section className="bg-white py-20 lg:py-24">
+    <section className="bg-[#111111] py-20 lg:py-24">
       <div className="mx-auto max-w-[1280px] px-4">
         {/* Section header */}
-        <div className="mb-12 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            <p className="mb-2 text-[11px] font-bold uppercase tracking-widest text-[#039139]">
-              Von der U7 bis zur Ü50
-            </p>
-            <h2 className="text-3xl font-bold text-gray-900 [font-family:var(--font-club)] lg:text-4xl">
-              Unsere Mannschaften
-            </h2>
-            <p className="mt-2 text-sm text-gray-500">
-              Von den Jüngsten bis in den Männerbereich — alle Mannschaften auf einen Blick.
-            </p>
-          </div>
-          <Link
-            href="/teams"
-            className="shrink-0 text-[11px] font-semibold uppercase tracking-wider text-[#039139] hover:underline"
-          >
-            Alle Mannschaften →
-          </Link>
+        <div className="mb-12 text-center">
+          <p className="mb-2 text-[11px] font-bold uppercase tracking-widest text-[#a5d6a7]">
+            Unsere Mannschaften
+          </p>
+          <h2 className="text-3xl font-bold text-white [font-family:var(--font-club)] lg:text-4xl">
+            Alle Teams
+          </h2>
         </div>
 
-        {/* Groups */}
-        <div className="space-y-14">
-          {GROUP_ORDER.map((groupKey) => {
-            const groupTeams = grouped[groupKey];
-            if (groupTeams.length === 0) return null;
-            return (
-              <div key={groupKey}>
-                <h3 className="mb-5 border-b border-gray-100 pb-2 text-sm font-bold uppercase tracking-widest text-gray-400">
-                  {GROUP_LABELS[groupKey]}
-                </h3>
-                <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-                  {groupTeams.map((team) => (
-                    <TeamCard key={team.slug} team={team} />
-                  ))}
-                </div>
-              </div>
-            );
-          })}
+        {/* Two-column layout */}
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-14">
+          {/* LEFT — Männer */}
+          <div>
+            <div className="mb-5 flex items-center gap-3">
+              <h3 className="text-sm font-bold uppercase tracking-widest text-white">
+                M&auml;nner
+              </h3>
+              <div className="flex-1 border-t border-[#2e7d32]/40" />
+            </div>
+            <div className="flex flex-col gap-3">
+              {maenner.map((team) => (
+                <MaennerCard key={team.slug} team={team} />
+              ))}
+            </div>
+          </div>
+
+          {/* RIGHT — Nachwuchs */}
+          <div>
+            <div className="mb-5 flex items-center gap-3">
+              <h3 className="text-sm font-bold uppercase tracking-widest text-white">
+                Nachwuchs
+              </h3>
+              <div className="flex-1 border-t border-[#2e7d32]/40" />
+            </div>
+            <div className="divide-y divide-white/5">
+              {nachwuchs.map((team) => (
+                <NachwuchsItem key={team.slug} team={team} />
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom CTA */}
+        <div className="mt-12 text-center">
+          <Link
+            href="/teams"
+            className="inline-flex items-center gap-2 rounded-full border border-[#2e7d32] px-7 py-3 text-[12px] font-bold uppercase tracking-wider text-[#a5d6a7] transition-all duration-200 hover:bg-[#2e7d32] hover:text-white"
+          >
+            Alle Mannschaften &rarr;
+          </Link>
         </div>
       </div>
     </section>

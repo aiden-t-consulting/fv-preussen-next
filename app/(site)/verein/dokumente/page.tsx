@@ -80,16 +80,16 @@ export default function DokumentePage() {
   return (
     <div className="min-h-screen bg-neutral-50">
       {/* Hero */}
-      <div className="bg-linear-to-br from-[#0e3a07] to-[#21a530] text-white py-20 lg:py-28">
+      <div className="bg-linear-to-br from-[#1b5e20] to-[#2e7d32] text-white py-20 lg:py-28">
         <div className="max-w-7xl mx-auto px-4">
           <Link
             href="/verein"
-            className="inline-flex items-center gap-2 text-[#81d742] hover:text-white transition-colors text-sm font-semibold mb-6"
+            className="inline-flex items-center gap-2 text-[#a5d6a7] hover:text-white transition-colors text-sm font-semibold mb-6"
           >
             <ArrowLeft className="w-4 h-4" />
             Zurück zum Verein
           </Link>
-          <p className="text-[#81d742] text-sm font-bold uppercase tracking-[0.2em] mb-3">
+          <p className="text-[#a5d6a7] text-sm font-bold uppercase tracking-[0.2em] mb-3">
             Transparenz
           </p>
           <h1 className="text-4xl md:text-6xl font-bold mb-4">Satzung & Dokumente</h1>
@@ -122,8 +122,8 @@ export default function DokumentePage() {
                   key={doc.title}
                   className="bg-white rounded-xl border border-gray-100 p-5 flex items-center gap-4"
                 >
-                  <div className="w-12 h-12 rounded-xl bg-[#e8f5e9] flex items-center justify-center shrink-0">
-                    <FileText className="w-6 h-6 text-[#21a530]" />
+                  <div className="w-12 h-12 rounded-xl bg-[#f1f8e9] flex items-center justify-center shrink-0">
+                    <FileText className="w-6 h-6 text-[#2e7d32]" />
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 flex-wrap">
@@ -144,7 +144,7 @@ export default function DokumentePage() {
                       href={doc.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="shrink-0 flex items-center gap-1.5 bg-[#21a530] text-white text-xs font-semibold px-4 py-2 rounded-lg hover:bg-[#1a8f28] transition-colors"
+                      className="shrink-0 flex items-center gap-1.5 bg-[#2e7d32] text-white text-xs font-semibold px-4 py-2 rounded-lg hover:bg-[#1b5e20] transition-colors"
                     >
                       <Download className="w-3.5 h-3.5" />
                       Download
@@ -224,11 +224,11 @@ export default function DokumentePage() {
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group bg-white rounded-xl border border-gray-100 hover:border-[#21a530]/40 hover:shadow-sm transition-all p-5 flex items-start gap-3"
+                className="group bg-white rounded-xl border border-gray-100 hover:border-[#2e7d32]/40 hover:shadow-sm transition-all p-5 flex items-start gap-3"
               >
-                <ExternalLink className="w-4 h-4 text-[#21a530] mt-0.5 shrink-0" />
+                <ExternalLink className="w-4 h-4 text-[#2e7d32] mt-0.5 shrink-0" />
                 <div>
-                  <p className="font-bold text-gray-900 text-sm group-hover:text-[#21a530] transition-colors">
+                  <p className="font-bold text-gray-900 text-sm group-hover:text-[#2e7d32] transition-colors">
                     {link.title}
                   </p>
                   <p className="text-xs text-gray-500 mt-0.5">{link.desc}</p>

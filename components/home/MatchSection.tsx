@@ -30,7 +30,7 @@ function MatchRow({ match, showResult }: { match: FuPaMatch; showResult: boolean
   return (
     <div className="flex items-center gap-3 py-3 border-b border-white/10 last:border-0">
       <div className="text-center shrink-0 w-12">
-        <div className="text-[#81d742] text-xs font-bold">
+        <div className="text-[#a5d6a7] text-xs font-bold">
           {new Date(match.date).toLocaleDateString("de-DE", { day: "2-digit", month: "2-digit" })}
         </div>
         {match.time && !showResult && (
@@ -56,7 +56,7 @@ function MatchRow({ match, showResult }: { match: FuPaMatch; showResult: boolean
             className={cn(
               "inline-block px-2 py-1 rounded-md text-sm font-bold",
               won
-                ? "bg-[#039139] text-white"
+                ? "bg-[#2e7d32] text-white"
                 : drew
                 ? "bg-gray-600 text-white"
                 : "bg-red-800 text-white"
@@ -77,10 +77,10 @@ function TableRow({ entry }: { entry: FuPaTableEntry }) {
     <tr
       className={cn(
         "text-sm border-b border-white/10",
-        entry.isCurrentTeam && "bg-[#039139]/20"
+        entry.isCurrentTeam && "bg-[#2e7d32]/20"
       )}
     >
-      <td className={cn("py-2 pl-3 w-8 font-bold", entry.isCurrentTeam ? "text-[#81d742]" : "text-gray-400")}>
+      <td className={cn("py-2 pl-3 w-8 font-bold", entry.isCurrentTeam ? "text-[#a5d6a7]" : "text-gray-400")}>
         {entry.position}.
       </td>
       <td className={cn("py-2 pr-2 font-semibold", entry.isCurrentTeam ? "text-white" : "text-gray-200")}>
@@ -90,7 +90,7 @@ function TableRow({ entry }: { entry: FuPaTableEntry }) {
       <td className="py-2 text-center text-gray-300 w-8">{entry.won}</td>
       <td className="py-2 text-center text-gray-400 w-8">{entry.drawn}</td>
       <td className="py-2 text-center text-gray-400 w-8">{entry.lost}</td>
-      <td className={cn("py-2 text-center font-bold w-10 pr-3", entry.isCurrentTeam ? "text-[#81d742]" : "text-white")}>
+      <td className={cn("py-2 text-center font-bold w-10 pr-3", entry.isCurrentTeam ? "text-[#a5d6a7]" : "text-white")}>
         {entry.points}
       </td>
     </tr>
@@ -99,7 +99,7 @@ function TableRow({ entry }: { entry: FuPaTableEntry }) {
 
 export function MatchSection({ upcoming, results, table }: MatchSectionProps) {
   return (
-    <section className="py-20 lg:py-28 bg-[#0e3a07]">
+    <section className="py-20 lg:py-28 bg-[#1b5e20]">
       <div className="max-w-7xl mx-auto px-4">
         <FadeIn>
           <SectionHeading
@@ -116,10 +116,10 @@ export function MatchSection({ upcoming, results, table }: MatchSectionProps) {
             <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 h-full">
               <div className="flex items-center justify-between mb-5">
                 <div className="flex items-center gap-2 text-white font-bold">
-                  <Calendar className="w-4 h-4 text-[#81d742]" />
+                  <Calendar className="w-4 h-4 text-[#a5d6a7]" />
                   Nächste Spiele
                 </div>
-                <Link href="/teams/herren" className="text-xs text-[#81d742] hover:text-[#a5e068] transition-colors flex items-center gap-1">
+                <Link href="/teams/herren" className="text-xs text-[#a5d6a7] hover:text-[#a5e068] transition-colors flex items-center gap-1">
                   Alle <ArrowRight className="w-3 h-3" />
                 </Link>
               </div>
@@ -136,10 +136,10 @@ export function MatchSection({ upcoming, results, table }: MatchSectionProps) {
             <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 h-full">
               <div className="flex items-center justify-between mb-5">
                 <div className="flex items-center gap-2 text-white font-bold">
-                  <Trophy className="w-4 h-4 text-[#81d742]" />
+                  <Trophy className="w-4 h-4 text-[#a5d6a7]" />
                   Letzte Ergebnisse
                 </div>
-                <Link href="/berichte" className="text-xs text-[#81d742] hover:text-[#a5e068] transition-colors flex items-center gap-1">
+                <Link href="/berichte" className="text-xs text-[#a5d6a7] hover:text-[#a5e068] transition-colors flex items-center gap-1">
                   Berichte <ArrowRight className="w-3 h-3" />
                 </Link>
               </div>
@@ -156,7 +156,7 @@ export function MatchSection({ upcoming, results, table }: MatchSectionProps) {
             <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 h-full">
               <div className="flex items-center justify-between mb-5">
                 <div className="flex items-center gap-2 text-white font-bold">
-                  <Trophy className="w-4 h-4 text-[#81d742]" />
+                  <Trophy className="w-4 h-4 text-[#a5d6a7]" />
                   Tabelle
                 </div>
               </div>

@@ -32,9 +32,9 @@ export default async function AktuellesPage({ searchParams }: Props) {
   return (
     <div className="min-h-screen">
       {/* Page header */}
-      <div className="bg-[#15540a] text-white py-16 lg:py-20">
+      <div className="bg-[#1b5e20] text-white py-16 lg:py-20">
         <div className="max-w-7xl mx-auto px-4">
-          <p className="text-[#81d742] text-sm font-bold uppercase tracking-[0.2em] mb-3">
+          <p className="text-[#a5d6a7] text-sm font-bold uppercase tracking-[0.2em] mb-3">
             Neuigkeiten
           </p>
           <h1 className="text-3xl md:text-5xl font-bold">Aktuelles</h1>
@@ -54,8 +54,8 @@ export default async function AktuellesPage({ searchParams }: Props) {
               href={cat.value ? `/aktuelles?kategorie=${cat.value}` : "/aktuelles"}
               className={`px-4 py-2 rounded-full text-sm font-semibold transition-colors ${
                 category === cat.value
-                  ? "bg-[#21a530] text-white"
-                  : "bg-gray-100 text-gray-600 hover:bg-[#e8f5e9] hover:text-[#21a530]"
+                  ? "bg-[#2e7d32] text-white"
+                  : "bg-gray-100 text-gray-600 hover:bg-[#f1f8e9] hover:text-[#2e7d32]"
               }`}
             >
               {cat.label}

@@ -171,7 +171,7 @@ const packages = [
 function SanityCard({ sponsor }: { sponsor: Sponsor }) {
   const size = TIER_META[sponsor.tier].logoSize;
   const card = (
-    <div className="bg-white rounded-xl border border-gray-100 hover:border-[#21a530] hover:shadow-md transition-all duration-200 flex items-center justify-center px-8 py-6 h-28 group">
+    <div className="bg-white rounded-xl border border-gray-100 hover:border-[#2e7d32] hover:shadow-md transition-all duration-200 flex items-center justify-center px-8 py-6 h-28 group">
       {sponsor.logo ? (
         <Image
           src={urlFor(sponsor.logo).width(size).height(80).url()}
@@ -201,7 +201,7 @@ function FallbackCard({
   sponsor: (typeof FALLBACK_SPONSORS)[number];
 }) {
   const card = (
-    <div className="bg-white rounded-xl border border-gray-100 hover:border-[#21a530] hover:shadow-md transition-all duration-200 flex items-center justify-center px-8 py-6 h-28 group">
+    <div className="bg-white rounded-xl border border-gray-100 hover:border-[#2e7d32] hover:shadow-md transition-all duration-200 flex items-center justify-center px-8 py-6 h-28 group">
       <Image
         src={sponsor.src}
         alt={sponsor.name}
@@ -237,16 +237,16 @@ export default async function SponsorenPage() {
     <div className="min-h-screen bg-[#f9fafb]">
 
       {/* ── Hero ── */}
-      <div className="bg-gradient-to-br from-[#0e3a07] to-[#21a530] text-white py-20 lg:py-28">
+      <div className="bg-gradient-to-br from-[#1b5e20] to-[#2e7d32] text-white py-20 lg:py-28">
         <div className="max-w-7xl mx-auto px-4">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-[#81d742] hover:text-white transition-colors text-sm font-semibold mb-6"
+            className="inline-flex items-center gap-2 text-[#a5d6a7] hover:text-white transition-colors text-sm font-semibold mb-6"
           >
             <ArrowLeft className="w-4 h-4" />
             Zurück zur Startseite
           </Link>
-          <p className="text-[#81d742] text-sm font-bold uppercase tracking-[0.2em] mb-3">
+          <p className="text-[#a5d6a7] text-sm font-bold uppercase tracking-[0.2em] mb-3">
             Unsere Partner
           </p>
           <h1 className="text-4xl md:text-6xl font-bold mb-4">Sponsoren & Partner</h1>
@@ -266,8 +266,8 @@ export default async function SponsorenPage() {
           {(hasSanityData ? hauptsponsors.length > 0 : fallbackHaupt.length > 0) && (
             <div>
               <div className="flex items-center gap-3 mb-8">
-                <div className="w-9 h-9 rounded-xl bg-[#21a530]/15 flex items-center justify-center">
-                  <Star className="w-5 h-5 text-[#21a530]" />
+                <div className="w-9 h-9 rounded-xl bg-[#2e7d32]/15 flex items-center justify-center">
+                  <Star className="w-5 h-5 text-[#2e7d32]" />
                 </div>
                 <h2 className="text-xl font-bold text-gray-900">Hauptsponsor</h2>
               </div>
@@ -283,8 +283,8 @@ export default async function SponsorenPage() {
           {(hasSanityData ? premiumsponsors.length > 0 : fallbackPremium.length > 0) && (
             <div>
               <div className="flex items-center gap-3 mb-8">
-                <div className="w-9 h-9 rounded-xl bg-[#21a530]/15 flex items-center justify-center">
-                  <Award className="w-5 h-5 text-[#21a530]" />
+                <div className="w-9 h-9 rounded-xl bg-[#2e7d32]/15 flex items-center justify-center">
+                  <Award className="w-5 h-5 text-[#2e7d32]" />
                 </div>
                 <h2 className="text-xl font-bold text-gray-900">Premium Partner</h2>
               </div>
@@ -300,8 +300,8 @@ export default async function SponsorenPage() {
           {(hasSanityData ? partners.length > 0 : fallbackPartner.length > 0) && (
             <div>
               <div className="flex items-center gap-3 mb-8">
-                <div className="w-9 h-9 rounded-xl bg-[#21a530]/15 flex items-center justify-center">
-                  <Handshake className="w-5 h-5 text-[#21a530]" />
+                <div className="w-9 h-9 rounded-xl bg-[#2e7d32]/15 flex items-center justify-center">
+                  <Handshake className="w-5 h-5 text-[#2e7d32]" />
                 </div>
                 <h2 className="text-xl font-bold text-gray-900">Partner</h2>
               </div>
@@ -337,8 +337,8 @@ export default async function SponsorenPage() {
               const Icon = b.icon;
               return (
                 <div key={b.title} className="bg-white rounded-2xl border border-gray-100 p-6">
-                  <div className="w-10 h-10 rounded-xl bg-[#e8f5e9] flex items-center justify-center mb-4">
-                    <Icon className="w-5 h-5 text-[#21a530]" />
+                  <div className="w-10 h-10 rounded-xl bg-[#f1f8e9] flex items-center justify-center mb-4">
+                    <Icon className="w-5 h-5 text-[#2e7d32]" />
                   </div>
                   <h3 className="font-bold text-gray-900 mb-2">{b.title}</h3>
                   <p className="text-sm text-gray-500 leading-relaxed">{b.desc}</p>
@@ -361,14 +361,14 @@ export default async function SponsorenPage() {
                 key={pkg.name}
                 className={`rounded-2xl border p-7 flex flex-col gap-5 ${
                   pkg.highlight
-                    ? "bg-[#21a530] border-[#21a530] text-white shadow-lg shadow-[#21a530]/25"
+                    ? "bg-[#2e7d32] border-[#2e7d32] text-white shadow-lg shadow-[#2e7d32]/25"
                     : "bg-white border-gray-100"
                 }`}
               >
                 <div>
                   <p
                     className={`text-xs font-bold uppercase tracking-widest mb-1 ${
-                      pkg.highlight ? "text-[#c5f080]" : "text-[#21a530]"
+                      pkg.highlight ? "text-[#c5f080]" : "text-[#2e7d32]"
                     }`}
                   >
                     {pkg.name}
@@ -393,7 +393,7 @@ export default async function SponsorenPage() {
                     <li key={perk} className="flex items-start gap-2.5 text-sm">
                       <CheckCircle2
                         className={`w-4 h-4 mt-0.5 shrink-0 ${
-                          pkg.highlight ? "text-[#c5f080]" : "text-[#21a530]"
+                          pkg.highlight ? "text-[#c5f080]" : "text-[#2e7d32]"
                         }`}
                       />
                       <span className={pkg.highlight ? "text-green-50" : "text-gray-600"}>
@@ -406,8 +406,8 @@ export default async function SponsorenPage() {
                   href="/kontakt?betreff=sponsoring"
                   className={`inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-semibold text-sm transition-colors ${
                     pkg.highlight
-                      ? "bg-white text-[#15540a] hover:bg-[#f0faf0]"
-                      : "bg-[#21a530] text-white hover:bg-[#1a8f28]"
+                      ? "bg-white text-[#1b5e20] hover:bg-[#f0faf0]"
+                      : "bg-[#2e7d32] text-white hover:bg-[#1b5e20]"
                   }`}
                 >
                   Jetzt anfragen
@@ -431,7 +431,7 @@ export default async function SponsorenPage() {
           </div>
           <Link
             href="/kontakt?betreff=sponsoring"
-            className="shrink-0 inline-flex items-center gap-2 bg-[#21a530] text-white px-6 py-3 rounded-xl font-semibold hover:bg-[#1a8f28] transition-colors text-sm"
+            className="shrink-0 inline-flex items-center gap-2 bg-[#2e7d32] text-white px-6 py-3 rounded-xl font-semibold hover:bg-[#1b5e20] transition-colors text-sm"
           >
             Kontakt aufnehmen
             <ArrowRight className="w-4 h-4" />

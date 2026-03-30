@@ -129,7 +129,7 @@ export function SponsorsStrip({ sponsors = [] }: SponsorsStripProps) {
         <div className="text-center mt-8">
           <Link
             href="/sponsoren"
-            className="inline-flex items-center gap-2 text-[#21a530] font-semibold hover:text-[#15540a] transition-colors"
+            className="inline-flex items-center gap-2 text-[#2e7d32] font-semibold hover:text-[#1b5e20] transition-colors"
           >
             Alle Sponsoren ansehen
             <ArrowRight className="w-4 h-4" />
@@ -137,7 +137,7 @@ export function SponsorsStrip({ sponsors = [] }: SponsorsStripProps) {
         </div>
 
         {/* Become a sponsor CTA */}
-        <div className="mt-12 bg-gradient-to-r from-[#15540a] to-[#21a530] rounded-2xl p-8 text-center text-white">
+        <div className="mt-12 bg-gradient-to-r from-[#1b5e20] to-[#2e7d32] rounded-2xl p-8 text-center text-white">
           <h3 className="text-xl md:text-2xl font-bold mb-2">
             Werden Sie unser Partner!
           </h3>
@@ -147,7 +147,7 @@ export function SponsorsStrip({ sponsors = [] }: SponsorsStripProps) {
           </p>
           <Link
             href="/kontakt?betreff=sponsoring"
-            className="inline-flex items-center gap-2 bg-white text-[#15540a] px-6 py-3 rounded-xl font-semibold hover:bg-[#f0faf0] transition-colors"
+            className="inline-flex items-center gap-2 bg-white text-[#1b5e20] px-6 py-3 rounded-xl font-semibold hover:bg-[#f0faf0] transition-colors"
           >
             Jetzt Kontakt aufnehmen
             <ArrowRight className="w-4 h-4" />
@@ -173,7 +173,7 @@ function SponsorCard({
 
   const content = (
     <div
-      className={`${dimensions.className} flex items-center justify-center bg-white rounded-xl border border-gray-200 hover:border-[#21a530] hover:shadow-md transition-all duration-200 px-4 py-2`}
+      className={`${dimensions.className} flex items-center justify-center bg-white rounded-xl border border-gray-200 hover:border-[#2e7d32] hover:shadow-md transition-all duration-200 px-4 py-2`}
     >
       {"logo" in sponsor && sponsor.logo ? (
         <Image

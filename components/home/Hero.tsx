@@ -186,7 +186,7 @@ export function Hero({ nextMatch }: Readonly<HeroProps>) {
           )}
         >
           {/* Eyebrow */}
-          <p className="mb-4 text-[11px] font-bold uppercase tracking-[0.2em] text-[#039139]">
+          <p className="mb-4 text-[11px] font-bold uppercase tracking-[0.2em] text-[#2e7d32]">
             {slide.eyebrow}
           </p>
 
@@ -209,7 +209,7 @@ export function Hero({ nextMatch }: Readonly<HeroProps>) {
                 className={cn(
                   "rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-widest",
                   homeIsUs
-                    ? "bg-[#039139] text-white"
+                    ? "bg-[#2e7d32] text-white"
                     : "border border-white/40 text-white/80"
                 )}
               >
@@ -222,7 +222,7 @@ export function Hero({ nextMatch }: Readonly<HeroProps>) {
           <div className="flex flex-wrap gap-3">
             <Link
               href={slide.cta1.href}
-              className="inline-flex min-w-[160px] items-center justify-center rounded-full bg-[#039139] px-6 py-3 text-[12px] font-bold uppercase tracking-[0.1em] text-white transition-colors hover:bg-[#026b29] [font-family:var(--font-club)]"
+              className="inline-flex min-w-[160px] items-center justify-center rounded-full bg-[#2e7d32] px-6 py-3 text-[12px] font-bold uppercase tracking-[0.1em] text-white transition-colors hover:bg-[#1b5e20] [font-family:var(--font-club)]"
             >
               {slide.cta1.label}
             </Link>
@@ -246,7 +246,7 @@ export function Hero({ nextMatch }: Readonly<HeroProps>) {
             className={cn(
               "transition-all duration-300",
               i === current
-                ? "h-2 w-8 rounded-full bg-[#039139]"
+                ? "h-2 w-8 rounded-full bg-[#2e7d32]"
                 : "h-2 w-2 rounded-full bg-white/30 hover:bg-white/60"
             )}
           />

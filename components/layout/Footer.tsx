@@ -34,7 +34,7 @@ export function Footer() {
   return (
     <footer className="bg-[#111111] text-gray-400">
       {/* Green top border */}
-      <div className="h-1 bg-[#039139]" />
+      <div className="h-1 bg-[#2e7d32]" />
 
       <div className="max-w-7xl mx-auto px-4 pt-14 pb-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
@@ -69,7 +69,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="w-8 h-8 border border-[#039139]/40 hover:border-[#039139] hover:bg-[#039139] flex items-center justify-center transition-all duration-200"
+                  className="w-8 h-8 border border-[#2e7d32]/40 hover:border-[#2e7d32] hover:bg-[#2e7d32] flex items-center justify-center transition-all duration-200"
                 >
                   <Icon className="w-3.5 h-3.5 text-gray-400 group-hover:text-white" />
                 </a>
@@ -79,14 +79,14 @@ export function Footer() {
 
           {/* Verein links */}
           <div>
-            <h3 className="text-white font-bold text-xs uppercase tracking-[0.2em] border-b border-[#039139]/30 pb-3 mb-5">
+            <h3 className="text-white font-bold text-xs uppercase tracking-[0.2em] border-b border-[#2e7d32]/30 pb-3 mb-5">
               Verein
             </h3>
             <ul className="space-y-2.5">
               {footerLinks.verein.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="text-sm hover:text-[#039139] transition-colors flex items-center gap-2">
-                    <span className="w-1 h-1 bg-[#039139] rounded-full shrink-0" />
+                  <Link href={link.href} className="text-sm hover:text-[#2e7d32] transition-colors flex items-center gap-2">
+                    <span className="w-1 h-1 bg-[#2e7d32] rounded-full shrink-0" />
                     {link.label}
                   </Link>
                 </li>
@@ -96,14 +96,14 @@ export function Footer() {
 
           {/* Teams links */}
           <div>
-            <h3 className="text-white font-bold text-xs uppercase tracking-[0.2em] border-b border-[#039139]/30 pb-3 mb-5">
+            <h3 className="text-white font-bold text-xs uppercase tracking-[0.2em] border-b border-[#2e7d32]/30 pb-3 mb-5">
               Teams
             </h3>
             <ul className="space-y-2.5">
               {footerLinks.teams.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="text-sm hover:text-[#039139] transition-colors flex items-center gap-2">
-                    <span className="w-1 h-1 bg-[#039139] rounded-full shrink-0" />
+                  <Link href={link.href} className="text-sm hover:text-[#2e7d32] transition-colors flex items-center gap-2">
+                    <span className="w-1 h-1 bg-[#2e7d32] rounded-full shrink-0" />
                     {link.label}
                   </Link>
                 </li>
@@ -113,26 +113,26 @@ export function Footer() {
 
           {/* Contact */}
           <div>
-            <h3 className="text-white font-bold text-xs uppercase tracking-[0.2em] border-b border-[#039139]/30 pb-3 mb-5">
+            <h3 className="text-white font-bold text-xs uppercase tracking-[0.2em] border-b border-[#2e7d32]/30 pb-3 mb-5">
               Kontakt
             </h3>
             <ul className="space-y-4">
               <li className="flex gap-3 text-sm">
-                <MapPin className="w-4 h-4 text-[#039139] shrink-0 mt-0.5" />
+                <MapPin className="w-4 h-4 text-[#2e7d32] shrink-0 mt-0.5" />
                 <address className="not-italic text-gray-400 leading-relaxed">
                   Heegermühler Str. 69a<br />
                   16225 Eberswalde
                 </address>
               </li>
               <li className="flex gap-3 text-sm">
-                <Phone className="w-4 h-4 text-[#039139] shrink-0 mt-0.5" />
-                <a href="tel:+4933342358 48" className="hover:text-[#039139] transition-colors">
+                <Phone className="w-4 h-4 text-[#2e7d32] shrink-0 mt-0.5" />
+                <a href="tel:+4933342358 48" className="hover:text-[#2e7d32] transition-colors">
                   +49 3334 235848
                 </a>
               </li>
               <li className="flex gap-3 text-sm">
-                <Mail className="w-4 h-4 text-[#039139] shrink-0 mt-0.5" />
-                <a href="mailto:info@fvpreussen-eberswalde.de" className="hover:text-[#039139] transition-colors break-all">
+                <Mail className="w-4 h-4 text-[#2e7d32] shrink-0 mt-0.5" />
+                <a href="mailto:info@fvpreussen-eberswalde.de" className="hover:text-[#2e7d32] transition-colors break-all">
                   info@fvpreussen-eberswalde.de
                 </a>
               </li>
@@ -140,9 +140,9 @@ export function Footer() {
             <div className="mt-6">
               <Link
                 href="/kontakt"
-                className="relative inline-flex items-center px-5 py-2.5 text-xs font-bold uppercase tracking-widest text-white border border-[#039139] overflow-hidden group"
+                className="relative inline-flex items-center px-5 py-2.5 text-xs font-bold uppercase tracking-widest text-white border border-[#2e7d32] overflow-hidden group"
               >
-                <span className="absolute inset-0 bg-[#039139] -translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
+                <span className="absolute inset-0 bg-[#2e7d32] -translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
                 <span className="relative">Nachricht senden</span>
               </Link>
             </div>

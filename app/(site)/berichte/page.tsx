@@ -42,7 +42,7 @@ function ResultBadge({ match }: { match: FuPaMatch }) {
 
   if (us > them)
     return (
-      <span className="rounded-full bg-[#039139] px-2.5 py-0.5 text-[11px] font-bold text-white">
+      <span className="rounded-full bg-[#2e7d32] px-2.5 py-0.5 text-[11px] font-bold text-white">
         S
       </span>
     );
@@ -70,7 +70,7 @@ function ResultRow({ match }: { match: FuPaMatch }) {
       className={cn(
         "flex items-center gap-4 border-b border-gray-100 py-4 last:border-0",
         "border-l-4 pl-4",
-        outcome === "win" && "border-l-[#039139]",
+        outcome === "win" && "border-l-[#2e7d32]",
         outcome === "loss" && "border-l-red-400",
         outcome === "draw" && "border-l-gray-300"
       )}
@@ -88,7 +88,7 @@ function ResultRow({ match }: { match: FuPaMatch }) {
               className={cn(
                 "truncate text-sm font-bold",
                 isPreussen(match.homeTeam)
-                  ? "text-[#039139]"
+                  ? "text-[#2e7d32]"
                   : "text-gray-900"
               )}
             >
@@ -99,7 +99,7 @@ function ResultRow({ match }: { match: FuPaMatch }) {
               className={cn(
                 "truncate text-sm font-bold",
                 isPreussen(match.awayTeam)
-                  ? "text-[#039139]"
+                  ? "text-[#2e7d32]"
                   : "text-gray-900"
               )}
             >
@@ -122,7 +122,7 @@ function ResultRow({ match }: { match: FuPaMatch }) {
           <span
             className={cn(
               "text-xl font-bold tabular-nums",
-              outcome === "win" && "text-[#039139]",
+              outcome === "win" && "text-[#2e7d32]",
               outcome === "loss" && "text-red-500",
               outcome === "draw" && "text-gray-500"
             )}
@@ -143,7 +143,7 @@ function UpcomingRow({ match, index }: { match: FuPaMatch; index: number }) {
   return (
     <div className="flex items-center gap-4 border-b border-white/10 py-4 last:border-0">
       {/* Matchday number */}
-      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#039139]/20 text-xs font-bold text-[#039139]">
+      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#2e7d32]/20 text-xs font-bold text-[#2e7d32]">
         {index + 1}
       </div>
 
@@ -152,7 +152,7 @@ function UpcomingRow({ match, index }: { match: FuPaMatch; index: number }) {
           <div className="text-sm font-bold text-white">
             {isHome ? (
               <>
-                <span className="text-[#7de8a0]">FV Preussen</span>
+                <span className="text-[#a5d6a7]">FV Preussen</span>
                 <span className="text-white/50"> vs </span>
                 {opponent}
               </>
@@ -160,7 +160,7 @@ function UpcomingRow({ match, index }: { match: FuPaMatch; index: number }) {
               <>
                 {opponent}
                 <span className="text-white/50"> vs </span>
-                <span className="text-[#7de8a0]">FV Preussen</span>
+                <span className="text-[#a5d6a7]">FV Preussen</span>
               </>
             )}
           </div>
@@ -203,7 +203,7 @@ function TablePanel({ entries }: { entries: FuPaTableEntry[] }) {
               key={e.position}
               className={cn(
                 "border-b border-white/5 last:border-0",
-                e.isCurrentTeam && "bg-[#039139]/10"
+                e.isCurrentTeam && "bg-[#2e7d32]/10"
               )}
             >
               <td className="py-2.5 font-mono text-xs text-gray-500">
@@ -212,12 +212,12 @@ function TablePanel({ entries }: { entries: FuPaTableEntry[] }) {
               <td
                 className={cn(
                   "py-2.5 pr-2 text-xs font-semibold",
-                  e.isCurrentTeam ? "text-[#7de8a0]" : "text-gray-200"
+                  e.isCurrentTeam ? "text-[#a5d6a7]" : "text-gray-200"
                 )}
               >
                 {e.isCurrentTeam ? (
                   <span className="flex items-center gap-1">
-                    <span className="h-1.5 w-1.5 rounded-full bg-[#039139]" />
+                    <span className="h-1.5 w-1.5 rounded-full bg-[#2e7d32]" />
                     {e.team}
                   </span>
                 ) : (
@@ -269,9 +269,9 @@ export default async function BerichtePage() {
   return (
     <div className="min-h-screen">
       {/* ── Hero ────────────────────────────────────────────────────────── */}
-      <div className="bg-gradient-to-br from-[#1e2030] via-[#1a2a1a] to-[#026b29] py-16 lg:py-24">
+      <div className="bg-gradient-to-br from-[#1e2030] via-[#1a2a1a] to-[#1b5e20] py-16 lg:py-24">
         <div className="mx-auto max-w-[1280px] px-4">
-          <p className="mb-3 text-[11px] font-bold uppercase tracking-widest text-[#7de8a0]">
+          <p className="mb-3 text-[11px] font-bold uppercase tracking-widest text-[#a5d6a7]">
             Saison 2024/25 · Landesliga Nord
           </p>
           <h1 className="mb-4 text-4xl font-bold text-white [font-family:var(--font-club)] lg:text-5xl">
@@ -300,9 +300,9 @@ export default async function BerichtePage() {
             )}
             {tableEntry && (
               <div className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 px-5 py-3">
-                <Trophy className="h-4 w-4 text-[#7de8a0]" />
+                <Trophy className="h-4 w-4 text-[#a5d6a7]" />
                 <span className="text-xs text-gray-400">Tabellenplatz</span>
-                <span className="text-lg font-bold text-[#7de8a0]">
+                <span className="text-lg font-bold text-[#a5d6a7]">
                   {tableEntry.position}.
                 </span>
                 <span className="text-xs text-gray-300">
@@ -314,7 +314,7 @@ export default async function BerichtePage() {
               href="https://www.fussball.de"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-5 py-3 text-xs text-gray-400 transition-colors hover:border-[#039139]/40 hover:text-[#7de8a0]"
+              className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-5 py-3 text-xs text-gray-400 transition-colors hover:border-[#2e7d32]/40 hover:text-[#a5d6a7]"
             >
               <ExternalLink className="h-3.5 w-3.5" />
               Offizielle Daten auf fussball.de
@@ -337,7 +337,7 @@ export default async function BerichtePage() {
                   </h2>
                   <div className="flex items-center gap-3 text-[11px] text-gray-500">
                     <span className="flex items-center gap-1">
-                      <span className="h-2 w-2 rounded-full bg-[#039139]" />
+                      <span className="h-2 w-2 rounded-full bg-[#2e7d32]" />
                       Sieg
                     </span>
                     <span className="flex items-center gap-1">
@@ -368,7 +368,7 @@ export default async function BerichtePage() {
                     href="https://www.fussball.de"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-1 text-[11px] text-gray-500 hover:text-[#039139]"
+                    className="flex items-center gap-1 text-[11px] text-gray-500 hover:text-[#2e7d32]"
                   >
                     <ExternalLink className="h-3 w-3" />
                     Alle Ergebnisse auf fussball.de
@@ -399,7 +399,7 @@ export default async function BerichtePage() {
                     href="https://www.fussball.de"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-1 text-[11px] text-gray-500 hover:text-[#039139]"
+                    className="flex items-center gap-1 text-[11px] text-gray-500 hover:text-[#2e7d32]"
                   >
                     <ExternalLink className="h-3 w-3" />
                     Spielplan auf fussball.de
@@ -415,7 +415,7 @@ export default async function BerichtePage() {
                   <h2 className="text-lg font-bold text-white [font-family:var(--font-club)]">
                     Tabelle
                   </h2>
-                  <span className="rounded-full bg-[#039139]/20 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-[#7de8a0]">
+                  <span className="rounded-full bg-[#2e7d32]/20 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-[#a5d6a7]">
                     Landesliga Nord
                   </span>
                 </div>
@@ -433,7 +433,7 @@ export default async function BerichtePage() {
                     href="https://www.fussball.de"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-1 text-[11px] text-gray-500 hover:text-[#039139]"
+                    className="flex items-center gap-1 text-[11px] text-gray-500 hover:text-[#2e7d32]"
                   >
                     <ExternalLink className="h-3 w-3" />
                     Gesamttabelle auf fussball.de
@@ -442,8 +442,8 @@ export default async function BerichtePage() {
               </div>
 
               {/* Quick link card */}
-              <div className="rounded-2xl border border-[#039139]/30 bg-[#039139]/10 p-5">
-                <p className="mb-1 text-xs font-bold uppercase tracking-widest text-[#7de8a0]">
+              <div className="rounded-2xl border border-[#2e7d32]/30 bg-[#2e7d32]/10 p-5">
+                <p className="mb-1 text-xs font-bold uppercase tracking-widest text-[#a5d6a7]">
                   Offizielle Daten
                 </p>
                 <p className="mb-4 text-sm text-gray-300">
@@ -454,7 +454,7 @@ export default async function BerichtePage() {
                   href="https://www.fussball.de"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between rounded-xl bg-[#039139] px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-[#026b29]"
+                  className="flex items-center justify-between rounded-xl bg-[#2e7d32] px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-[#1b5e20]"
                 >
                   Zu fussball.de
                   <ChevronRight className="h-4 w-4" />
@@ -471,7 +471,7 @@ export default async function BerichtePage() {
           <div className="mx-auto max-w-[1280px] px-4">
             <div className="mb-10 flex items-end justify-between">
               <div>
-                <p className="mb-2 text-[11px] font-bold uppercase tracking-widest text-[#039139]">
+                <p className="mb-2 text-[11px] font-bold uppercase tracking-widest text-[#2e7d32]">
                   Matchreports
                 </p>
                 <h2 className="text-3xl font-bold text-gray-900 [font-family:var(--font-club)]">
@@ -480,7 +480,7 @@ export default async function BerichtePage() {
               </div>
               <Link
                 href="/aktuelles"
-                className="text-[11px] font-semibold uppercase tracking-wider text-[#039139] hover:underline"
+                className="text-[11px] font-semibold uppercase tracking-wider text-[#2e7d32] hover:underline"
               >
                 Alle News →
               </Link>

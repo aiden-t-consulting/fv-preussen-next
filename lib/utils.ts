@@ -43,9 +43,9 @@ export function categoryLabel(category: string): string {
 
 export function categoryColor(category: string): string {
   const colors: Record<string, string> = {
-    news: "bg-[#039139] text-white",
-    bericht: "bg-[#15540a] text-white",
-    jugend: "bg-[#81d742] text-[#15540a]",
+    news: "bg-[#2e7d32] text-white",
+    bericht: "bg-[#1b5e20] text-white",
+    jugend: "bg-[#a5d6a7] text-[#1b5e20]",
     verein: "bg-neutral-600 text-white",
   };
   return colors[category] ?? "bg-neutral-200 text-neutral-800";

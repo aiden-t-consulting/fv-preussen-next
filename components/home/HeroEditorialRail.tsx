@@ -6,7 +6,7 @@ import { formatDate } from "@/lib/utils";
 type TagColor = "green" | "navy" | "gray";
 
 const TAG_COLORS: Record<TagColor, string> = {
-  green: "bg-[#039139]/10 text-[#039139]",
+  green: "bg-[#2e7d32]/10 text-[#2e7d32]",
   navy: "bg-[#1a1a2e]/10 text-[#1a1a2e]",
   gray: "bg-gray-100 text-gray-600",
 };
@@ -29,7 +29,7 @@ function RailCard({
   return (
     <Link
       href={href}
-      className="group flex flex-col gap-3 rounded-2xl border border-gray-100 bg-white p-6 shadow-sm transition-all duration-200 hover:border-[#039139]/30 hover:shadow-md"
+      className="group flex flex-col gap-3 rounded-2xl border border-gray-100 bg-white p-6 shadow-sm transition-all duration-200 hover:border-[#2e7d32]/30 hover:shadow-md"
     >
       <span
         className={cn(
@@ -39,11 +39,11 @@ function RailCard({
       >
         {tag}
       </span>
-      <h3 className="text-sm font-bold leading-snug text-gray-900 line-clamp-2 group-hover:text-[#039139] transition-colors [font-family:var(--font-club)]">
+      <h3 className="text-sm font-bold leading-snug text-gray-900 line-clamp-2 group-hover:text-[#2e7d32] transition-colors [font-family:var(--font-club)]">
         {headline}
       </h3>
       <p className="text-xs text-gray-500">{meta}</p>
-      <span className="mt-auto text-[11px] font-semibold uppercase tracking-wider text-[#039139]">
+      <span className="mt-auto text-[11px] font-semibold uppercase tracking-wider text-[#2e7d32]">
         {cta} →
       </span>
     </Link>

@@ -7,8 +7,6 @@ import {
   FileText,
   MapPin,
   ChevronRight,
-  Calendar,
-  Trophy,
 } from "lucide-react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
@@ -20,7 +18,7 @@ export const metadata: Metadata = {
 
 const boardMembers = [
   {
-    role: "Prasident",
+    role: "Präsident",
     name: "Danko Jur",
     email: "info@fvpreussen-eberswalde.de",
     photo: "/images/legacy/board/danko-jur.jpg",
@@ -73,57 +71,91 @@ const subPages = [
   { href: "/verein/stadion", icon: MapPin, label: "Stadion & Anfahrt", desc: "Pfefferwerkerstraße 9, Eberswalde" },
 ];
 
+const HERO_STATS = [
+  { value: "1909", label: "Gegründet" },
+  { value: "600+", label: "Mitglieder" },
+  { value: "16", label: "Teams" },
+  { value: "1", label: "Stadion" },
+];
+
 export default function VereinPage() {
   return (
     <div className="min-h-screen bg-[#f9fafb]">
       {/* Hero */}
-      <div className="bg-gradient-to-br from-[#0e3a07] to-[#21a530] text-white py-20 lg:py-28">
-        <div className="max-w-7xl mx-auto px-4 text-center">
-          <div className="inline-flex items-center justify-center w-20 h-20 bg-white/20 rounded-2xl mb-6">
-            <span className="text-white font-bold text-3xl font-['Playfair_Display',serif]">FVP</span>
+      <div className="relative overflow-hidden bg-gradient-to-br from-[#111111] via-[#1b5e20] to-[#2e7d32] py-24 lg:py-32">
+        <div className="relative mx-auto max-w-7xl px-4 text-center">
+          {/* Logo circle */}
+          <div className="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-full bg-white/15 ring-2 ring-white/30">
+            <Image
+              src="/images/logo.png"
+              alt="FV Preussen Eberswalde Logo"
+              width={64}
+              height={64}
+              className="h-16 w-16 object-contain"
+            />
           </div>
-          <p className="text-[#81d742] text-sm font-bold uppercase tracking-[0.2em] mb-3">
+          <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.2em] text-[#a5d6a7]">
             Seit 1909
           </p>
-          <h1 className="text-4xl md:text-6xl font-bold mb-4">FV Preussen Eberswalde</h1>
-          <p className="text-xl text-gray-200 max-w-2xl mx-auto">
-            Motor des Barnim – Fußball ist unsere Zukunft.
+          <h1 className="mb-4 text-4xl font-bold text-white [font-family:var(--font-club)] md:text-6xl">
+            FV Preussen Eberswalde
+          </h1>
+          <p className="mx-auto max-w-2xl text-lg text-gray-300">
+            Motor des Barnim &mdash; Fu&szlig;ball ist unsere Zukunft.
           </p>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 py-14 space-y-16">
+      {/* Stats strip */}
+      <div className="bg-[#111111]">
+        <div className="mx-auto max-w-7xl px-4">
+          <div className="grid grid-cols-2 divide-x divide-white/10 sm:grid-cols-4">
+            {HERO_STATS.map((stat) => (
+              <div key={stat.label} className="py-5 text-center">
+                <div className="text-2xl font-bold text-white [font-family:var(--font-club)]">
+                  {stat.value}
+                </div>
+                <div className="text-xs font-bold uppercase tracking-wider text-gray-400">
+                  {stat.label}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div className="mx-auto max-w-7xl space-y-16 px-4 py-14">
         {/* Quick nav */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
           {subPages.map((page) => {
             const Icon = page.icon;
             return (
               <Link
                 key={page.href}
                 href={page.href}
-                className="group bg-white rounded-2xl border border-gray-100 hover:border-[#21a530]/40 hover:shadow-md transition-all duration-200 p-5 flex flex-col items-center text-center"
+                className="group flex flex-col items-center rounded-2xl border-2 border-transparent bg-white p-5 text-center transition-all duration-200 hover:border-[#2e7d32] hover:shadow-md"
               >
-                <div className="w-12 h-12 rounded-xl bg-[#e8f5e9] flex items-center justify-center mb-3 group-hover:bg-[#21a530] transition-colors">
-                  <Icon className="w-5 h-5 text-[#21a530] group-hover:text-white transition-colors" />
+                <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-[#f1f8e9] transition-colors group-hover:bg-[#2e7d32]">
+                  <Icon className="h-5 w-5 text-[#2e7d32] transition-colors group-hover:text-white" />
                 </div>
-                <h3 className="font-bold text-gray-900 text-sm mb-1">{page.label}</h3>
+                <h3 className="mb-1 text-sm font-bold text-gray-900">{page.label}</h3>
                 <p className="text-xs text-gray-500">{page.desc}</p>
-                <ChevronRight className="w-4 h-4 text-[#21a530] mt-2 group-hover:translate-x-1 transition-transform" />
+                <ChevronRight className="mt-2 h-4 w-4 text-[#2e7d32] transition-transform group-hover:translate-x-1" />
               </Link>
             );
           })}
         </div>
 
         {/* About section */}
-        <section className="grid lg:grid-cols-2 gap-12 items-center">
+        <section className="grid items-center gap-12 lg:grid-cols-2">
           <div>
-            <span className="text-[#21a530] text-xs font-bold uppercase tracking-[0.2em] mb-3 block">
+            <span className="mb-3 block text-xs font-bold uppercase tracking-[0.2em] text-[#2e7d32]">
               Über uns
             </span>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-5">
-              Mehr als nur Fußball
+            <h2 className="mb-5 text-3xl font-bold text-gray-900 md:text-4xl">
+              Mehr als nur Fu&szlig;ball
             </h2>
-            <div className="space-y-4 text-gray-600 leading-relaxed">
+            <div className="space-y-4 leading-relaxed text-gray-600">
               <p>
                 Der Verein wurde 1909 als FC Preussen 09 gegründet und hat sich über
                 mehr als ein Jahrhundert hinweg als feste Größe im Barnim entwickelt.
@@ -136,38 +168,38 @@ export default function VereinPage() {
                 mit Hauptplatz, Kunstrasen und Nebenplatz bildet dabei das sportliche Zentrum.
               </p>
               <p>
-                Als &quot;Motor des Barnim&quot; steht der Verein fur Nachwuchsforderung,
+                Als &quot;Motor des Barnim&quot; steht der Verein für Nachwuchsförderung,
                 gesellschaftliches Engagement und eine starke lokale Gemeinschaft.
               </p>
             </div>
-            <div className="mt-6 flex gap-4">
+            <div className="mt-6">
               <Link
                 href="/kontakt"
-                className="inline-flex items-center gap-2 bg-[#21a530] text-white px-5 py-2.5 rounded-xl font-semibold hover:bg-[#1a8f28] transition-colors text-sm"
+                className="inline-flex items-center gap-2 rounded-xl bg-[#2e7d32] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#1b5e20]"
               >
                 Mitglied werden
-                <ChevronRight className="w-4 h-4" />
+                <ChevronRight className="h-4 w-4" />
               </Link>
             </div>
           </div>
 
-          {/* Stats */}
-          <div className="grid grid-cols-2 gap-4">
-            {[
-              { icon: Calendar, value: "1909", label: "Grundungsjahr" },
-              { icon: Users, value: "600+", label: "Mitglieder" },
-              { icon: Trophy, value: "16", label: "Mannschaften" },
-              { icon: MapPin, value: "Barnim", label: "Heimat" },
-            ].map((item) => {
-              const Icon = item.icon;
-              return (
-                <div key={item.label} className="bg-white rounded-2xl border border-gray-100 p-6 text-center">
-                  <Icon className="w-6 h-6 text-[#21a530] mx-auto mb-2" />
-                  <div className="text-2xl font-bold text-gray-900">{item.value}</div>
-                  <div className="text-sm text-gray-500 mt-0.5">{item.label}</div>
-                </div>
-              );
-            })}
+          {/* Visual block */}
+          <div className="flex items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-br from-[#1b5e20] to-[#2e7d32] p-12">
+            <div className="text-center">
+              <div className="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-white/20">
+                <Image
+                  src="/images/logo.png"
+                  alt="FV Preussen Eberswalde"
+                  width={56}
+                  height={56}
+                  className="h-14 w-14 object-contain"
+                />
+              </div>
+              <p className="text-lg font-bold text-white [font-family:var(--font-club)]">
+                FV Preussen Eberswalde
+              </p>
+              <p className="mt-1 text-sm text-[#a5d6a7]">Gegründet 1909</p>
+            </div>
           </div>
         </section>
 
@@ -178,13 +210,22 @@ export default function VereinPage() {
             title="Unsere Geschichte"
             align="left"
           />
-          <div className="relative pl-6 border-l-2 border-[#21a530]/30 space-y-8">
-            {milestones.map((m) => (
-              <div key={m.year} className="relative">
-                <div className="absolute -left-[25px] w-5 h-5 rounded-full bg-[#21a530] border-2 border-white shadow" />
-                <div className="bg-white rounded-xl border border-gray-100 p-5">
-                  <span className="text-[#21a530] font-bold text-sm">{m.year}</span>
-                  <p className="text-gray-700 mt-1">{m.event}</p>
+          <div className="space-y-6">
+            {milestones.map((m, i) => (
+              <div key={m.year} className="flex gap-5">
+                {/* Dot + line */}
+                <div className="flex flex-col items-center">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#2e7d32] text-xs font-bold text-white shadow">
+                    {m.year.slice(2)}
+                  </div>
+                  {i < milestones.length - 1 && (
+                    <div className="mt-1 w-0.5 flex-1 bg-[#2e7d32]/20" style={{ minHeight: "1.5rem" }} />
+                  )}
+                </div>
+                {/* Card */}
+                <div className="mb-2 flex-1 rounded-xl border border-gray-100 bg-white p-5">
+                  <span className="text-sm font-bold text-[#2e7d32]">{m.year}</span>
+                  <p className="mt-1 text-gray-700">{m.event}</p>
                 </div>
               </div>
             ))}
@@ -198,31 +239,43 @@ export default function VereinPage() {
             title="Unser Vorstand"
             align="left"
           />
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {boardMembers.map((member) => (
-              <div key={`${member.role}-${member.name}`} className="bg-white rounded-xl border border-gray-100 p-5">
-                {member.photo ? (
-                  <div className="mb-3 overflow-hidden rounded-xl border border-gray-100">
+              <div
+                key={`${member.role}-${member.name}`}
+                className="overflow-hidden rounded-xl border border-gray-100 bg-white"
+              >
+                {/* Photo area with role badge */}
+                <div className="relative">
+                  {member.photo ? (
                     <Image
                       src={member.photo}
                       alt={member.name}
-                      width={360}
-                      height={220}
-                      className="h-28 w-full object-cover object-top"
+                      width={400}
+                      height={160}
+                      className="h-40 w-full object-cover object-top"
                     />
+                  ) : (
+                    <div className="flex h-40 items-center justify-center bg-[#f1f8e9]">
+                      <Users className="h-10 w-10 text-[#2e7d32]" />
+                    </div>
+                  )}
+                  <div className="absolute left-3 top-3 rounded-full bg-[#2e7d32] px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-white">
+                    {member.role}
                   </div>
-                ) : (
-                  <div className="mb-3 flex h-28 items-center justify-center rounded-xl border border-gray-100 bg-[#e8f5e9]">
-                    <Users className="h-8 w-8 text-[#21a530]" />
-                  </div>
-                )}
-                <p className="text-xs font-bold text-[#21a530] uppercase tracking-wide mb-0.5">{member.role}</p>
-                <p className="font-bold text-gray-900">{member.name}</p>
-                {member.email && (
-                  <a href={`mailto:${member.email}`} className="text-xs text-gray-400 hover:text-[#21a530] transition-colors mt-1 block">
-                    {member.email}
-                  </a>
-                )}
+                </div>
+                {/* Name + email */}
+                <div className="p-4">
+                  <p className="font-bold text-gray-900">{member.name}</p>
+                  {member.email && (
+                    <a
+                      href={`mailto:${member.email}`}
+                      className="mt-1 block text-xs text-gray-400 transition-colors hover:text-[#2e7d32]"
+                    >
+                      {member.email}
+                    </a>
+                  )}
+                </div>
               </div>
             ))}
           </div>
@@ -235,19 +288,19 @@ export default function VereinPage() {
             title="Unser Stadion"
             align="left"
           />
-          <div className="grid lg:grid-cols-2 gap-8 items-start">
-            <div className="bg-white rounded-2xl border border-gray-100 p-6">
-              <h3 className="font-bold text-gray-900 text-lg mb-4">Stadion Pfefferwerk</h3>
+          <div className="grid items-start gap-8 lg:grid-cols-2">
+            <div className="rounded-2xl border border-gray-100 bg-white p-6">
+              <h3 className="mb-4 text-lg font-bold text-gray-900">Stadion Pfefferwerk</h3>
               <div className="space-y-3 text-sm text-gray-600">
                 <div className="flex gap-3">
-                  <MapPin className="w-4 h-4 text-[#21a530] shrink-0 mt-0.5" />
+                  <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[#2e7d32]" />
                   <div>
                     <p className="font-semibold text-gray-800">Adresse</p>
-                    <p>Pfefferwerkerstraße 9<br />16225 Eberswalde</p>
+                    <p>Pfefferwerkerstra&szlig;e 9<br />16225 Eberswalde</p>
                   </div>
                 </div>
                 <div className="flex gap-3">
-                  <Users className="w-4 h-4 text-[#21a530] shrink-0 mt-0.5" />
+                  <Users className="mt-0.5 h-4 w-4 shrink-0 text-[#2e7d32]" />
                   <div>
                     <p className="font-semibold text-gray-800">Kapazität</p>
                     <p>4.500 Zuschauer, davon 300 überdachte Sitzplätze</p>
@@ -255,8 +308,7 @@ export default function VereinPage() {
                 </div>
               </div>
             </div>
-            {/* Google Maps embed */}
-            <div className="rounded-2xl overflow-hidden border border-gray-200 h-64">
+            <div className="h-64 overflow-hidden rounded-2xl border border-gray-200">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2406.6!2d13.8055!3d52.8342!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTLCsDUwJzAzLjEiTiAxM8KwNDgnMTkuOCJF!5e0!3m2!1sde!2sde!4v1"
                 width="100%"

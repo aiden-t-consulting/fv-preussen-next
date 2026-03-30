@@ -1,14 +1,15 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { useInView } from "@/lib/hooks/useInView";
 
 const STATS = [
-  { value: 100, suffix: "+", label: "Jahre", description: "Vereinsgeschichte" },
-  { value: 10, suffix: "+", label: "Teams", description: "Von der U7 bis zur Ü50" },
-  { value: 600, suffix: "+", label: "Mitglieder", description: "Aktiv im Verein" },
-  { value: 12, suffix: "+", label: "Titel", description: "Regionale Erfolge" },
+  { value: 1909, suffix: "", label: "Gegründet", fixed: true },
+  { value: 600, suffix: "+", label: "Mitglieder", fixed: false },
+  { value: 16, suffix: "", label: "Mannschaften", fixed: false },
+  { value: 100, suffix: "+", label: "Jahre", fixed: false },
 ];
 
 function useCountUp(target: number, duration: number, enabled: boolean) {
@@ -29,24 +30,24 @@ function useCountUp(target: number, duration: number, enabled: boolean) {
   return count;
 }
 
-function StatCard({
+function StatItem({
   value,
   suffix,
   label,
-  description,
+  fixed,
   animate,
 }: (typeof STATS)[0] & { animate: boolean }) {
-  const count = useCountUp(value, 2000, animate);
+  const count = useCountUp(value, 2000, animate && !fixed);
+  const display = fixed ? value : animate ? count : "—";
   return (
-    <div className="rounded-[20px] border border-gray-100 bg-white p-6 shadow-sm">
-      <div className="mb-1 text-4xl font-bold text-gray-900 lg:text-5xl">
-        {animate ? count : "—"}
+    <div className="flex flex-col items-center text-center">
+      <div className="text-5xl font-bold text-white [font-family:var(--font-club)] lg:text-6xl">
+        {display}
         {suffix}
       </div>
-      <div className="mb-0.5 text-sm font-bold uppercase tracking-widest text-[#039139]">
+      <div className="mt-1 text-xs font-bold uppercase tracking-wider text-gray-400">
         {label}
       </div>
-      <div className="text-xs text-gray-500">{description}</div>
     </div>
   );
 }
@@ -56,36 +57,59 @@ export function ClubBlock() {
   const visible = useInView(ref, { threshold: 0.2 });
 
   return (
-    <section ref={ref} className="bg-[#f0efed] py-20 lg:py-24">
-      <div className="mx-auto max-w-[1280px] px-4">
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-20 lg:items-center">
-          {/* Left: narrative */}
+    <section ref={ref} className="relative bg-[#111111] py-20 lg:py-28 overflow-hidden">
+      {/* Stadium background image */}
+      <div className="absolute inset-0 pointer-events-none">
+        <Image
+          src="/images/legacy/stadion/stadionheft-18-19.jpg"
+          alt=""
+          fill
+          className="object-cover opacity-10"
+          sizes="100vw"
+          priority={false}
+        />
+      </div>
+
+      <div className="relative mx-auto max-w-[1280px] px-4">
+        {/* Stats row */}
+        <div className="mb-16 grid grid-cols-2 gap-10 sm:grid-cols-4">
+          {STATS.map((stat) => (
+            <StatItem key={stat.label} {...stat} animate={visible} />
+          ))}
+        </div>
+
+        {/* Text block + CTAs */}
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:items-start lg:gap-16">
+          {/* Left heading */}
           <div>
-            <p className="mb-3 text-[11px] font-bold uppercase tracking-widest text-[#039139]">
-              Motor des Barnim
-            </p>
-            <h2 className="mb-6 text-3xl font-bold text-gray-900 [font-family:var(--font-club)] lg:text-4xl">
+            <h2 className="text-3xl font-bold text-white [font-family:var(--font-club)] lg:text-4xl">
               Tradition mit Perspektive
             </h2>
-            <p className="mb-8 text-base leading-relaxed text-gray-600">
-              Seit Generationen steht FV Preussen Eberswalde für Fußball, Nachwuchsarbeit und
-              Vereinsleben in der Region. Von der Bambini bis zur Ü50 bieten wir jedem einen
-              Platz auf dem Platz — regional verwurzelt, sportlich ambitioniert, auf die Zukunft
-              ausgerichtet.
-            </p>
-            <Link
-              href="/verein"
-              className="inline-flex items-center rounded-full border border-[#039139] px-6 py-3 text-[12px] font-bold uppercase tracking-wider text-[#039139] transition-colors hover:bg-[#039139] hover:text-white"
-            >
-              Mehr über den Verein
-            </Link>
           </div>
 
-          {/* Right: stat grid */}
-          <div className="grid grid-cols-2 gap-4">
-            {STATS.map((stat) => (
-              <StatCard key={stat.label} {...stat} animate={visible} />
-            ))}
+          {/* Right body + buttons */}
+          <div>
+            <p className="mb-8 text-sm leading-relaxed text-gray-300">
+              Seit Generationen steht FV Preussen Eberswalde für Fußball, Nachwuchsarbeit und
+              Vereinsleben im Barnim. Von den Bambini bis zur Ü50 bieten wir jedem einen
+              Platz auf dem Platz — regional verwurzelt, sportlich ambitioniert und auf die
+              Zukunft ausgerichtet. Das Westendstadion ist dabei Heimat, Treffpunkt und Symbol
+              für über 100 Jahre Vereinsgeschichte.
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <Link
+                href="/kontakt"
+                className="inline-flex items-center rounded-full bg-[#2e7d32] px-6 py-3 text-[12px] font-bold uppercase tracking-wider text-white transition-colors hover:bg-[#1b5e20]"
+              >
+                Mitglied werden
+              </Link>
+              <Link
+                href="/verein"
+                className="inline-flex items-center rounded-full border border-white/30 px-6 py-3 text-[12px] font-bold uppercase tracking-wider text-white transition-colors hover:border-white hover:bg-white/10"
+              >
+                Mehr erfahren
+              </Link>
+            </div>
           </div>
         </div>
       </div>
