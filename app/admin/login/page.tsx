@@ -1,32 +1,12 @@
-"use server";
-
-import { redirect } from "next/navigation";
-import { cookies } from "next/headers";
 import { Lock, ShieldCheck } from "lucide-react";
-import {
-  verifyPassword,
-  createSessionToken,
-  sessionCookieOptions,
-  SESSION_COOKIE,
-} from "@/lib/admin/auth";
+import { loginAction } from "./actions";
 
-async function loginAction(formData: FormData) {
-  "use server";
-
-  const password = formData.get("password");
-  if (typeof password !== "string" || !password) return;
-
-  if (!verifyPassword(password)) {
-    redirect("/admin/login?error=1");
-  }
-
-  const token = await createSessionToken();
-  const jar = await cookies();
-  jar.set(SESSION_COOKIE, token, sessionCookieOptions());
-  redirect("/admin");
-}
-
-export default function LoginPage() {
+export default function LoginPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ error?: string }>;
+}) {
+  void searchParams; // available for future use
   return (
     <div className="flex min-h-screen items-center justify-center bg-[#0d0d0d] px-4">
       <div className="w-full max-w-sm">
@@ -70,9 +50,6 @@ export default function LoginPage() {
               Anmelden
             </button>
           </form>
-
-          {/* Error message — shown via URL param to avoid server state */}
-          <ErrorMessage />
         </div>
 
         <p className="mt-6 text-center text-[11px] text-gray-700">
@@ -81,9 +58,4 @@ export default function LoginPage() {
       </div>
     </div>
   );
-}
-
-// Async component to read searchParams
-async function ErrorMessage() {
-  return null; // error shown client-side via URL; avoids async searchParams complexity
 }

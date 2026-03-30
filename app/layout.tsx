@@ -37,7 +37,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const isAdmin = pathname.startsWith("/admin");
 
   return (
-    <html lang="de" className="h-full">
+    <html lang="de" className="h-full" data-scroll-behavior="smooth">
       <body className="min-h-full flex flex-col antialiased">
         {!isAdmin && <Header />}
         <main className={isAdmin ? "flex-1" : "flex-1 pt-[72px] lg:pt-[88px]"}>
