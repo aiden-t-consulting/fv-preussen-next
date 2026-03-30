@@ -3,7 +3,7 @@ import Link from "next/link";
 import { urlFor } from "@/lib/sanity/client";
 import type { Sponsor } from "@/types";
 
-type TierKey = "hauptsponsor" | "premiumsponsor" | "partner";
+type TierKey = "hauptsponsor" | "premiumsponsor" | "partner" | "foerderer";
 
 interface DisplaySponsor {
   id: string;
@@ -13,61 +13,136 @@ interface DisplaySponsor {
   tier: TierKey;
 }
 
-// Static fallback mirrors the legacy site's sponsor data
+// Static fallback — sourced from public/images/sponsors/ folder structure
 const FALLBACK_SPONSORS: DisplaySponsor[] = [
+  // ── Exclusivsponsor ──────────────────────────────────────────────────────────
   {
     id: "sparkasse-barnim",
     name: "Sparkasse Barnim",
-    logoUrl: "/images/sponsors/sparkasse-barnim.jpg",
-    url: "https://www.spk-barnim.de/de/home.html",
+    logoUrl: "/images/sponsors/Exclusivsponsor/Sparkasse_big.jpg",
+    url: "https://www.spk-barnim.de/",
     tier: "hauptsponsor",
   },
-  {
-    id: "fielmann",
-    name: "Fielmann",
-    logoUrl: "/images/legacy/sponsors/fielmann.png",
-    url: "#",
-    tier: "premiumsponsor",
-  },
-  {
-    id: "sportstiftung",
-    name: "Sportstiftung der Sparkasse Barnim",
-    logoUrl: "/images/legacy/sponsors/sportstiftung.jpg",
-    url: "#",
-    tier: "premiumsponsor",
-  },
-  {
-    id: "hotel-am-markt",
-    name: "Hotel Am Markt",
-    logoUrl: "/images/legacy/sponsors/hotel-am-markt.png",
-    url: "#",
-    tier: "premiumsponsor",
-  },
-  {
-    id: "fitolino",
-    name: "Fitolino",
-    logoUrl: "/images/legacy/sponsors/fitolino.png",
-    url: "#",
-    tier: "partner",
-  },
-  {
-    id: "ksb",
-    name: "Kreissportbund Barnim",
-    logoUrl: "/images/legacy/sponsors/ksb.jpg",
-    url: "#",
-    tier: "partner",
-  },
-  {
-    id: "twe",
-    name: "TWE",
-    logoUrl: "/images/legacy/sponsors/twe.jpg",
-    url: "#",
-    tier: "partner",
-  },
+
+  // ── Premiumsponsoren ─────────────────────────────────────────────────────────
   {
     id: "glg",
-    name: "GLG",
-    logoUrl: "/images/legacy/sponsors/glg.jpg",
+    name: "GLG – Gesellschaft für Leben und Gesundheit",
+    logoUrl: "/images/sponsors/Premiumsponsoren/GLG_big.jpg",
+    url: "#",
+    tier: "premiumsponsor",
+  },
+  {
+    id: "ck-wrensch",
+    name: "CK Wrensch Containerdienst und Recycling",
+    logoUrl: "/images/sponsors/Premiumsponsoren/IMG_8931.jpg",
+    url: "#",
+    tier: "premiumsponsor",
+  },
+  {
+    id: "finow-rohrsysteme",
+    name: "FINOW Rohrsysteme GmbH",
+    logoUrl: "/images/sponsors/Premiumsponsoren/IMG_8932.jpg",
+    url: "#",
+    tier: "premiumsponsor",
+  },
+  {
+    id: "koha",
+    name: "KOHA Bauausführungen und Immobilien GmbH",
+    logoUrl: "/images/sponsors/Premiumsponsoren/IMG_8933.png",
+    url: "#",
+    tier: "premiumsponsor",
+  },
+  {
+    id: "e-dis",
+    name: "e.dis",
+    logoUrl: "/images/sponsors/Premiumsponsoren/IMG_8934-1.jpg",
+    url: "#",
+    tier: "premiumsponsor",
+  },
+  {
+    id: "structure",
+    name: "structure Bauträgergesellschaft",
+    logoUrl: "/images/sponsors/Premiumsponsoren/IMG_8935.jpg",
+    url: "#",
+    tier: "premiumsponsor",
+  },
+
+  // ── Top-Partner ──────────────────────────────────────────────────────────────
+  {
+    id: "arxes",
+    name: "arxes engineering",
+    logoUrl: "/images/sponsors/Sponsoren/TOPPARTNER/IMG_8937.png",
+    url: "#",
+    tier: "partner",
+  },
+  {
+    id: "autohaus-schley",
+    name: "Autohaus Schley Eberswalde GmbH",
+    logoUrl: "/images/sponsors/Sponsoren/TOPPARTNER/IMG_8939.png",
+    url: "#",
+    tier: "partner",
+  },
+  {
+    id: "hoffmann-transport",
+    name: "Hoffmann Transport & Recycling GmbH",
+    logoUrl: "/images/sponsors/Sponsoren/TOPPARTNER/IMG_8940.png",
+    url: "#",
+    tier: "partner",
+  },
+  {
+    id: "medimax",
+    name: "MEDIMAX",
+    logoUrl: "/images/sponsors/Sponsoren/TOPPARTNER/IMG_8941-300x59.png",
+    url: "#",
+    tier: "partner",
+  },
+  {
+    id: "fgm-automobil",
+    name: "FGM Automobil GmbH – Franz Graf Mettchen",
+    logoUrl: "/images/sponsors/Sponsoren/TOPPARTNER/IMG_8942.png",
+    url: "#",
+    tier: "partner",
+  },
+  {
+    id: "chorona",
+    name: "CHORONA Immobilien GmbH",
+    logoUrl: "/images/sponsors/Sponsoren/TOPPARTNER/IMG_8943-300x113.jpg",
+    url: "#",
+    tier: "partner",
+  },
+  {
+    id: "eberswalder-wurst",
+    name: "Eberswalder Wurst",
+    logoUrl: "/images/sponsors/Sponsoren/TOPPARTNER/IMG_8944.png",
+    url: "#",
+    tier: "partner",
+  },
+  {
+    id: "autohaus-zemike",
+    name: "Autohaus Zemike",
+    logoUrl: "/images/sponsors/Sponsoren/TOPPARTNER/IMG_8945-768x1014.jpg",
+    url: "#",
+    tier: "partner",
+  },
+  {
+    id: "forth-elektrotechnik",
+    name: "FORTH Elektrotechnik GmbH",
+    logoUrl: "/images/sponsors/Sponsoren/TOPPARTNER/IMG_8946-300x211.jpg",
+    url: "#",
+    tier: "partner",
+  },
+  {
+    id: "ewe",
+    name: "EWE",
+    logoUrl: "/images/sponsors/Sponsoren/TOPPARTNER/IMG_8948-300x179.webp",
+    url: "#",
+    tier: "partner",
+  },
+  {
+    id: "iev",
+    name: "IEV Industrieservice & Elektroinstallation Valkat",
+    logoUrl: "/images/sponsors/Sponsoren/TOPPARTNER/IMG_9769-300x151.jpg",
     url: "#",
     tier: "partner",
   },

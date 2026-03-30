@@ -7,6 +7,7 @@ import {
   Star,
   Award,
   Handshake,
+  Heart,
   TrendingUp,
   Users,
   Megaphone,
@@ -26,74 +27,341 @@ export const metadata: Metadata = {
 
 export const revalidate = 3600;
 
-// ─── Static fallback sponsors (shown when Sanity is not configured) ───────────
+// ─── Static fallback sponsors — sourced from public/images/sponsors/ folders ──
 const FALLBACK_SPONSORS: Array<{
   id: string;
   name: string;
-  tier: "hauptsponsor" | "premiumsponsor" | "partner";
+  tier: "hauptsponsor" | "premiumsponsor" | "partner" | "foerderer";
   src: string;
   url?: string;
 }> = [
+  // Exclusivsponsor/
   {
     id: "sparkasse-barnim",
     name: "Sparkasse Barnim",
     tier: "hauptsponsor",
-    src: "/images/sponsors/sparkasse-barnim.jpg",
+    src: "/images/sponsors/Exclusivsponsor/Sparkasse_big.jpg",
     url: "https://www.spk-barnim.de/",
   },
+
+  // Premiumsponsoren/
   {
-    id: "fielmann",
-    name: "Fielmann",
+    id: "glg",
+    name: "GLG – Gesellschaft für Leben und Gesundheit",
     tier: "premiumsponsor",
-    src: "/images/legacy/sponsors/fielmann.png",
+    src: "/images/sponsors/Premiumsponsoren/GLG_big.jpg",
   },
   {
-    id: "sportstiftung",
-    name: "Sportstiftung der Sparkasse Barnim",
+    id: "ck-wrensch",
+    name: "CK Wrensch Containerdienst und Recycling",
     tier: "premiumsponsor",
-    src: "/images/legacy/sponsors/sportstiftung.jpg",
+    src: "/images/sponsors/Premiumsponsoren/IMG_8931.jpg",
   },
   {
-    id: "hotel-am-markt",
-    name: "Hotel Am Markt",
+    id: "finow-rohrsysteme",
+    name: "FINOW Rohrsysteme GmbH",
     tier: "premiumsponsor",
-    src: "/images/legacy/sponsors/hotel-am-markt.png",
+    src: "/images/sponsors/Premiumsponsoren/IMG_8932.jpg",
   },
   {
-    id: "hts",
-    name: "HTS",
-    tier: "partner",
-    src: "/images/legacy/sponsors/hts.jpg",
+    id: "koha",
+    name: "KOHA Bauausführungen und Immobilien GmbH",
+    tier: "premiumsponsor",
+    src: "/images/sponsors/Premiumsponsoren/IMG_8933.png",
   },
   {
-    id: "accurat",
-    name: "ACCURAT",
-    tier: "partner",
-    src: "/images/legacy/sponsors/accurat.jpg",
+    id: "e-dis",
+    name: "e.dis",
+    tier: "premiumsponsor",
+    src: "/images/sponsors/Premiumsponsoren/IMG_8934-1.jpg",
   },
   {
-    id: "fitolino",
-    name: "Fitolino",
+    id: "structure",
+    name: "structure Bauträgergesellschaft",
+    tier: "premiumsponsor",
+    src: "/images/sponsors/Premiumsponsoren/IMG_8935.jpg",
+  },
+
+  // Sponsoren/TOPPARTNER/
+  {
+    id: "arxes",
+    name: "arxes engineering",
     tier: "partner",
-    src: "/images/legacy/sponsors/fitolino.png",
+    src: "/images/sponsors/Sponsoren/TOPPARTNER/IMG_8937.png",
   },
   {
-    id: "ksb",
-    name: "Kreissportbund Barnim",
+    id: "autohaus-schley",
+    name: "Autohaus Schley Eberswalde GmbH",
     tier: "partner",
-    src: "/images/legacy/sponsors/ksb.jpg",
+    src: "/images/sponsors/Sponsoren/TOPPARTNER/IMG_8939.png",
+  },
+  {
+    id: "hoffmann-transport",
+    name: "Hoffmann Transport & Recycling GmbH",
+    tier: "partner",
+    src: "/images/sponsors/Sponsoren/TOPPARTNER/IMG_8940.png",
+  },
+  {
+    id: "medimax",
+    name: "MEDIMAX",
+    tier: "partner",
+    src: "/images/sponsors/Sponsoren/TOPPARTNER/IMG_8941-300x59.png",
+  },
+  {
+    id: "fgm-automobil",
+    name: "FGM Automobil GmbH – Franz Graf Mettchen",
+    tier: "partner",
+    src: "/images/sponsors/Sponsoren/TOPPARTNER/IMG_8942.png",
+  },
+  {
+    id: "chorona",
+    name: "CHORONA Immobilien GmbH",
+    tier: "partner",
+    src: "/images/sponsors/Sponsoren/TOPPARTNER/IMG_8943-300x113.jpg",
+  },
+  {
+    id: "eberswalder-wurst",
+    name: "Eberswalder Wurst",
+    tier: "partner",
+    src: "/images/sponsors/Sponsoren/TOPPARTNER/IMG_8944.png",
+  },
+  {
+    id: "autohaus-zemike",
+    name: "Autohaus Zemike",
+    tier: "partner",
+    src: "/images/sponsors/Sponsoren/TOPPARTNER/IMG_8945-768x1014.jpg",
+  },
+  {
+    id: "forth-elektrotechnik",
+    name: "FORTH Elektrotechnik GmbH",
+    tier: "partner",
+    src: "/images/sponsors/Sponsoren/TOPPARTNER/IMG_8946-300x211.jpg",
+  },
+  {
+    id: "ewe",
+    name: "EWE",
+    tier: "partner",
+    src: "/images/sponsors/Sponsoren/TOPPARTNER/IMG_8948-300x179.webp",
+  },
+  {
+    id: "iev",
+    name: "IEV Industrieservice & Elektroinstallation Valkat",
+    tier: "partner",
+    src: "/images/sponsors/Sponsoren/TOPPARTNER/IMG_9769-300x151.jpg",
+  },
+
+  // Foerderer/ — named files
+  {
+    id: "dachdecker-schmidt",
+    name: "Dachdecker Schmidt",
+    tier: "foerderer",
+    src: "/images/sponsors/Foerderer/Dachdecker-Schmidt.png",
+  },
+  {
+    id: "drei-schilde",
+    name: "Drei Schilde",
+    tier: "foerderer",
+    src: "/images/sponsors/Foerderer/Drei-Schilde.png",
+  },
+  {
+    id: "druckerei-mertinkat",
+    name: "Druckerei Mertinkat",
+    tier: "foerderer",
+    src: "/images/sponsors/Foerderer/Druckerei-Mertinkat.jpg",
+  },
+  {
+    id: "enertrag",
+    name: "ENERTRAG",
+    tier: "foerderer",
+    src: "/images/sponsors/Foerderer/ENERTRAG_LOGO_RGB.jpg",
+  },
+  {
+    id: "feuersozietaet",
+    name: "Feuersozietät",
+    tier: "foerderer",
+    src: "/images/sponsors/Foerderer/FeuerSozietaet_big.jpg",
+  },
+  {
+    id: "fitfun",
+    name: "FitFun",
+    tier: "foerderer",
+    src: "/images/sponsors/Foerderer/FitFun_big.jpg",
+  },
+  {
+    id: "frank-dahms",
+    name: "Frank Dahms",
+    tier: "foerderer",
+    src: "/images/sponsors/Foerderer/Frank-Dahms.jpg",
+  },
+  {
+    id: "platz-gmbh",
+    name: "Platz GmbH",
+    tier: "foerderer",
+    src: "/images/sponsors/Foerderer/Platz-GmbH.png",
+  },
+  {
+    id: "sitte",
+    name: "SITTE",
+    tier: "foerderer",
+    src: "/images/sponsors/Foerderer/SITTE-Logo.png",
+  },
+  {
+    id: "svt",
+    name: "SVT",
+    tier: "foerderer",
+    src: "/images/sponsors/Foerderer/SVT.jpg",
+  },
+  {
+    id: "sanitaetshaus-koeppe",
+    name: "Sanitätshaus Koeppe",
+    tier: "foerderer",
+    src: "/images/sponsors/Foerderer/Sanitätshaus-Koeppe.jpg",
+  },
+  {
+    id: "tharo-gmbh",
+    name: "THARO GmbH",
+    tier: "foerderer",
+    src: "/images/sponsors/Foerderer/THARO-GmbH.jpg",
+  },
+  {
+    id: "theo-steil-gmbh",
+    name: "Theo Steil GmbH",
+    tier: "foerderer",
+    src: "/images/sponsors/Foerderer/Theo-Steil-GmbH.jpg",
+  },
+  {
+    id: "uweg",
+    name: "UWEG",
+    tier: "foerderer",
+    src: "/images/sponsors/Foerderer/UWEG.jpg",
+  },
+  {
+    id: "wilab",
+    name: "Wilab",
+    tier: "foerderer",
+    src: "/images/sponsors/Foerderer/Wilab-Logo-2014.jpg",
+  },
+  {
+    id: "bbv",
+    name: "bbv",
+    tier: "foerderer",
+    src: "/images/sponsors/Foerderer/bbv.png",
+  },
+  {
+    id: "leuendorff",
+    name: "Leuendorff",
+    tier: "foerderer",
+    src: "/images/sponsors/Foerderer/leuendorff.jpg",
   },
   {
     id: "twe",
     name: "TWE",
-    tier: "partner",
-    src: "/images/legacy/sponsors/twe.jpg",
+    tier: "foerderer",
+    src: "/images/sponsors/Foerderer/signet_twe_rgb-768x638.jpg",
+  },
+
+  // Foerderer/ — unnamed files (identified by logo content)
+  {
+    id: "platz-sicherheit",
+    name: "Platz Sicherheit",
+    tier: "foerderer",
+    src: "/images/sponsors/Foerderer/IMG_9771.png",
   },
   {
-    id: "glg",
-    name: "GLG",
-    tier: "partner",
-    src: "/images/legacy/sponsors/glg.jpg",
+    id: "michael-franz",
+    name: "Malerfachbetrieb Michael Franz",
+    tier: "foerderer",
+    src: "/images/sponsors/Foerderer/IMG_9772.jpg",
+  },
+  {
+    id: "thimm",
+    name: "THIMM pack'n'display",
+    tier: "foerderer",
+    src: "/images/sponsors/Foerderer/IMG_9773.jpg",
+  },
+  {
+    id: "forst-gartentechnik-didfun",
+    name: "Forst & Gartentechnik Didfun",
+    tier: "foerderer",
+    src: "/images/sponsors/Foerderer/IMG_9774-768x768.jpg",
+  },
+  {
+    id: "efk",
+    name: "EFK Elektroanlagen Freier + Küter",
+    tier: "foerderer",
+    src: "/images/sponsors/Foerderer/IMG_9775.jpg",
+  },
+  {
+    id: "leichter-leben",
+    name: "Leichter Leben",
+    tier: "foerderer",
+    src: "/images/sponsors/Foerderer/IMG_9776.png",
+  },
+  {
+    id: "krenz-fuss",
+    name: "Krenz & Fuß – Eberswalder Fensterbau",
+    tier: "foerderer",
+    src: "/images/sponsors/Foerderer/IMG_9777.jpg",
+  },
+  {
+    id: "rewe-graep",
+    name: "REWE Graep",
+    tier: "foerderer",
+    src: "/images/sponsors/Foerderer/IMG_9778.png",
+  },
+  {
+    id: "movie-magic",
+    name: "Movie Magic Eberswalde",
+    tier: "foerderer",
+    src: "/images/sponsors/Foerderer/IMG_9779.png",
+  },
+  {
+    id: "kreiswerke-barnim",
+    name: "Kreiswerke Barnim",
+    tier: "foerderer",
+    src: "/images/sponsors/Foerderer/IMG_9780.jpg",
+  },
+  {
+    id: "stadt-eberswalde",
+    name: "Stadt Eberswalde",
+    tier: "foerderer",
+    src: "/images/sponsors/Foerderer/IMG_9781-768x150.jpg",
+  },
+  {
+    id: "ksb-barnim",
+    name: "KSB Barnim",
+    tier: "foerderer",
+    src: "/images/sponsors/Foerderer/IMG_9782.jpg",
+  },
+  {
+    id: "die-klempner",
+    name: "Die Klempner",
+    tier: "foerderer",
+    src: "/images/sponsors/Foerderer/IMG_9784.png",
+  },
+  {
+    id: "wilder-eber",
+    name: "Wilder Eber Hotel & Restaurant",
+    tier: "foerderer",
+    src: "/images/sponsors/Foerderer/IMG_9785.png",
+  },
+  {
+    id: "egv-ag",
+    name: "EGV AG Foodlover",
+    tier: "foerderer",
+    src: "/images/sponsors/Foerderer/IMG_9811-2048x554.png",
+  },
+  {
+    id: "teletechnik-poch",
+    name: "TeleTechnik Poch GmbH",
+    tier: "foerderer",
+    src: "/images/sponsors/Foerderer/IMG_9812.jpg",
+  },
+  {
+    id: "yaman-doener",
+    name: "Yaman Döner",
+    tier: "foerderer",
+    src: "/images/sponsors/Foerderer/IMG_9813-150x150.jpg",
   },
 ];
 
@@ -101,7 +369,8 @@ const FALLBACK_SPONSORS: Array<{
 const TIER_META = {
   hauptsponsor: { label: "Hauptsponsor", icon: Star, logoSize: 220 },
   premiumsponsor: { label: "Premium Partner", icon: Award, logoSize: 180 },
-  partner: { label: "Partner", icon: Handshake, logoSize: 140 },
+  partner: { label: "Top-Partner", icon: Handshake, logoSize: 140 },
+  foerderer: { label: "Förderer", icon: Heart, logoSize: 120 },
 } as const;
 
 // ─── Benefits shown in the "Warum Partner werden?" section ───────────────────
@@ -228,10 +497,12 @@ export default async function SponsorenPage() {
   const hauptsponsors = sponsors.filter((s) => s.tier === "hauptsponsor");
   const premiumsponsors = sponsors.filter((s) => s.tier === "premiumsponsor");
   const partners = sponsors.filter((s) => s.tier === "partner");
+  const foerderers = sponsors.filter((s) => s.tier === "foerderer");
 
   const fallbackHaupt = FALLBACK_SPONSORS.filter((s) => s.tier === "hauptsponsor");
   const fallbackPremium = FALLBACK_SPONSORS.filter((s) => s.tier === "premiumsponsor");
   const fallbackPartner = FALLBACK_SPONSORS.filter((s) => s.tier === "partner");
+  const fallbackFoerderer = FALLBACK_SPONSORS.filter((s) => s.tier === "foerderer");
 
   return (
     <div className="min-h-screen bg-[#f9fafb]">
@@ -296,19 +567,36 @@ export default async function SponsorenPage() {
             </div>
           )}
 
-          {/* Partner */}
+          {/* Top-Partner */}
           {(hasSanityData ? partners.length > 0 : fallbackPartner.length > 0) && (
             <div id="partner">
               <div className="flex items-center gap-3 mb-8">
                 <div className="w-9 h-9 rounded-xl bg-[#2e7d32]/15 flex items-center justify-center">
                   <Handshake className="w-5 h-5 text-[#2e7d32]" />
                 </div>
-                <h2 className="text-xl font-bold text-gray-900">Partner</h2>
+                <h2 className="text-xl font-bold text-gray-900">Top-Partner</h2>
               </div>
               <div className="flex flex-wrap justify-center gap-4">
                 {hasSanityData
                   ? partners.map((s) => <SanityCard key={s._id} sponsor={s} />)
                   : fallbackPartner.map((s) => <FallbackCard key={s.id} sponsor={s} />)}
+              </div>
+            </div>
+          )}
+
+          {/* Förderer */}
+          {(hasSanityData ? foerderers.length > 0 : fallbackFoerderer.length > 0) && (
+            <div id="foerderer">
+              <div className="flex items-center gap-3 mb-8">
+                <div className="w-9 h-9 rounded-xl bg-[#2e7d32]/15 flex items-center justify-center">
+                  <Heart className="w-5 h-5 text-[#2e7d32]" />
+                </div>
+                <h2 className="text-xl font-bold text-gray-900">Förderer</h2>
+              </div>
+              <div className="flex flex-wrap justify-center gap-3">
+                {hasSanityData
+                  ? foerderers.map((s) => <SanityCard key={s._id} sponsor={s} />)
+                  : fallbackFoerderer.map((s) => <FallbackCard key={s.id} sponsor={s} />)}
               </div>
             </div>
           )}
@@ -320,7 +608,7 @@ export default async function SponsorenPage() {
           )}
           {!hasSanityData && FALLBACK_SPONSORS.length === 0 && (
             <p className="text-center text-gray-400 py-20">
-              Sponsoreninformationen werden in Kurze veroffentlicht.
+              Sponsoreninformationen werden in Kürze veröffentlicht.
             </p>
           )}
         </section>

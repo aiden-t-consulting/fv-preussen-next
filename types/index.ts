@@ -56,7 +56,7 @@ export interface Sponsor {
   _type: "sponsor";
   name: string;
   logo: SanityImage;
-  tier: "hauptsponsor" | "premiumsponsor" | "partner";
+  tier: "hauptsponsor" | "premiumsponsor" | "partner" | "foerderer";
   url?: string;
   description?: string;
 }

@@ -19,7 +19,8 @@ export const sponsor = defineType({
         list: [
           { title: "Hauptsponsor", value: "hauptsponsor" },
           { title: "Premium Partner", value: "premiumsponsor" },
-          { title: "Partner", value: "partner" },
+          { title: "Partner / Top-Partner", value: "partner" },
+          { title: "Förderer", value: "foerderer" },
         ],
         layout: "radio",
       },

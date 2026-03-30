@@ -78,7 +78,8 @@ const nav: NavEntry[] = [
     children: [
       { label: "Hauptsponsor", href: "/sponsoren#hauptsponsor" },
       { label: "Premium Partner", href: "/sponsoren#premium" },
-      { label: "Business Partner", href: "/sponsoren#partner" },
+      { label: "Top-Partner", href: "/sponsoren#partner" },
+      { label: "Förderer", href: "/sponsoren#foerderer" },
       { label: "Sponsor werden", href: "/kontakt?betreff=sponsoring" },
     ],
   },
