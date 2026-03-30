@@ -9,6 +9,9 @@
   --color-brand-green-light: #05b347;
   --color-brand-green-pale: #e6f5ec;
 
+  /* Page shell */
+  --color-page-bg: #f8f7f5;
+
   /* Neutral palette */
   --color-neutral-50:  #f9fafb;
   --color-neutral-100: #f3f4f6;
@@ -40,7 +43,7 @@ html {
 body {
   font-family: var(--font-body);
   color: var(--color-neutral-800);
-  background: #fff;
+  background: var(--color-page-bg);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

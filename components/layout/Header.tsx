@@ -6,7 +6,6 @@ import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { FacebookIcon, InstagramIcon, YoutubeIcon } from "@/components/ui/SocialIcons";
 
 const nav = [
   {
@@ -51,18 +50,15 @@ const nav = [
     href: "/sponsoren",
     children: [
       { label: "Hauptsponsor", href: "/sponsoren" },
-      { label: "Premiumsponsoren", href: "/sponsoren" },
-      { label: "Exklusivsponsoren", href: "/sponsoren" },
-      { label: "Toppartner", href: "/sponsoren" },
-      { label: "Businesspartner", href: "/sponsoren" },
+      { label: "Premium Partner", href: "/sponsoren" },
+      { label: "Exklusiv Partner", href: "/sponsoren" },
+      { label: "Business Partner", href: "/sponsoren" },
     ],
   },
   {
     label: "FANS",
     href: "/fan-shop",
-    children: [
-      { label: "Fanshop", href: "/fan-shop" },
-    ],
+    children: [{ label: "Fanshop", href: "/fan-shop" }],
   },
   { label: "KONTAKT", href: "/kontakt" },
 ];
@@ -88,77 +84,81 @@ export function Header() {
     href === "/" ? pathname === "/" : pathname.startsWith(href);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 shadow-2xl">
-      <nav className="border-b border-white/25 bg-[#252331]/95 backdrop-blur-md transition-all duration-300">
+    <header className="fixed inset-x-0 top-0 z-50">
+      <nav
+        className={cn(
+          "border-b bg-white/95 backdrop-blur-sm transition-all duration-300",
+          scrolled ? "border-gray-200 shadow-md" : "border-gray-100"
+        )}
+      >
         <div className="mx-auto max-w-[1280px] px-4">
-          {/* Social bar — collapses on scroll */}
-          <div
-            className={cn(
-              "hidden items-end justify-center border-b border-white/20 pb-2 lg:flex transition-all duration-300 overflow-hidden",
-              scrolled ? "max-h-0 opacity-0 pb-0" : "max-h-11"
-            )}
-          >
-            <ul className="flex items-center gap-5 text-white/80">
-              <li>
-                <a href="https://www.facebook.com/fvpreusseneberswalde" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="transition-colors duration-200 hover:text-[#039139]">
-                  <FacebookIcon className="h-3.5 w-3.5" />
-                </a>
-              </li>
-              <li>
-                <a href="https://www.instagram.com/fvpreusseneberswalde" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="transition-colors duration-200 hover:text-[#039139]">
-                  <InstagramIcon className="h-3.5 w-3.5" />
-                </a>
-              </li>
-              <li>
-                <a href="https://www.youtube.com/@fvpreusseneberswalde" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="transition-colors duration-200 hover:text-[#039139]">
-                  <YoutubeIcon className="h-3.5 w-3.5" />
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Main nav bar — shrinks on scroll */}
           <div
             className={cn(
               "relative flex items-center justify-between transition-all duration-300",
-              scrolled ? "h-[64px] lg:h-[72px]" : "h-16 lg:h-[76px]"
+              scrolled ? "h-[64px] lg:h-[72px]" : "h-[72px] lg:h-[88px]"
             )}
           >
-            <Link href="/" className="flex-shrink-0 lg:hidden" aria-label="FV Preussen Eberswalde – Startseite">
-              <Image src="/logo.png" alt="FV Preussen Eberswalde" width={60} height={60} className="h-12 w-auto drop-shadow-md" priority />
+            {/* Mobile logo */}
+            <Link
+              href="/"
+              className="flex-shrink-0 lg:hidden"
+              aria-label="FV Preussen Eberswalde – Startseite"
+            >
+              <Image
+                src="/logo.png"
+                alt="FV Preussen Eberswalde"
+                width={56}
+                height={56}
+                className="h-11 w-auto"
+                priority
+              />
             </Link>
 
-            <div className="hidden flex-1 items-center gap-0 pr-20 lg:flex">
+            {/* Desktop left nav */}
+            <div className="hidden flex-1 items-center gap-0 pr-16 lg:flex">
               {nav.slice(0, 4).map((item, index) => (
                 <div key={item.href} className="flex items-center">
-                  {index > 0 && <span className="mx-1 text-[11px] text-[#039139]">.</span>}
+                  {index > 0 && (
+                    <span className="mx-0.5 text-[10px] text-gray-300">·</span>
+                  )}
                   <NavItem item={item} isActive={isActive} />
                 </div>
               ))}
             </div>
 
-            <Link href="/" className="absolute left-1/2 hidden -translate-x-1/2 lg:block" aria-label="FV Preussen Eberswalde – Startseite">
+            {/* Desktop centered logo */}
+            <Link
+              href="/"
+              className="absolute left-1/2 hidden -translate-x-1/2 lg:block"
+              aria-label="FV Preussen Eberswalde – Startseite"
+            >
               <Image
                 src="/logo.png"
                 alt="FV Preussen Eberswalde"
-                width={112}
-                height={112}
-                className={cn("w-auto drop-shadow-lg transition-all duration-300", scrolled ? "h-[80px] translate-y-0" : "h-[108px] translate-y-1")}
+                width={96}
+                height={96}
+                className={cn(
+                  "w-auto drop-shadow-sm transition-all duration-300",
+                  scrolled ? "h-[56px]" : "h-[72px]"
+                )}
                 priority
               />
             </Link>
 
-            <div className="hidden flex-1 items-center justify-end gap-0 pl-20 lg:flex">
+            {/* Desktop right nav + CTAs */}
+            <div className="hidden flex-1 items-center justify-end gap-0 pl-16 lg:flex">
               {nav.slice(4).map((item, index) => (
                 <div key={item.href} className="flex items-center">
-                  {index > 0 && <span className="mx-1 text-[11px] text-[#039139]">.</span>}
+                  {index > 0 && (
+                    <span className="mx-0.5 text-[10px] text-gray-300">·</span>
+                  )}
                   <NavItem item={item} isActive={isActive} />
                 </div>
               ))}
-              <div className="ml-4 flex items-center gap-2 border-l border-white/20 pl-4">
+              <div className="ml-4 flex items-center gap-2 border-l border-gray-200 pl-4">
                 <Link
                   href="/verein/dokumente"
-                  className="whitespace-nowrap rounded-full border border-white/40 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.08em] text-white/85 transition-colors hover:border-white hover:text-white [font-family:var(--font-club)]"
+                  className="whitespace-nowrap rounded-full border border-gray-300 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.08em] text-gray-700 transition-colors hover:border-[#039139] hover:text-[#039139] [font-family:var(--font-club)]"
                 >
                   Mitglied werden
                 </Link>
@@ -171,26 +171,28 @@ export function Header() {
               </div>
             </div>
 
+            {/* Mobile hamburger */}
             <button
-              className="ml-auto rounded border border-white/15 p-2 text-white transition-colors hover:border-[#039139]/60 hover:text-[#039139] lg:hidden"
+              className="ml-auto rounded border border-gray-200 p-2 text-gray-700 transition-colors hover:border-[#039139]/50 hover:text-[#039139] lg:hidden"
               onClick={() => setMobileOpen((v) => !v)}
               aria-expanded={mobileOpen}
               aria-label="Menü öffnen"
             >
-              {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
           </div>
         </div>
       </nav>
 
+      {/* Mobile drawer */}
       <div
         className={cn(
-          "overflow-hidden border-t border-white/10 bg-[#252331] transition-all duration-300 lg:hidden",
+          "overflow-hidden border-t border-gray-100 bg-white transition-all duration-300 lg:hidden",
           mobileOpen ? "max-h-[90vh] overflow-y-auto" : "max-h-0"
         )}
         aria-hidden={!mobileOpen}
       >
-        <div className="px-4 py-4 space-y-1">
+        <div className="space-y-1 px-4 py-4">
           {nav.map((item) => (
             <div key={item.href}>
               {item.children ? (
@@ -199,25 +201,25 @@ export function Header() {
                     onClick={() =>
                       setOpenDropdown(openDropdown === item.href ? null : item.href)
                     }
-                    className="flex w-full items-center justify-between px-4 py-3 text-sm font-bold uppercase tracking-widest text-gray-200 transition-colors hover:text-[#039139]"
+                    className="flex w-full items-center justify-between px-4 py-3 text-sm font-bold uppercase tracking-widest text-gray-800 transition-colors hover:text-[#039139]"
                     aria-expanded={openDropdown === item.href}
                   >
                     {item.label}
                     <ChevronDown
                       className={cn(
-                        "w-4 h-4 transition-transform",
+                        "h-4 w-4 transition-transform",
                         openDropdown === item.href && "rotate-180"
                       )}
                     />
                   </button>
                   {openDropdown === item.href && (
-                    <div className="ml-4 space-y-1 border-l-2 border-[#039139]/40 pl-3">
+                    <div className="ml-4 space-y-1 border-l-2 border-[#039139]/30 pl-3">
                       {item.children.map((child) => (
                         <Link
                           key={child.href}
                           href={child.href}
                           onClick={closeMobileMenu}
-                          className="block py-2 text-sm text-gray-400 transition-colors hover:text-[#039139]"
+                          className="block py-2 text-sm text-gray-500 transition-colors hover:text-[#039139]"
                         >
                           {child.label}
                         </Link>
@@ -230,8 +232,10 @@ export function Header() {
                   href={item.href}
                   onClick={closeMobileMenu}
                   className={cn(
-                    "block px-4 py-3 font-bold text-sm uppercase tracking-widest transition-colors",
-                    isActive(item.href) ? "text-[#039139]" : "text-gray-200 hover:text-[#039139]"
+                    "block px-4 py-3 text-sm font-bold uppercase tracking-widest transition-colors",
+                    isActive(item.href)
+                      ? "text-[#039139]"
+                      : "text-gray-800 hover:text-[#039139]"
                   )}
                 >
                   {item.label}
@@ -239,6 +243,24 @@ export function Header() {
               )}
             </div>
           ))}
+
+          {/* Mobile CTAs */}
+          <div className="mt-4 flex flex-col gap-2 border-t border-gray-100 pt-4">
+            <Link
+              href="/verein/dokumente"
+              onClick={closeMobileMenu}
+              className="block rounded-full border border-gray-300 px-5 py-3 text-center text-sm font-bold uppercase tracking-wider text-gray-700 transition-colors hover:border-[#039139] hover:text-[#039139]"
+            >
+              Mitglied werden
+            </Link>
+            <Link
+              href="/sponsoren"
+              onClick={closeMobileMenu}
+              className="block rounded-full bg-[#039139] px-5 py-3 text-center text-sm font-bold uppercase tracking-wider text-white transition-colors hover:bg-[#026b29]"
+            >
+              Sponsor werden
+            </Link>
+          </div>
         </div>
       </div>
     </header>
@@ -257,11 +279,11 @@ function NavItem({
       <Link
         href={item.href}
         className={cn(
-          "relative whitespace-nowrap px-3 py-2 text-[12px] font-semibold uppercase tracking-[0.08em] text-white transition-colors [font-family:var(--font-club)]",
-          "after:absolute after:-bottom-0.5 after:left-1/2 after:h-1 after:w-1 after:-translate-x-1/2 after:rounded-full after:bg-[#039139] after:opacity-0 after:transition-opacity",
+          "relative whitespace-nowrap px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.08em] transition-colors [font-family:var(--font-club)]",
+          "after:absolute after:-bottom-0.5 after:left-1/2 after:h-0.5 after:w-4 after:-translate-x-1/2 after:rounded-full after:bg-[#039139] after:opacity-0 after:transition-opacity",
           isActive(item.href)
-            ? "after:opacity-100"
-            : "text-white/85 hover:text-white hover:after:opacity-100"
+            ? "text-[#039139] after:opacity-100"
+            : "text-gray-700 hover:text-[#039139] hover:after:opacity-100"
         )}
       >
         {item.label}
@@ -270,27 +292,27 @@ function NavItem({
   }
 
   return (
-    <div className="relative group">
+    <div className="group relative">
       <button
         className={cn(
-          "relative flex items-center gap-1 whitespace-nowrap px-3 py-2 text-[12px] font-semibold uppercase tracking-[0.08em] text-white transition-colors [font-family:var(--font-club)]",
-          "after:absolute after:-bottom-0.5 after:left-1/2 after:h-1 after:w-1 after:-translate-x-1/2 after:rounded-full after:bg-[#039139] after:opacity-0 after:transition-opacity",
+          "relative flex items-center gap-1 whitespace-nowrap px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.08em] transition-colors [font-family:var(--font-club)]",
+          "after:absolute after:-bottom-0.5 after:left-1/2 after:h-0.5 after:w-4 after:-translate-x-1/2 after:rounded-full after:bg-[#039139] after:opacity-0 after:transition-opacity",
           isActive(item.href)
-            ? "after:opacity-100"
-            : "text-white/85 hover:text-white hover:after:opacity-100"
+            ? "text-[#039139] after:opacity-100"
+            : "text-gray-700 hover:text-[#039139] hover:after:opacity-100"
         )}
       >
         {item.label}
-        <ChevronDown className="w-3 h-3 transition-transform group-hover:rotate-180" />
+        <ChevronDown className="h-3 w-3 transition-transform group-hover:rotate-180" />
       </button>
-      <div className="invisible absolute left-0 top-full z-50 min-w-[220px] pt-2 opacity-0 transition-all duration-150 group-hover:visible group-hover:opacity-100">
-        <div className="border border-[#039139]/30 bg-[#2a2835] shadow-xl">
-          <div className="h-0.5 bg-[#039139]" />
+      <div className="invisible absolute left-0 top-full z-50 min-w-[200px] pt-2 opacity-0 transition-all duration-150 group-hover:visible group-hover:opacity-100">
+        <div className="rounded-xl border border-gray-100 bg-white shadow-lg">
+          <div className="h-0.5 rounded-t-xl bg-[#039139]" />
           {item.children.map((child) => (
             <Link
               key={child.href}
               href={child.href}
-              className="block border-b border-white/5 px-4 py-2.5 text-xs font-semibold uppercase tracking-wider text-gray-200 transition-colors hover:bg-white/5 hover:text-[#039139] last:border-0"
+              className="block border-b border-gray-50 px-4 py-2.5 text-xs font-semibold uppercase tracking-wider text-gray-600 transition-colors hover:bg-gray-50 hover:text-[#039139] last:border-0"
             >
               {child.label}
             </Link>

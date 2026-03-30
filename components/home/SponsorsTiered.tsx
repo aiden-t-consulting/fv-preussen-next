@@ -166,7 +166,7 @@ export function SponsorsTiered({ sponsors }: { sponsors: Sponsor[] }) {
         {premium.length > 0 && (
           <div className="mb-8 border-t border-gray-200 pt-8">
             <p className="mb-4 text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">
-              Premiumsponsoren
+              Premium Partner
             </p>
             <div className="flex flex-wrap gap-4">
               {premium.map((s) => (
@@ -180,7 +180,7 @@ export function SponsorsTiered({ sponsors }: { sponsors: Sponsor[] }) {
         {partner.length > 0 && (
           <div className="mb-10 border-t border-gray-200 pt-8">
             <p className="mb-4 text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">
-              Partner
+              Business Partner
             </p>
             <div className="flex flex-wrap gap-3">
               {partner.map((s) => (
@@ -194,7 +194,7 @@ export function SponsorsTiered({ sponsors }: { sponsors: Sponsor[] }) {
         <div className="flex flex-col items-start justify-between gap-4 rounded-[20px] border-l-4 border-[#039139] bg-white px-8 py-6 sm:flex-row sm:items-center">
           <div>
             <h3 className="font-bold uppercase tracking-wide text-gray-900">
-              Werden Sie unser Partner
+              Werden Sie Partner des FV Preussen Eberswalde
             </h3>
             <p className="mt-1 text-sm text-gray-500">
               Unterstützen Sie den Fußball in Eberswalde und profitieren Sie von sichtbarer
@@ -205,7 +205,7 @@ export function SponsorsTiered({ sponsors }: { sponsors: Sponsor[] }) {
             href="/kontakt?betreff=sponsoring"
             className="shrink-0 rounded-full bg-[#039139] px-7 py-3 text-[12px] font-bold uppercase tracking-wider text-white transition-colors hover:bg-[#026b29]"
           >
-            Jetzt anfragen
+            Partnerschaft anfragen
           </Link>
         </div>
       </div>

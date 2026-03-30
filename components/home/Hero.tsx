@@ -2,39 +2,67 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState, useCallback } from "react";
-import { cn, formatShortDate } from "@/lib/utils";
+import { useEffect, useState, useCallback, useRef } from "react";
+import { cn } from "@/lib/utils";
 import type { FuPaMatch } from "@/types";
 
-const slides = [
+interface Slide {
+  id: number;
+  player: string;
+  eyebrow: string;
+  isDynamic?: true;
+  title?: string;
+  subtitle?: string;
+  cta1: { label: string; href: string };
+  cta2: { label: string; href: string };
+}
+
+const SLIDES: Slide[] = [
   {
     id: 1,
     player: "/images/slider/img-01.png",
-    title: "Nächstes",
-    titleSpan: "Spiel",
-    subtitle: "Landesliga Nord · 2025/26",
+    eyebrow: "Nächstes Spiel",
+    isDynamic: true,
     cta1: { label: "Zum Spielplan", href: "/berichte" },
     cta2: { label: "Alle Spiele", href: "/berichte" },
   },
   {
     id: 2,
     player: "/images/slider/img-02.png",
-    title: "Tradition.",
-    titleSpan: "Leidenschaft.",
-    subtitle: "Regional verwurzelt. Sportlich ambitioniert.",
+    eyebrow: "Verein & Nachwuchs",
+    title: "Tradition. Nachwuchs.\nLeidenschaft.",
+    subtitle:
+      "Mehr als Fußball — regional verwurzelt, sportlich ambitioniert, auf die Zukunft ausgerichtet.",
     cta1: { label: "Unsere Teams", href: "/teams" },
     cta2: { label: "Mitglied werden", href: "/verein/dokumente" },
   },
   {
     id: 3,
     player: "/images/slider/img-03.jpg",
-    title: "Aktuelles",
-    titleSpan: "im Verein",
-    subtitle: "Spielberichte, Nachwuchsnews und alles rund um den Motor des Barnim.",
+    eyebrow: "Aktuelles",
+    title: "Aktuelles aus\ndem Verein",
+    subtitle:
+      "Spielberichte, Nachwuchsnews und alles rund um den Motor des Barnim.",
     cta1: { label: "Mehr erfahren", href: "/aktuelles" },
     cta2: { label: "Alle News", href: "/aktuelles" },
   },
 ];
+
+function isPreussen(name: string) {
+  return (
+    name.toLowerCase().includes("preussen") ||
+    name.toLowerCase().includes("eberswalde")
+  );
+}
+
+function formatMatchDate(dateStr: string) {
+  return new Date(dateStr).toLocaleDateString("de-DE", {
+    weekday: "short",
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+}
 
 interface HeroProps {
   nextMatch?: FuPaMatch | null;
@@ -44,154 +72,173 @@ export function Hero({ nextMatch }: Readonly<HeroProps>) {
   const [current, setCurrent] = useState(0);
   const [transitioning, setTransitioning] = useState(false);
   const [direction, setDirection] = useState<1 | -1>(1);
+  const [paused, setPaused] = useState(false);
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  const goTo = useCallback((idx: number) => {
-    if (transitioning || idx === current) return;
-    const isForward = idx > current || (current === slides.length - 1 && idx === 0);
-    setDirection(isForward ? 1 : -1);
-    setTransitioning(true);
-    setTimeout(() => {
-      setCurrent(idx);
-    }, 220);
-    setTimeout(() => {
-      setTransitioning(false);
-    }, 560);
-  }, [current, transitioning]);
+  const goTo = useCallback(
+    (idx: number) => {
+      if (transitioning || idx === current) return;
+      setDirection(
+        idx > current || (current === SLIDES.length - 1 && idx === 0) ? 1 : -1
+      );
+      setTransitioning(true);
+      setTimeout(() => setCurrent(idx), 220);
+      setTimeout(() => setTransitioning(false), 560);
+    },
+    [current, transitioning]
+  );
 
-  const next = useCallback(() => goTo((current + 1) % slides.length), [current, goTo]);
-  const prev = useCallback(() => goTo((current - 1 + slides.length) % slides.length), [current, goTo]);
+  const next = useCallback(
+    () => goTo((current + 1) % SLIDES.length),
+    [current, goTo]
+  );
+  const prev = useCallback(
+    () => goTo((current - 1 + SLIDES.length) % SLIDES.length),
+    [current, goTo]
+  );
 
-  // Auto-advance
   useEffect(() => {
-    const timer = setInterval(next, 5000);
-    return () => clearInterval(timer);
-  }, [next]);
+    if (paused) return;
+    timerRef.current = setInterval(next, 7000);
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
+  }, [next, paused]);
 
-  const slide = slides[current];
+  const slide = SLIDES[current];
+
+  // Resolve dynamic slide 1 content
+  const isDynamic = slide.isDynamic && nextMatch;
+  const homeIsUs = nextMatch ? isPreussen(nextMatch.homeTeam) : true;
+  const opponent = nextMatch
+    ? homeIsUs
+      ? nextMatch.awayTeam
+      : nextMatch.homeTeam
+    : "Nächster Gegner";
+  const matchInfo = nextMatch
+    ? [
+        formatMatchDate(nextMatch.date),
+        nextMatch.time ? `${nextMatch.time} Uhr` : null,
+        nextMatch.competition,
+        homeIsUs ? "Heimspiel" : "Auswärtsspiel",
+      ]
+        .filter(Boolean)
+        .join(" · ")
+    : "Alle Spielinfos im Spielcenter";
+
+  const displayTitle = isDynamic ? opponent : slide.title ?? "";
+  const displaySubtitle = isDynamic ? matchInfo : slide.subtitle ?? "";
 
   return (
     <section
-      className="hero-classic relative -mt-16 flex min-h-[92vh] items-center overflow-hidden bg-[#373542] pt-16 lg:-mt-[120px] lg:min-h-screen lg:pt-[120px]"
+      className="hero-classic relative -mt-[72px] flex min-h-[68vh] items-center overflow-hidden bg-[#373542] pt-[72px] lg:-mt-[88px] lg:min-h-[74vh] lg:pt-[88px]"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
     >
+      {/* Background pattern */}
       <div
         className="hero-pattern-motion absolute inset-0 bg-repeat bg-center opacity-35"
         style={{ backgroundImage: "url('/bg-pattern.png')" }}
         aria-hidden="true"
       />
 
+      {/* Gradient overlay */}
       <div
-        className="absolute inset-0 bg-gradient-to-b from-[#252331]/60 via-[#373542]/35 to-[#373542]/90"
+        className="absolute inset-0 bg-gradient-to-r from-[#252331]/85 via-[#373542]/60 to-[#373542]/20"
         aria-hidden="true"
       />
       <div className="hero-vignette absolute inset-0" aria-hidden="true" />
 
-      <div className="absolute inset-x-0 top-0 h-px bg-white/30" aria-hidden="true" />
+      {/* Player image — right side */}
+      <div
+        className={cn(
+          "pointer-events-none absolute bottom-0 right-0 hidden h-[420px] w-[420px] transition-all duration-700 ease-out lg:block lg:h-[500px] lg:w-[500px]",
+          transitioning
+            ? cn(
+                "opacity-0",
+                direction === 1 ? "translate-x-4 translate-y-2" : "-translate-x-4 translate-y-2"
+              )
+            : "opacity-100 translate-x-0 translate-y-0"
+        )}
+        aria-hidden="true"
+      >
+        <Image
+          src={slide.player}
+          alt=""
+          fill
+          className="hero-player-float object-contain object-bottom drop-shadow-2xl"
+          priority
+          sizes="500px"
+        />
+      </div>
 
-      <div className="relative z-10 mx-auto w-full max-w-[1280px] px-4 py-14 lg:py-16">
-        <div className="relative flex min-h-[540px] items-center justify-center lg:min-h-[640px]">
-          <div
-            className={cn(
-              "pointer-events-none absolute inset-x-0 bottom-0 mx-auto hidden h-[520px] max-w-[620px] transition-all duration-700 ease-out lg:block",
-              transitioning
-                ? cn("opacity-0", direction === 1 ? "translate-x-5 translate-y-2" : "-translate-x-5 translate-y-2")
-                : "opacity-100 translate-x-0 translate-y-0"
-            )}
-            aria-hidden="true"
-          >
-            <Image
-              src={slide.player}
-              alt=""
-              fill
-              className="hero-player-float object-contain object-bottom drop-shadow-2xl"
-              priority
-              sizes="640px"
-            />
-          </div>
+      {/* Content — left aligned */}
+      <div className="relative z-10 mx-auto w-full max-w-[1280px] px-4 py-12 lg:py-16">
+        <div
+          className={cn(
+            "max-w-[600px] transition-all duration-500 ease-out",
+            transitioning
+              ? cn(
+                  "opacity-0",
+                  direction === 1 ? "translate-x-4" : "-translate-x-4"
+                )
+              : "opacity-100 translate-x-0"
+          )}
+        >
+          {/* Eyebrow */}
+          <p className="mb-4 text-[11px] font-bold uppercase tracking-[0.2em] text-[#039139]">
+            {slide.eyebrow}
+          </p>
 
-          <div
-            className={cn(
-              "relative z-10 w-full max-w-[980px] text-center transition-all duration-500 ease-out",
-              transitioning
-                ? cn("opacity-0", direction === 1 ? "translate-x-4" : "-translate-x-4")
-                : "opacity-100 translate-x-0"
-            )}
-          >
-            <h1 className="hero-title-glow mb-1 text-[clamp(2.6rem,8.8vw,8.8rem)] font-bold uppercase leading-[0.86] tracking-[0.01em] text-[#039139] [font-family:var(--font-club)] lg:mb-0">
-              {slide.title}
-            </h1>
-            <h1 className="mb-8 text-[clamp(2.9rem,9.2vw,9.3rem)] font-bold uppercase leading-[0.86] tracking-[0.01em] text-white [font-family:var(--font-club)] lg:mb-10">
-              {slide.titleSpan}
-            </h1>
+          {/* H1 */}
+          <h1 className="mb-4 whitespace-pre-line text-[clamp(2.4rem,6vw,5rem)] font-bold leading-[0.95] tracking-tight text-white [font-family:var(--font-club)]">
+            {displayTitle}
+          </h1>
 
-            <div className="flex flex-col items-center justify-center gap-5 lg:flex-row lg:gap-10">
-              <p className="text-3xl font-bold uppercase tracking-[0.03em] text-white [font-family:var(--font-club)] lg:text-[2.9rem] lg:leading-none">
-                {slide.subtitle}
-              </p>
-              <div className="flex flex-wrap justify-center gap-4">
-                <Link
-                  href={slide.cta1.href}
-                  className="inline-flex min-w-[180px] items-center justify-center border border-[#039139] bg-transparent px-7 py-3 text-xs font-bold uppercase tracking-[0.12em] text-[#039139] transition-all duration-300 [font-family:var(--font-club)] hover:bg-[#039139]/20 hover:text-white"
-                >
-                  {slide.cta1.label}
-                </Link>
-                <Link
-                  href={slide.cta2.href}
-                  className="inline-flex min-w-[180px] items-center justify-center border border-[#039139] bg-transparent px-7 py-3 text-xs font-bold uppercase tracking-[0.12em] text-[#039139] transition-all duration-300 [font-family:var(--font-club)] hover:bg-[#039139]/20 hover:text-white"
-                >
-                  {slide.cta2.label}
-                </Link>
-              </div>
+          {/* Supporting line */}
+          {displaySubtitle && (
+            <p className="mb-8 text-sm leading-relaxed text-white/75 lg:text-base lg:max-w-[480px]">
+              {displaySubtitle}
+            </p>
+          )}
+
+          {/* Home/Away badge for dynamic slide */}
+          {isDynamic && (
+            <div className="mb-6 inline-flex items-center gap-2">
+              <span
+                className={cn(
+                  "rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-widest",
+                  homeIsUs
+                    ? "bg-[#039139] text-white"
+                    : "border border-white/40 text-white/80"
+                )}
+              >
+                {homeIsUs ? "Heimspiel" : "Auswärtsspiel"}
+              </span>
             </div>
+          )}
 
-            {nextMatch && (
-              <div className="mt-10 inline-flex flex-wrap items-center justify-center gap-4 border border-[#039139]/40 bg-black/20 px-5 py-3 backdrop-blur-sm">
-                <span className="text-[#039139] text-xs font-bold uppercase tracking-[0.2em] whitespace-nowrap">
-                  Nächstes Spiel
-                </span>
-                <div className="h-4 w-px bg-white/20" />
-                <span className="text-white text-sm font-semibold">
-                  {nextMatch.homeTeam} <span className="text-[#039139]">vs</span> {nextMatch.awayTeam}
-                </span>
-                <span className="text-gray-400 text-sm whitespace-nowrap">
-                  {formatShortDate(nextMatch.date)}
-                  {nextMatch.time && ` · ${nextMatch.time}`}
-                </span>
-              </div>
-            )}
+          {/* CTAs */}
+          <div className="flex flex-wrap gap-3">
+            <Link
+              href={slide.cta1.href}
+              className="inline-flex min-w-[160px] items-center justify-center rounded-full bg-[#039139] px-6 py-3 text-[12px] font-bold uppercase tracking-[0.1em] text-white transition-colors hover:bg-[#026b29] [font-family:var(--font-club)]"
+            >
+              {slide.cta1.label}
+            </Link>
+            <Link
+              href={slide.cta2.href}
+              className="inline-flex min-w-[160px] items-center justify-center rounded-full border border-white/50 px-6 py-3 text-[12px] font-bold uppercase tracking-[0.1em] text-white transition-colors hover:border-white hover:bg-white/10 [font-family:var(--font-club)]"
+            >
+              {slide.cta2.label}
+            </Link>
           </div>
         </div>
       </div>
 
-      <div className="absolute left-6 top-1/2 z-20 hidden -translate-y-1/2 lg:block">
-        <button
-          onClick={prev}
-          className="group flex flex-col items-center gap-3 text-[#039139] transition-all duration-300 hover:text-white hover:-translate-x-0.5"
-          aria-label="Vorheriger Slide"
-        >
-          <span className="h-14 w-px bg-current/70" aria-hidden="true" />
-          <span className="rotate-180 text-[11px] font-bold uppercase tracking-[0.2em] [writing-mode:vertical-rl]">
-            prev
-          </span>
-          <span className="h-14 w-px bg-current/70" aria-hidden="true" />
-        </button>
-      </div>
-
-      <div className="absolute right-6 top-1/2 z-20 hidden -translate-y-1/2 lg:block">
-        <button
-          onClick={next}
-          className="group flex flex-col items-center gap-3 text-[#039139] transition-all duration-300 hover:text-white hover:translate-x-0.5"
-          aria-label="Nächster Slide"
-        >
-          <span className="h-14 w-px bg-current/70" aria-hidden="true" />
-          <span className="text-[11px] font-bold uppercase tracking-[0.2em] [writing-mode:vertical-rl]">
-            next
-          </span>
-          <span className="h-14 w-px bg-current/70" aria-hidden="true" />
-        </button>
-      </div>
-
-      <div className="absolute bottom-8 left-1/2 z-20 flex -translate-x-1/2 gap-2">
-        {slides.map((item, i) => (
+      {/* Dot navigation */}
+      <div className="absolute bottom-6 left-1/2 z-20 flex -translate-x-1/2 gap-2">
+        {SLIDES.map((item, i) => (
           <button
             key={item.id}
             onClick={() => goTo(i)}
@@ -199,31 +246,38 @@ export function Hero({ nextMatch }: Readonly<HeroProps>) {
             className={cn(
               "transition-all duration-300",
               i === current
-                ? "w-8 h-2 bg-[#039139]"
-                : "w-2 h-2 bg-white/30 hover:bg-white/60"
+                ? "h-2 w-8 rounded-full bg-[#039139]"
+                : "h-2 w-2 rounded-full bg-white/30 hover:bg-white/60"
             )}
           />
         ))}
       </div>
 
-      <div className="absolute bottom-6 left-4 right-4 z-20 flex items-center justify-between lg:hidden">
-        <button
-          onClick={prev}
-          className="border border-[#039139]/70 px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] text-[#039139]"
-          aria-label="Vorheriger Slide"
-        >
-          Prev
-        </button>
-        <button
-          onClick={next}
-          className="border border-[#039139]/70 px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] text-[#039139]"
-          aria-label="Nächster Slide"
-        >
-          Next
-        </button>
-      </div>
+      {/* Desktop arrow controls */}
+      <button
+        onClick={prev}
+        className="absolute left-4 top-1/2 z-20 hidden -translate-y-1/2 rounded-full border border-white/20 bg-black/20 p-2.5 text-white/70 transition-all hover:border-white/50 hover:bg-black/40 hover:text-white lg:block"
+        aria-label="Vorheriger Slide"
+      >
+        <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+      <button
+        onClick={next}
+        className="absolute right-4 top-1/2 z-20 hidden -translate-y-1/2 rounded-full border border-white/20 bg-black/20 p-2.5 text-white/70 transition-all hover:border-white/50 hover:bg-black/40 hover:text-white lg:block"
+        aria-label="Nächster Slide"
+      >
+        <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
 
-      <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-[#373542] to-transparent" aria-hidden="true" />
+      {/* Hero bottom fade — connects to editorial rail */}
+      <div
+        className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#373542] to-transparent"
+        aria-hidden="true"
+      />
     </section>
   );
 }

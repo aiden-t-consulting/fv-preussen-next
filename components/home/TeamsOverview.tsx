@@ -116,7 +116,7 @@ export function TeamsOverview({ teams }: { teams: Team[] }) {
               Unsere Mannschaften
             </h2>
             <p className="mt-2 text-sm text-gray-500">
-              Nachwuchs, Aktivenbereich und Senioren — Fußball für jeden.
+              Von den Jüngsten bis in den Männerbereich — alle Mannschaften auf einen Blick.
             </p>
           </div>
           <Link
@@ -128,7 +128,7 @@ export function TeamsOverview({ teams }: { teams: Team[] }) {
         </div>
 
         {/* Groups */}
-        <div className="space-y-12">
+        <div className="space-y-14">
           {GROUP_ORDER.map((groupKey) => {
             const groupTeams = grouped[groupKey];
             if (groupTeams.length === 0) return null;

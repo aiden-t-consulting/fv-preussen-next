@@ -53,7 +53,7 @@ export function LatestNews({ articles = FALLBACK_ARTICLES }: LatestNewsProps) {
       <div className="max-w-7xl mx-auto px-4">
         <FadeIn className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
           <SectionHeading
-            label="Neuigkeiten"
+            label="Aus dem Verein"
             title="Aktuelles"
             subtitle="Berichte, Vereinsnews und alles rund um den FV Preussen Eberswalde."
             align="left"

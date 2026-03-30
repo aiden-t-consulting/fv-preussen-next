@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Hero } from "@/components/home/Hero";
+import { HeroEditorialRail } from "@/components/home/HeroEditorialRail";
 import { QuickMatchStrip } from "@/components/home/QuickMatchStrip";
 import { Spielcenter } from "@/components/home/Spielcenter";
 import { LatestNews } from "@/components/home/LatestNews";
@@ -78,6 +79,13 @@ export default async function HomePage() {
       />
 
       <Hero nextMatch={nextMatch.status === "fulfilled" ? nextMatch.value : null} />
+
+      <HeroEditorialRail
+        lastArticle={
+          articles.status === "fulfilled" ? articles.value[0] ?? null : null
+        }
+        nextMatch={nextMatch.status === "fulfilled" ? nextMatch.value : null}
+      />
 
       <QuickMatchStrip
         nextMatch={nextMatch.status === "fulfilled" ? nextMatch.value : null}
