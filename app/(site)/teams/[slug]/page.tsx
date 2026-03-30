@@ -14,13 +14,15 @@ interface Props {
   params: Promise<{ slug: string }>;
 }
 
+type TeamPageProps = Readonly<Props>;
+
 export async function generateStaticParams() {
   const slugs = await getTeamSlugs();
   const fallbackSlugs = LEGACY_TEAMS.map((team) => team.slug?.current).filter(Boolean) as string[];
   return Array.from(new Set([...slugs, ...fallbackSlugs])).map((slug) => ({ slug }));
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({ params }: TeamPageProps): Promise<Metadata> {
   const { slug } = await params;
   const team = (await getTeamBySlug(slug)) ?? getLegacyTeamBySlug(slug);
   if (!team?.name) return {};
@@ -32,7 +34,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export const revalidate = 300;
 
-export default async function TeamPage({ params }: Props) {
+export default async function TeamPage({ params }: TeamPageProps) {
   const { slug } = await params;
   const team = (await getTeamBySlug(slug)) ?? getLegacyTeamBySlug(slug);
   if (!team) notFound();
@@ -50,8 +52,31 @@ export default async function TeamPage({ params }: Props) {
     Angriff: (team.players ?? []).filter((p) => p.position === "Angriff"),
   };
 
+  let heroBadgeContent = <Trophy className="w-12 h-12 text-white/60" />;
+  if (team.badge) {
+    heroBadgeContent = (
+      <Image
+        src={urlFor(team.badge).width(100).height(100).url()}
+        alt={`${team.name} Wappen`}
+        width={80}
+        height={80}
+        className="object-contain"
+      />
+    );
+  } else if ("photo" in team && team.photo) {
+    heroBadgeContent = (
+      <Image
+        src={team.photo}
+        alt={team.name ?? "Teamfoto"}
+        width={112}
+        height={112}
+        className="object-cover w-28 h-28 rounded-xl"
+      />
+    );
+  }
+
   return (
-    <div className="min-h-screen bg-[#f9fafb]">
+    <div className="min-h-screen bg-neutral-50">
       {/* Back */}
       <div className="bg-white border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 py-4">
@@ -66,29 +91,11 @@ export default async function TeamPage({ params }: Props) {
       </div>
 
       {/* Hero */}
-      <div className="bg-gradient-to-br from-[#0e3a07] to-[#21a530] text-white py-16">
+      <div className="bg-linear-to-br from-[#0e3a07] to-[#21a530] text-white py-16">
         <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center sm:items-start gap-8">
           {/* Badge */}
           <div className="w-28 h-28 shrink-0 bg-white/20 rounded-2xl flex items-center justify-center">
-            {team.badge ? (
-              <Image
-                src={urlFor(team.badge).width(100).height(100).url()}
-                alt={`${team.name} Wappen`}
-                width={80}
-                height={80}
-                className="object-contain"
-              />
-            ) : "photo" in team && team.photo ? (
-              <Image
-                src={team.photo}
-                alt={team.name ?? "Teamfoto"}
-                width={112}
-                height={112}
-                className="object-cover w-28 h-28 rounded-xl"
-              />
-            ) : (
-              <Trophy className="w-12 h-12 text-white/60" />
-            )}
+            {heroBadgeContent}
           </div>
           <div>
             <p className="text-[#81d742] text-sm font-bold uppercase tracking-[0.2em] mb-2">
