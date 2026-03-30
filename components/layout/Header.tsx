@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { FacebookIcon, GooglePlusIcon, InstagramIcon, YoutubeIcon } from "@/components/ui/SocialIcons";
 
 const nav = [
   {
@@ -84,48 +85,59 @@ export function Header() {
       className="fixed inset-x-0 top-0 z-50 shadow-2xl"
     >
       <nav
-        className="border-b border-[#039139]/35 bg-[#252331]/95 backdrop-blur-md transition-all duration-300"
+        className="border-b border-white/25 bg-[#252331]/95 backdrop-blur-md transition-all duration-300"
       >
         <div className="mx-auto max-w-[1280px] px-4">
-          <div className="hidden h-12 items-end justify-center pb-2 lg:flex">
+          <div className="hidden h-11 items-end justify-center border-b border-white/20 pb-2 lg:flex">
             <ul className="flex items-center gap-5 text-white/80">
               <li>
                 <a
-                  href="https://www.facebook.com"
+                  href="https://www.facebook.com/fvpreusseneberswalde"
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   aria-label="Facebook"
-                  className="text-[11px] font-bold uppercase tracking-[0.15em] transition-colors hover:text-[#039139]"
+                  className="transition-colors duration-200 hover:text-[#039139]"
                 >
-                  FB
+                  <FacebookIcon className="h-3.5 w-3.5" />
                 </a>
               </li>
               <li>
                 <a
-                  href="https://www.instagram.com"
+                  href="https://www.instagram.com/fvpreusseneberswalde"
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   aria-label="Instagram"
-                  className="text-[11px] font-bold uppercase tracking-[0.15em] transition-colors hover:text-[#039139]"
+                  className="transition-colors duration-200 hover:text-[#039139]"
                 >
-                  IG
+                  <InstagramIcon className="h-3.5 w-3.5" />
                 </a>
               </li>
               <li>
                 <a
-                  href="https://www.youtube.com"
+                  href="https://www.youtube.com/@fvpreusseneberswalde"
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   aria-label="YouTube"
-                  className="text-[11px] font-bold uppercase tracking-[0.15em] transition-colors hover:text-[#039139]"
+                  className="transition-colors duration-200 hover:text-[#039139]"
                 >
-                  YT
+                  <YoutubeIcon className="h-3.5 w-3.5" />
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://plus.google.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Google Plus"
+                  className="transition-colors duration-200 hover:text-[#039139]"
+                >
+                  <GooglePlusIcon className="h-3.5 w-3.5" />
                 </a>
               </li>
             </ul>
           </div>
 
-          <div className="relative flex h-16 items-center justify-between lg:h-[86px]">
+          <div className="relative flex h-16 items-center justify-between lg:h-[76px]">
             <Link
               href="/"
               className="flex-shrink-0 lg:hidden"
@@ -142,8 +154,11 @@ export function Header() {
             </Link>
 
             <div className="hidden flex-1 items-center gap-0 pr-20 lg:flex">
-              {nav.slice(0, 4).map((item) => (
-                <NavItem key={item.href} item={item} isActive={isActive} />
+              {nav.slice(0, 4).map((item, index) => (
+                <div key={item.href} className="flex items-center">
+                  {index > 0 && <span className="mx-1 text-[11px] text-[#039139]">.</span>}
+                  <NavItem item={item} isActive={isActive} />
+                </div>
               ))}
             </div>
 
@@ -155,16 +170,19 @@ export function Header() {
               <Image
                 src="/logo.png"
                 alt="FV Preussen Eberswalde"
-                width={96}
-                height={96}
-                className="h-[92px] w-auto -translate-y-1 drop-shadow-lg"
+                width={112}
+                height={112}
+                className="h-[108px] w-auto translate-y-1 drop-shadow-lg"
                 priority
               />
             </Link>
 
             <div className="hidden flex-1 items-center justify-end gap-0 pl-20 lg:flex">
-              {nav.slice(4).map((item) => (
-                <NavItem key={item.href} item={item} isActive={isActive} />
+              {nav.slice(4).map((item, index) => (
+                <div key={item.href} className="flex items-center">
+                  {index > 0 && <span className="mx-1 text-[11px] text-[#039139]">.</span>}
+                  <NavItem item={item} isActive={isActive} />
+                </div>
               ))}
             </div>
 
@@ -254,10 +272,10 @@ function NavItem({
       <Link
         href={item.href}
         className={cn(
-          "relative whitespace-nowrap px-3 py-2 text-[12px] font-bold uppercase tracking-[0.14em] transition-colors",
+          "relative whitespace-nowrap px-3 py-2 text-[12px] font-semibold uppercase tracking-[0.08em] text-white transition-colors [font-family:var(--font-club)]",
           "after:absolute after:-bottom-0.5 after:left-1/2 after:h-1 after:w-1 after:-translate-x-1/2 after:rounded-full after:bg-[#039139] after:opacity-0 after:transition-opacity",
           isActive(item.href)
-            ? "text-white after:opacity-100"
+            ? "after:opacity-100"
             : "text-white/85 hover:text-white hover:after:opacity-100"
         )}
       >
@@ -270,10 +288,10 @@ function NavItem({
     <div className="relative group">
       <button
         className={cn(
-          "relative flex items-center gap-1 whitespace-nowrap px-3 py-2 text-[12px] font-bold uppercase tracking-[0.14em] transition-colors",
+          "relative flex items-center gap-1 whitespace-nowrap px-3 py-2 text-[12px] font-semibold uppercase tracking-[0.08em] text-white transition-colors [font-family:var(--font-club)]",
           "after:absolute after:-bottom-0.5 after:left-1/2 after:h-1 after:w-1 after:-translate-x-1/2 after:rounded-full after:bg-[#039139] after:opacity-0 after:transition-opacity",
           isActive(item.href)
-            ? "text-white after:opacity-100"
+            ? "after:opacity-100"
             : "text-white/85 hover:text-white hover:after:opacity-100"
         )}
       >

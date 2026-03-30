@@ -1,5 +1,5 @@
 /* Google Fonts must come before @import "tailwindcss" */
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Nunito+Sans:ital,opsz,wght@0,6..12,300;0,6..12,400;0,6..12,500;0,6..12,600;0,6..12,700;1,6..12,400&family=Playfair+Display:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Nunito+Sans:ital,opsz,wght@0,6..12,300;0,6..12,400;0,6..12,500;0,6..12,600;0,6..12,700;1,6..12,400&family=Oswald:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap');
 @import "tailwindcss";
 
 @theme inline {
@@ -25,6 +25,7 @@
   --font-display: 'Cormorant Garamond', Georgia, serif;
   --font-body: 'Nunito Sans', system-ui, sans-serif;
   --font-logo: 'Playfair Display', Georgia, serif;
+  --font-club: 'Oswald', Arial, sans-serif;
 }
 
 
@@ -105,3 +106,36 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
   color: var(--color-neutral-900);
 }
+
+@keyframes heroPatternDrift {
+  0% { transform: translate3d(0, 0, 0) scale(1.02); }
+  50% { transform: translate3d(-1.5%, -1%, 0) scale(1.04); }
+  100% { transform: translate3d(0, 0, 0) scale(1.02); }
+}
+
+@keyframes heroPlayerFloat {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0); }
+}
+
+.hero-classic {
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.18);
+}
+
+.hero-pattern-motion {
+  animation: heroPatternDrift 15s ease-in-out infinite;
+}
+
+.hero-vignette {
+  background: radial-gradient(circle at 50% 38%, transparent 28%, rgba(0, 0, 0, 0.38) 100%);
+}
+
+.hero-title-glow {
+  text-shadow: 0 0 14px rgba(3, 145, 57, 0.24);
+}
+
+.hero-player-float {
+  animation: heroPlayerFloat 5s ease-in-out infinite;
+}
+
