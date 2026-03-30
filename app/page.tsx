@@ -95,14 +95,14 @@ export default async function HomePage() {
         tableEntry={tableEntry}
       />
 
+      <LatestNews
+        articles={articles.status === "fulfilled" ? articles.value : undefined}
+      />
+
       <Spielcenter
         upcoming={upcoming.status === "fulfilled" ? upcoming.value : []}
         results={results.status === "fulfilled" ? results.value : []}
         table={tableData}
-      />
-
-      <LatestNews
-        articles={articles.status === "fulfilled" ? articles.value : undefined}
       />
 
       <TeamsOverview teams={teams.status === "fulfilled" ? teams.value : []} />

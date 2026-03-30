@@ -24,15 +24,11 @@ function isHome(match: FuPaMatch) {
 
 function getResultMeta(match: FuPaMatch) {
   if (match.status !== "finished") return null;
-  const us = isHome(match)
-    ? (match.homeScore ?? 0)
-    : (match.awayScore ?? 0);
-  const them = isHome(match)
-    ? (match.awayScore ?? 0)
-    : (match.homeScore ?? 0);
+  const us = isHome(match) ? (match.homeScore ?? 0) : (match.awayScore ?? 0);
+  const them = isHome(match) ? (match.awayScore ?? 0) : (match.homeScore ?? 0);
   if (us > them) return { label: "SIEG", cls: "bg-emerald-500 text-white" };
   if (us < them) return { label: "NIEDERLAGE", cls: "bg-red-500 text-white" };
-  return { label: "UNENTSCHIEDEN", cls: "bg-gray-500 text-white" };
+  return { label: "UNENTSCHIEDEN", cls: "bg-gray-400 text-white" };
 }
 
 function pad(n: number) {
@@ -63,28 +59,6 @@ function useCountdown(iso: string | null) {
   return { diff, mounted };
 }
 
-// ── ClubBadge ────────────────────────────────────────────────────────────────
-
-function ClubBadge({
-  label,
-  featured = false,
-}: {
-  label: string;
-  featured?: boolean;
-}) {
-  return (
-    <div
-      className={`flex h-14 w-14 items-center justify-center rounded-full text-sm font-bold transition-transform group-hover:scale-105 ${
-        featured
-          ? "border-2 border-[#4caf50]/60 bg-[#2e7d32]/30 text-[#4caf50] shadow-[0_0_20px_rgba(76,175,80,0.3)]"
-          : "border border-white/20 bg-white/10 text-white/60"
-      }`}
-    >
-      {label}
-    </div>
-  );
-}
-
 // ── CountdownDisplay ─────────────────────────────────────────────────────────
 
 function CountdownDisplay({
@@ -106,13 +80,13 @@ function CountdownDisplay({
       {units.map(({ v, label }, i) => (
         <div key={label} className="flex items-end">
           {i > 0 && (
-            <span className="mb-3 px-1 text-xl font-bold text-[#2e7d32]">:</span>
+            <span className="mb-3 px-1 text-xl font-bold text-white/40">:</span>
           )}
           <div className="flex flex-col items-center">
             <span className="min-w-[2.5rem] text-center text-3xl font-bold tabular-nums text-white">
               {mounted ? pad(v) : "--"}
             </span>
-            <span className="mt-1 text-[9px] font-semibold uppercase tracking-widest text-gray-500">
+            <span className="mt-1 text-[9px] font-semibold uppercase tracking-widest text-white/50">
               {label}
             </span>
           </div>
@@ -147,7 +121,7 @@ export function QuickMatchStrip({
   const lostPct = played ? ((tableEntry?.lost ?? 0) / played) * 100 : 0;
 
   return (
-    <section className="relative overflow-hidden bg-[#0d1a0e]">
+    <section className="relative overflow-hidden bg-[#f4f8f4]">
       {/* top accent bar */}
       <div className="h-[3px] w-full bg-gradient-to-r from-[#1b5e20] via-[#4caf50] to-[#1b5e20]" />
 
@@ -155,14 +129,14 @@ export function QuickMatchStrip({
         {/* section header */}
         <div className="mb-8 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="h-5 w-1 rounded-full bg-[#4caf50]" />
-            <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#4caf50]">
-              Saison 2024/25
+            <div className="h-5 w-1 rounded-full bg-[#2e7d32]" />
+            <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#2e7d32]">
+              Saison 2025/26
             </span>
           </div>
           <Link
             href="/berichte"
-            className="flex items-center gap-1.5 rounded-full border border-white/15 px-4 py-2 text-[11px] font-bold uppercase tracking-wider text-white/60 transition-colors hover:border-[#4caf50]/60 hover:text-[#4caf50]"
+            className="flex items-center gap-1.5 rounded-full border border-[#2e7d32]/40 px-4 py-2 text-[11px] font-bold uppercase tracking-wider text-[#2e7d32] transition-colors hover:bg-[#2e7d32] hover:text-white"
           >
             Spielplan
             <ArrowRight className="h-3 w-3" />
@@ -172,54 +146,53 @@ export function QuickMatchStrip({
         {/* 3-card grid */}
         <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
 
-          {/* ── LETZTES ERGEBNIS ───────────────────────────────────── */}
-          <div className="group flex flex-col gap-5 rounded-2xl border border-white/8 bg-white/[0.04] p-6 transition-colors hover:border-white/15">
+          {/* ── LETZTES ERGEBNIS ─────────────────────────── */}
+          <div className="group flex flex-col gap-5 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-shadow hover:shadow-md">
             <div className="flex items-center gap-2">
-              <Trophy className="h-3.5 w-3.5 text-[#4caf50]" />
-              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#4caf50]">
+              <Trophy className="h-3.5 w-3.5 text-[#2e7d32]" />
+              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#2e7d32]">
                 Letztes Ergebnis
               </span>
             </div>
 
             {lastResult ? (
               <>
-                {/* competition */}
-                <p className="text-[10px] uppercase tracking-wider text-gray-500">
+                <p className="text-[10px] uppercase tracking-wider text-gray-400">
                   {lastResult.competition}
                 </p>
 
-                {/* teams + score */}
                 <div className="flex items-center justify-between gap-2">
                   <div className="flex flex-1 flex-col items-center gap-2">
-                    <ClubBadge label="FVP" />
-                    <span className="text-[9px] text-center leading-tight text-gray-400">
+                    <div className="flex h-14 w-14 items-center justify-center rounded-full border-2 border-[#2e7d32]/30 bg-[#2e7d32]/10 text-sm font-bold text-[#2e7d32]">
+                      FVP
+                    </div>
+                    <span className="text-center text-[9px] leading-tight text-gray-500">
                       FV Preussen
                     </span>
                   </div>
 
                   <div className="flex flex-col items-center gap-1.5">
-                    <span className="text-4xl font-bold tabular-nums text-white">
+                    <span className="text-4xl font-bold tabular-nums text-gray-900">
                       {lastResult.homeScore}:{lastResult.awayScore}
                     </span>
                     {resultMeta && (
-                      <span
-                        className={`rounded-full px-2.5 py-0.5 text-[9px] font-bold ${resultMeta.cls}`}
-                      >
+                      <span className={`rounded-full px-2.5 py-0.5 text-[9px] font-bold ${resultMeta.cls}`}>
                         {resultMeta.label}
                       </span>
                     )}
                   </div>
 
                   <div className="flex flex-1 flex-col items-center gap-2">
-                    <ClubBadge label={getOpponent(lastResult).charAt(0)} />
-                    <span className="line-clamp-2 text-center text-[9px] leading-tight text-gray-400">
+                    <div className="flex h-14 w-14 items-center justify-center rounded-full border border-gray-200 bg-gray-50 text-sm font-bold text-gray-500">
+                      {getOpponent(lastResult).charAt(0)}
+                    </div>
+                    <span className="line-clamp-2 text-center text-[9px] leading-tight text-gray-500">
                       {getOpponent(lastResult)}
                     </span>
                   </div>
                 </div>
 
-                {/* date */}
-                <p className="text-[10px] text-gray-600">
+                <p className="text-[10px] text-gray-400">
                   {new Date(lastResult.date).toLocaleDateString("de-DE", {
                     weekday: "short",
                     day: "2-digit",
@@ -229,34 +202,29 @@ export function QuickMatchStrip({
                 </p>
               </>
             ) : (
-              <p className="flex-1 py-8 text-center text-sm text-gray-500">
+              <p className="flex-1 py-8 text-center text-sm text-gray-400">
                 Noch kein Ergebnis
               </p>
             )}
 
-            <Link
-              href="/berichte"
-              className="mt-auto text-[10px] font-semibold uppercase tracking-wider text-[#4caf50] hover:underline"
-            >
+            <Link href="/berichte" className="mt-auto text-[10px] font-semibold uppercase tracking-wider text-[#2e7d32] hover:underline">
               Alle Ergebnisse →
             </Link>
           </div>
 
-          {/* ── NÄCHSTES SPIEL (featured) ──────────────────────────── */}
-          <div className="group relative flex flex-col gap-5 overflow-hidden rounded-2xl border-2 border-[#2e7d32] bg-gradient-to-br from-[#1b5e20]/30 via-[#0d1a0e] to-[#0d1a0e] p-6 shadow-[0_0_50px_-10px_rgba(46,125,50,0.5)]">
-            {/* subtle inner glow */}
-            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(76,175,80,0.08),transparent_70%)]" />
+          {/* ── NÄCHSTES SPIEL (featured — solid green) ─── */}
+          <div className="group relative flex flex-col gap-5 overflow-hidden rounded-2xl bg-[#2e7d32] p-6 shadow-lg shadow-[#2e7d32]/25">
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(255,255,255,0.1),transparent_60%)]" />
 
-            {/* header */}
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <div className="h-2 w-2 animate-pulse rounded-full bg-[#4caf50]" />
-                <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#4caf50]">
+                <div className="h-2 w-2 animate-pulse rounded-full bg-white" />
+                <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/80">
                   Nächstes Spiel
                 </span>
               </div>
               {nextMatch && (
-                <span className="rounded-full border border-[#2e7d32]/60 bg-[#2e7d32]/25 px-2.5 py-0.5 text-[9px] font-bold text-[#a5d6a7]">
+                <span className="rounded-full border border-white/30 bg-white/15 px-2.5 py-0.5 text-[9px] font-bold text-white">
                   {isHome(nextMatch) ? "HEIM" : "AUSWÄRTS"}
                 </span>
               )}
@@ -264,36 +232,35 @@ export function QuickMatchStrip({
 
             {nextMatch ? (
               <>
-                {/* countdown */}
                 <CountdownDisplay diff={diff} mounted={mounted} />
 
-                {/* teams */}
                 <div className="flex items-center justify-between gap-3">
                   <div className="flex flex-1 flex-col items-center gap-2">
-                    <ClubBadge label="FVP" featured />
-                    <span className="text-center text-[9px] text-gray-300">
-                      FV Preussen
-                    </span>
+                    <div className="flex h-14 w-14 items-center justify-center rounded-full border-2 border-white/40 bg-white/20 text-sm font-bold text-white shadow-inner">
+                      FVP
+                    </div>
+                    <span className="text-center text-[9px] text-white/70">FV Preussen</span>
                   </div>
 
                   <div className="flex flex-col items-center gap-1">
-                    <span className="text-base font-bold text-white/25">VS</span>
-                    <span className="text-[9px] uppercase tracking-wider text-gray-600">
+                    <span className="text-base font-bold text-white/30">VS</span>
+                    <span className="text-[9px] uppercase tracking-wider text-white/40">
                       {nextMatch.competition}
                     </span>
                   </div>
 
                   <div className="flex flex-1 flex-col items-center gap-2">
-                    <ClubBadge label={getOpponent(nextMatch).charAt(0)} />
-                    <span className="line-clamp-2 text-center text-[9px] leading-tight text-gray-300">
+                    <div className="flex h-14 w-14 items-center justify-center rounded-full border border-white/25 bg-white/10 text-sm font-bold text-white/60">
+                      {getOpponent(nextMatch).charAt(0)}
+                    </div>
+                    <span className="line-clamp-2 text-center text-[9px] leading-tight text-white/70">
                       {getOpponent(nextMatch)}
                     </span>
                   </div>
                 </div>
 
-                {/* date/time pill */}
-                <div className="flex items-center justify-center gap-2 rounded-xl border border-white/8 bg-white/5 px-4 py-3">
-                  <Calendar className="h-3.5 w-3.5 text-[#4caf50]" />
+                <div className="flex items-center justify-center gap-2 rounded-xl bg-white/15 px-4 py-3">
+                  <Calendar className="h-3.5 w-3.5 text-white/70" />
                   <span className="text-sm font-semibold text-white">
                     {new Date(nextMatch.date).toLocaleDateString("de-DE", {
                       weekday: "short",
@@ -305,123 +272,83 @@ export function QuickMatchStrip({
                 </div>
               </>
             ) : (
-              <p className="flex-1 py-8 text-center text-sm text-gray-500">
+              <p className="flex-1 py-8 text-center text-sm text-white/50">
                 Keine Spiele geplant
               </p>
             )}
 
-            <Link
-              href="/berichte"
-              className="mt-auto text-center text-[10px] font-semibold uppercase tracking-wider text-[#4caf50] hover:underline"
-            >
+            <Link href="/berichte" className="mt-auto text-center text-[10px] font-semibold uppercase tracking-wider text-white/70 hover:text-white hover:underline">
               Zur Spielübersicht →
             </Link>
           </div>
 
-          {/* ── TABELLENPLATZ ──────────────────────────────────────── */}
-          <div className="group flex flex-col gap-5 rounded-2xl border border-white/8 bg-white/[0.04] p-6 transition-colors hover:border-white/15">
+          {/* ── TABELLENPLATZ ────────────────────────────── */}
+          <div className="group flex flex-col gap-5 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-shadow hover:shadow-md">
             <div className="flex items-center gap-2">
-              <BarChart3 className="h-3.5 w-3.5 text-[#4caf50]" />
-              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#4caf50]">
+              <BarChart3 className="h-3.5 w-3.5 text-[#2e7d32]" />
+              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#2e7d32]">
                 Tabellenplatz
               </span>
             </div>
 
             {tableEntry ? (
               <>
-                {/* position */}
                 <div className="flex items-baseline gap-1 leading-none">
-                  <span className="text-[64px] font-bold tabular-nums text-white">
+                  <span className="text-[64px] font-bold tabular-nums text-gray-900">
                     {tableEntry.position}
                   </span>
-                  <span className="pb-2 text-3xl font-light text-white/20">.</span>
-                  <span className="pb-2 text-sm text-gray-500">Platz</span>
+                  <span className="pb-2 text-3xl font-light text-gray-300">.</span>
+                  <span className="pb-2 text-sm text-gray-400">Platz</span>
                 </div>
 
-                {/* stats row */}
                 <div className="grid grid-cols-3 gap-2">
                   {[
                     { label: "Punkte", value: String(tableEntry.points), accent: true },
                     { label: "Spiele", value: String(tableEntry.played), accent: false },
-                    {
-                      label: "Tore",
-                      value: `${tableEntry.goalsFor}:${tableEntry.goalsAgainst}`,
-                      accent: false,
-                    },
+                    { label: "Tore", value: `${tableEntry.goalsFor}:${tableEntry.goalsAgainst}`, accent: false },
                   ].map(({ label, value, accent }) => (
                     <div
                       key={label}
                       className={`rounded-xl border p-3 text-center ${
-                        accent
-                          ? "border-[#2e7d32]/40 bg-[#2e7d32]/15"
-                          : "border-white/8 bg-white/5"
+                        accent ? "border-[#2e7d32]/30 bg-[#f1f8f1]" : "border-gray-100 bg-gray-50"
                       }`}
                     >
-                      <div
-                        className={`text-lg font-bold leading-none ${
-                          accent ? "text-[#4caf50]" : "text-white"
-                        }`}
-                      >
+                      <div className={`text-lg font-bold leading-none ${accent ? "text-[#2e7d32]" : "text-gray-900"}`}>
                         {value}
                       </div>
-                      <div className="mt-1 text-[9px] uppercase tracking-wider text-gray-500">
-                        {label}
-                      </div>
+                      <div className="mt-1 text-[9px] uppercase tracking-wider text-gray-400">{label}</div>
                     </div>
                   ))}
                 </div>
 
-                {/* W/D/L bar */}
                 <div>
-                  <div className="flex h-1.5 overflow-hidden rounded-full bg-white/10">
-                    <div
-                      className="bg-emerald-500"
-                      style={{ width: `${wonPct}%` }}
-                    />
-                    <div
-                      className="bg-gray-500"
-                      style={{ width: `${drawnPct}%` }}
-                    />
-                    <div
-                      className="bg-red-500"
-                      style={{ width: `${lostPct}%` }}
-                    />
+                  <div className="flex h-1.5 overflow-hidden rounded-full bg-gray-100">
+                    <div className="bg-emerald-500 transition-all" style={{ width: `${wonPct}%` }} />
+                    <div className="bg-gray-300 transition-all" style={{ width: `${drawnPct}%` }} />
+                    <div className="bg-red-400 transition-all" style={{ width: `${lostPct}%` }} />
                   </div>
                   <div className="mt-2 flex gap-4 text-[9px]">
-                    <span className="text-emerald-400">
-                      <span className="font-bold">{tableEntry.won}</span> S
-                    </span>
-                    <span className="text-gray-400">
-                      <span className="font-bold">{tableEntry.drawn}</span> U
-                    </span>
-                    <span className="text-red-400">
-                      <span className="font-bold">{tableEntry.lost}</span> N
-                    </span>
-                    <span className="ml-auto text-gray-600">
-                      {tableEntry.goalDifference > 0 ? "+" : ""}
-                      {tableEntry.goalDifference} TD
+                    <span className="text-emerald-600"><span className="font-bold">{tableEntry.won}</span> S</span>
+                    <span className="text-gray-400"><span className="font-bold">{tableEntry.drawn}</span> U</span>
+                    <span className="text-red-400"><span className="font-bold">{tableEntry.lost}</span> N</span>
+                    <span className="ml-auto text-gray-400">
+                      {tableEntry.goalDifference > 0 ? "+" : ""}{tableEntry.goalDifference} TD
                     </span>
                   </div>
                 </div>
               </>
             ) : (
-              <p className="flex-1 py-8 text-center text-sm text-gray-500">
+              <p className="flex-1 py-8 text-center text-sm text-gray-400">
                 Keine Tabellendaten
               </p>
             )}
 
-            <Link
-              href="/berichte"
-              className="mt-auto text-[10px] font-semibold uppercase tracking-wider text-[#4caf50] hover:underline"
-            >
+            <Link href="/berichte" className="mt-auto text-[10px] font-semibold uppercase tracking-wider text-[#2e7d32] hover:underline">
               Zur Tabelle →
             </Link>
           </div>
         </div>
       </div>
-
-      {/* bottom fade into next section */}
-      <div className="pointer-events-none h-8 bg-gradient-to-b from-[#0d1a0e] to-transparent" />
     </section>
   );
 }
