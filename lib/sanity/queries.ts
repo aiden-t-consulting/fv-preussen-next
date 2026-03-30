@@ -1,5 +1,5 @@
 import { sanityClient } from "./client";
-import type { Article, Team, Sponsor, SiteSettings } from "@/types";
+import type { Article, Event, HeroSlideData, Team, Sponsor, SiteSettings } from "@/types";
 
 function isSanityConfigured(): boolean {
   const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
@@ -120,6 +120,74 @@ export async function getAllSponsors(): Promise<Sponsor[]> {
         logo { asset, alt }
       }`
     ),
+    []
+  );
+}
+
+// ─── Hero Slides ─────────────────────────────────────────────────────────────
+
+export async function getHeroSlides(): Promise<HeroSlideData[]> {
+  return safeFetch(async () => {
+    const settings = await sanityClient.fetch<{
+      heroSlides?: {
+        eyebrow: string;
+        title?: string;
+        subtitle?: string;
+        isDynamic?: boolean;
+        imageUrl?: string;
+        cta1Label?: string;
+        cta1Href?: string;
+        cta2Label?: string;
+        cta2Href?: string;
+      }[];
+    }>(
+      `*[_type == "siteSettings"][0]{
+        "heroSlides": heroSlides[]{
+          eyebrow, title, subtitle, isDynamic,
+          "imageUrl": image.asset->url,
+          cta1Label, cta1Href, cta2Label, cta2Href
+        }
+      }`
+    );
+    if (!settings?.heroSlides?.length) return [];
+    return settings.heroSlides.map((s) => ({
+      eyebrow: s.eyebrow ?? "",
+      title: s.title,
+      subtitle: s.subtitle,
+      isDynamic: s.isDynamic,
+      imageUrl: s.imageUrl ?? "",
+      cta1: { label: s.cta1Label ?? "", href: s.cta1Href ?? "/" },
+      cta2: { label: s.cta2Label ?? "", href: s.cta2Href ?? "/" },
+    }));
+  }, []);
+}
+
+// ─── Events ───────────────────────────────────────────────────────────────────
+
+export async function getUpcomingEvents(count = 10): Promise<Event[]> {
+  const now = new Date().toISOString();
+  return safeFetch(
+    () =>
+      sanityClient.fetch(
+        `*[_type == "event" && date >= $now] | order(date asc) [0...$count] {
+          _id, title, slug, category, date, endDate, location, description,
+          coverImage { asset, alt }
+        }`,
+        { now, count }
+      ),
+    []
+  );
+}
+
+export async function getAllEvents(): Promise<Event[]> {
+  return safeFetch(
+    () =>
+      sanityClient.fetch(
+        `*[_type == "event"] | order(date asc) {
+          _id, title, slug, category, date, endDate, location, description,
+          coverImage { asset, alt }
+        }`
+      ),
     []
   );
 }

@@ -8,7 +8,7 @@ import { TeamsOverview } from "@/components/home/TeamsOverview";
 import { ClubBlock } from "@/components/home/ClubBlock";
 import { SponsorsTiered } from "@/components/home/SponsorsTiered";
 import { ConversionBand } from "@/components/home/ConversionBand";
-import { getLatestArticles, getAllSponsors, getAllTeams } from "@/lib/sanity/queries";
+import { getLatestArticles, getAllSponsors, getAllTeams, getHeroSlides } from "@/lib/sanity/queries";
 import {
   getNextMatch,
   getUpcomingMatches,
@@ -30,11 +30,12 @@ export const metadata: Metadata = {
 export const revalidate = 60;
 
 export default async function HomePage() {
-  const [articles, sponsors, teams, nextMatch, upcoming, results, table] =
+  const [articles, sponsors, teams, heroSlides, nextMatch, upcoming, results, table] =
     await Promise.allSettled([
       getLatestArticles(4),
       getAllSponsors(),
       getAllTeams(),
+      getHeroSlides(),
       getNextMatch(),
       getUpcomingMatches(5),
       getRecentResults(5),
@@ -78,7 +79,10 @@ export default async function HomePage() {
         }}
       />
 
-      <Hero nextMatch={nextMatch.status === "fulfilled" ? nextMatch.value : null} />
+      <Hero
+        nextMatch={nextMatch.status === "fulfilled" ? nextMatch.value : null}
+        slides={heroSlides.status === "fulfilled" ? heroSlides.value : []}
+      />
 
       <HeroEditorialRail
         articles={articles.status === "fulfilled" ? articles.value : []}

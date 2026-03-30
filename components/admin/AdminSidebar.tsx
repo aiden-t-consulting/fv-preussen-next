@@ -9,6 +9,7 @@ import {
   Newspaper,
   Calendar,
   Images,
+  Globe,
   ExternalLink,
   LogOut,
   ChevronRight,
@@ -21,6 +22,7 @@ const NAV = [
   { href: "/admin/news", label: "Beiträge", icon: Newspaper, exact: false },
   { href: "/admin/events", label: "Veranstaltungen", icon: Calendar, exact: false },
   { href: "/admin/gallery", label: "Fotogalerien", icon: Images, exact: false },
+  { href: "/admin/website", label: "Website", icon: Globe, exact: false },
   { href: "/admin/content", label: "Inhalte", icon: FileText, exact: false },
 ];
 

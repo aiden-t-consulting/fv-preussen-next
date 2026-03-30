@@ -128,6 +128,111 @@ export async function deleteArticle(id: string): Promise<boolean> {
   return true;
 }
 
+// ── Site Settings / Hero ──────────────────────────────────────────────────────
+
+export interface HeroSlideInput {
+  eyebrow: string;
+  title?: string;
+  subtitle?: string;
+  isDynamic?: boolean;
+  imageRef?: string;
+  imageAlt?: string;
+  cta1Label: string;
+  cta1Href: string;
+  cta2Label: string;
+  cta2Href: string;
+}
+
+export interface SiteSettingsInput {
+  clubName?: string;
+  tagline?: string;
+  contactEmail?: string;
+  phone?: string;
+  address?: string;
+  facebookUrl?: string;
+  instagramUrl?: string;
+  youtubeUrl?: string;
+  heroSlides?: HeroSlideInput[];
+}
+
+export async function updateSiteSettings(input: SiteSettingsInput): Promise<boolean> {
+  const client = getWriteClient();
+  if (!client) return false;
+
+  const patch: Record<string, unknown> = {};
+  if (input.clubName !== undefined) patch.clubName = input.clubName;
+  if (input.tagline !== undefined) patch.tagline = input.tagline;
+  if (input.contactEmail !== undefined) patch.contactEmail = input.contactEmail;
+  if (input.phone !== undefined) patch.phone = input.phone;
+  if (input.address !== undefined) patch.address = input.address;
+  if (
+    input.facebookUrl !== undefined ||
+    input.instagramUrl !== undefined ||
+    input.youtubeUrl !== undefined
+  ) {
+    patch.socialLinks = {
+      facebook: input.facebookUrl ?? "",
+      instagram: input.instagramUrl ?? "",
+      youtube: input.youtubeUrl ?? "",
+    };
+  }
+  if (input.heroSlides !== undefined) {
+    patch.heroSlides = input.heroSlides.map((s, i) => ({
+      _type: "object",
+      _key: `slide_${i}`,
+      eyebrow: s.eyebrow,
+      title: s.title ?? "",
+      subtitle: s.subtitle ?? "",
+      isDynamic: s.isDynamic ?? false,
+      cta1Label: s.cta1Label,
+      cta1Href: s.cta1Href,
+      cta2Label: s.cta2Label,
+      cta2Href: s.cta2Href,
+      ...(s.imageRef
+        ? {
+            image: {
+              _type: "image",
+              asset: { _type: "reference", _ref: s.imageRef },
+              alt: s.imageAlt ?? "",
+            },
+          }
+        : {}),
+    }));
+  }
+
+  try {
+    const existing = await client.fetch<{ _id: string } | null>(
+      `*[_type == "siteSettings"][0]{ _id }`
+    );
+    if (existing) {
+      await client.patch(existing._id).set(patch).commit();
+    } else {
+      await client.create({ _type: "siteSettings", ...patch } as Parameters<typeof client.create>[0]);
+    }
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+export async function getSiteSettingsForAdmin() {
+  const client = getWriteClient();
+  if (!client) return null;
+  return client.fetch(
+    `*[_type == "siteSettings"][0]{
+      _id, clubName, tagline, contactEmail, phone, address,
+      socialLinks,
+      "heroSlides": heroSlides[]{
+        eyebrow, title, subtitle, isDynamic,
+        "imageRef": image.asset._ref,
+        "imageUrl": image.asset->url,
+        "imageAlt": image.alt,
+        cta1Label, cta1Href, cta2Label, cta2Href
+      }
+    }`
+  );
+}
+
 // ── Events ────────────────────────────────────────────────────────────────────
 
 export interface EventInput {

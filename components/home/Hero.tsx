@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState, useCallback, useRef } from "react";
 import { cn } from "@/lib/utils";
-import type { FuPaMatch } from "@/types";
+import type { FuPaMatch, HeroSlideData } from "@/types";
 
 interface Slide {
   id: number;
@@ -66,9 +66,32 @@ function formatMatchDate(dateStr: string) {
 
 interface HeroProps {
   nextMatch?: FuPaMatch | null;
+  slides?: HeroSlideData[];
 }
 
-export function Hero({ nextMatch }: Readonly<HeroProps>) {
+// Fallback images indexed by slide position
+const FALLBACK_IMAGES = [
+  "/images/slider/img-01.png",
+  "/images/slider/img-02.png",
+  "/images/slider/img-03.jpg",
+];
+
+export function Hero({ nextMatch, slides }: Readonly<HeroProps>) {
+  // Build effective slides from Sanity data or fall back to hardcoded
+  const effectiveSlides: Slide[] =
+    slides && slides.length > 0
+      ? slides.map((s, i) => ({
+          id: i + 1,
+          player: s.imageUrl || FALLBACK_IMAGES[i] || FALLBACK_IMAGES[0],
+          eyebrow: s.eyebrow,
+          isDynamic: s.isDynamic ? (true as const) : undefined,
+          title: s.title,
+          subtitle: s.subtitle,
+          cta1: s.cta1,
+          cta2: s.cta2,
+        }))
+      : SLIDES;
+
   const [current, setCurrent] = useState(0);
   const [transitioning, setTransitioning] = useState(false);
   const [direction, setDirection] = useState<1 | -1>(1);
@@ -89,11 +112,11 @@ export function Hero({ nextMatch }: Readonly<HeroProps>) {
   );
 
   const next = useCallback(
-    () => goTo((current + 1) % SLIDES.length),
-    [current, goTo]
+    () => goTo((current + 1) % effectiveSlides.length),
+    [current, goTo, effectiveSlides.length]
   );
   const prev = useCallback(
-    () => goTo((current - 1 + SLIDES.length) % SLIDES.length),
+    () => goTo((current - 1 + effectiveSlides.length) % effectiveSlides.length),
     [current, goTo]
   );
 
@@ -105,7 +128,7 @@ export function Hero({ nextMatch }: Readonly<HeroProps>) {
     };
   }, [next, paused]);
 
-  const slide = SLIDES[current];
+  const slide = effectiveSlides[current];
 
   // Resolve dynamic slide 1 content
   const isDynamic = slide.isDynamic && nextMatch;
@@ -238,7 +261,7 @@ export function Hero({ nextMatch }: Readonly<HeroProps>) {
 
       {/* Dot navigation */}
       <div className="absolute bottom-6 left-1/2 z-20 flex -translate-x-1/2 gap-2">
-        {SLIDES.map((item, i) => (
+        {effectiveSlides.map((item, i) => (
           <button
             key={item.id}
             onClick={() => goTo(i)}

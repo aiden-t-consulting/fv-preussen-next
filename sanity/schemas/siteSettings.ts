@@ -55,6 +55,36 @@ export const siteSettings = defineType({
         defineField({ name: "alt", title: "Alt-Text", type: "string" }),
       ],
     }),
+    defineField({
+      name: "heroSlides",
+      title: "Hero-Slides",
+      type: "array",
+      of: [
+        {
+          type: "object",
+          fields: [
+            defineField({ name: "eyebrow", title: "Eyebrow-Text (z.B. 'Naechstes Spiel')", type: "string", validation: (Rule) => Rule.required() }),
+            defineField({ name: "title", title: "Überschrift", type: "string" }),
+            defineField({ name: "subtitle", title: "Untertitel", type: "text", rows: 2 }),
+            defineField({ name: "isDynamic", title: "Dynamisch (zeigt nächstes Spiel)", type: "boolean", initialValue: false }),
+            defineField({
+              name: "image",
+              title: "Bild (Spieler-Foto o.ä.)",
+              type: "image",
+              options: { hotspot: true },
+              fields: [defineField({ name: "alt", title: "Alt-Text", type: "string" })],
+            }),
+            defineField({ name: "cta1Label", title: "Button 1 – Text", type: "string" }),
+            defineField({ name: "cta1Href", title: "Button 1 – Link", type: "string" }),
+            defineField({ name: "cta2Label", title: "Button 2 – Text", type: "string" }),
+            defineField({ name: "cta2Href", title: "Button 2 – Link", type: "string" }),
+          ],
+          preview: {
+            select: { title: "eyebrow", subtitle: "title", media: "image" },
+          },
+        },
+      ],
+    }),
   ],
   preview: {
     select: { title: "clubName", media: "badge" },

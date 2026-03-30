@@ -76,6 +76,16 @@ export interface SiteSettings {
   badge?: SanityImage;
 }
 
+export interface HeroSlideData {
+  eyebrow: string;
+  title?: string;
+  subtitle?: string;
+  isDynamic?: boolean;
+  imageUrl: string;
+  cta1: { label: string; href: string };
+  cta2: { label: string; href: string };
+}
+
 export interface Event {
   _id: string;
   _type: "event";
