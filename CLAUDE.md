@@ -30,11 +30,11 @@ When `NEXT_PUBLIC_SANITY_PROJECT_ID` is not set (or equals `"your-project-id"`),
 ```
 app/
   layout.tsx               ← Root layout: Header + Footer for all pages
-  page.tsx                 ← Homepage (/)
-  (site)/                  ← Route group (shared for future sub-layouts)
-    aktuelles/page.tsx     ← /aktuelles  (news listing)
+  page.tsx                 ← Homepage (/) — ISR revalidate=60
+  (site)/                  ← Route group for sub-pages (its own page.tsx calls notFound())
+    aktuelles/page.tsx     ← /aktuelles (news listing)
     aktuelles/[slug]/      ← /aktuelles/[slug] (article detail)
-    berichte/page.tsx      ← /berichte  (match reports)
+    berichte/page.tsx      ← /berichte (match reports)
     teams/page.tsx         ← /teams
     teams/[slug]/          ← /teams/[slug]
     sponsoren/page.tsx     ← /sponsoren
@@ -45,7 +45,9 @@ app/
   api/revalidate/route.ts  ← POST from Sanity webhook → ISR revalidation
 ```
 
-### Data fetching layers
+**Route conflict note:** `app/(site)/page.tsx` calls `notFound()` — the real homepage is `app/page.tsx`. Never put renderable content in `(site)/page.tsx`.
+
+### Data fetching
 
 | Layer | File | Purpose |
 |-------|------|---------|
@@ -54,26 +56,49 @@ app/
 | Types | `types/index.ts` | All shared TypeScript types |
 | Utils | `lib/utils.ts` | `cn()`, date formatters, category helpers |
 
-All Sanity queries use `safeFetch()` wrapper which returns the fallback value if Sanity isn't configured or the query fails — the site always renders something.
+All Sanity queries go through `safeFetch()` in `queries.ts` — returns the fallback value when Sanity is unconfigured or throws. The site always renders.
 
 ### ISR strategy
-- Homepage: `revalidate = 60` seconds
+- Homepage: `revalidate = 60`
 - Article/team pages: `revalidate = 60`
 - Static pages (verein, sponsoren, teams): `revalidate = 3600`
-- On Sanity publish: webhook hits `/api/revalidate` → `revalidatePath()` for the specific page
+- On Sanity publish: webhook → `/api/revalidate` → `revalidatePath()` for the changed page
 
 ### Styling
-Tailwind CSS v4 with brand tokens in `app/globals.css` `@theme` block:
-- `--color-brand-green: #21a530` — primary CTA, active states
-- `--color-brand-green-dark: #15540a` — header, footer, dark sections
-- `--color-brand-green-light: #81d742` — hover, accent, light text on dark bg
-- Font stack: `Cormorant Garamond` (headings), `Nunito Sans` (body), `Playfair Display` (logo)
+Tailwind CSS v4. Brand tokens are defined in the `@theme inline` block in `app/globals.css` — do not add a `tailwind.config.ts`.
+
+Key brand values (from original `color.css`):
+- Primary green: `#039139` (use as `bg-[#039139]` or `text-[#039139]`)
+- Dark green: `#026b29`
+- Hero background: `#373542` (dark purple-grey, matching original slider bg)
+
+Font stack (loaded via Google Fonts in `globals.css`):
+- `Oswald` — nav labels, section headings, club name
+- `Nunito Sans` — body text
+- `Cormorant Garamond` — display/article headings
+- `Playfair Display` — logo text
+
+### Components
+```
+components/
+  layout/   Header.tsx, Footer.tsx
+  home/     Hero.tsx, LatestNews.tsx, MatchSection.tsx,
+            SponsorsCarousel.tsx, SponsorsStrip.tsx, StatsCounter.tsx
+  news/     ArticleCard.tsx etc.
+  teams/    TeamCard.tsx etc.
+  ui/       Radix-based primitives (accordion, dialog, toast …)
+```
+
+`SponsorsCarousel` uses a CSS keyframe animation (`sponsors-scroll`) injected via a `<style>` tag — no JS scroll logic. Pause-on-hover is controlled by toggling the animation class via `useState`.
 
 ### Sanity schemas
-Located in `sanity/schemas/` — `article`, `team`, `player`, `sponsor`, `siteSettings`. Import via `sanity/schemas/index.ts` when setting up the Sanity Studio.
+Located in `sanity/schemas/`: `article`, `team`, `player`, `sponsor`, `siteSettings`. Entry point is `sanity/schemas/index.ts`. Use these when initialising Sanity Studio separately.
 
-### Contact form security
-`app/api/contact/route.ts` validates with Zod before sending. All HTML in emails is escaped via `escapeHtml()`. Resend is instantiated lazily (only when a request arrives) to avoid build-time failures.
+### Contact form
+`app/api/contact/route.ts` validates with Zod, escapes HTML via `escapeHtml()`, and instantiates Resend lazily inside the handler (not at module load) to avoid build-time failures when `RESEND_API_KEY` is absent.
 
-### Route conflict note
-`app/(site)/page.tsx` exists but calls `notFound()` — the real homepage is `app/page.tsx`. The `(site)` route group is used only for organisational purposes; its root page must not render real content.
+### Known gotchas
+- `lucide-react` v1.x removed brand icons — Facebook, Instagram, YouTube are inline SVGs in `Header.tsx` and `Footer.tsx`.
+- `@sanity/image-url` requires the named export: `import { createImageUrlBuilder } from "@sanity/image-url"`.
+- Zod v4: `z.literal()` second argument uses `error:` not `errorMap:`.
+- Google Fonts `@import url(...)` must appear before `@import "tailwindcss"` in `globals.css`.

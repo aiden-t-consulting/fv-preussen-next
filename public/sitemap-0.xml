@@ -1,10 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
-<url><loc>https://fvpreussen-eberswalde.de</loc><lastmod>2026-03-30T01:06:54.259Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://fvpreussen-eberswalde.de/berichte</loc><lastmod>2026-03-30T01:06:54.259Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://fvpreussen-eberswalde.de/fan-shop</loc><lastmod>2026-03-30T01:06:54.259Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://fvpreussen-eberswalde.de/kontakt</loc><lastmod>2026-03-30T01:06:54.259Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://fvpreussen-eberswalde.de/sponsoren</loc><lastmod>2026-03-30T01:06:54.259Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://fvpreussen-eberswalde.de/teams</loc><lastmod>2026-03-30T01:06:54.259Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://fvpreussen-eberswalde.de/verein</loc><lastmod>2026-03-30T01:06:54.259Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://fvpreussen-eberswalde.de</loc><lastmod>2026-03-30T03:22:08.589Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://fvpreussen-eberswalde.de/berichte</loc><lastmod>2026-03-30T03:22:08.590Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://fvpreussen-eberswalde.de/fan-shop</loc><lastmod>2026-03-30T03:22:08.590Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://fvpreussen-eberswalde.de/kontakt</loc><lastmod>2026-03-30T03:22:08.590Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://fvpreussen-eberswalde.de/sponsoren</loc><lastmod>2026-03-30T03:22:08.590Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://fvpreussen-eberswalde.de/teams</loc><lastmod>2026-03-30T03:22:08.590Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://fvpreussen-eberswalde.de/teams/herren</loc><lastmod>2026-03-30T03:22:08.590Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://fvpreussen-eberswalde.de/teams/herren-ii</loc><lastmod>2026-03-30T03:22:08.590Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://fvpreussen-eberswalde.de/teams/u11</loc><lastmod>2026-03-30T03:22:08.590Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://fvpreussen-eberswalde.de/teams/u13</loc><lastmod>2026-03-30T03:22:08.590Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://fvpreussen-eberswalde.de/teams/u15</loc><lastmod>2026-03-30T03:22:08.590Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://fvpreussen-eberswalde.de/teams/u17</loc><lastmod>2026-03-30T03:22:08.590Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://fvpreussen-eberswalde.de/teams/u19</loc><lastmod>2026-03-30T03:22:08.590Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://fvpreussen-eberswalde.de/teams/u35</loc><lastmod>2026-03-30T03:22:08.590Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://fvpreussen-eberswalde.de/teams/u45</loc><lastmod>2026-03-30T03:22:08.590Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://fvpreussen-eberswalde.de/teams/u50</loc><lastmod>2026-03-30T03:22:08.590Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://fvpreussen-eberswalde.de/teams/u7</loc><lastmod>2026-03-30T03:22:08.590Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://fvpreussen-eberswalde.de/teams/u9</loc><lastmod>2026-03-30T03:22:08.590Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://fvpreussen-eberswalde.de/verein</loc><lastmod>2026-03-30T03:22:08.590Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://fvpreussen-eberswalde.de/verein/dokumente</loc><lastmod>2026-03-30T03:22:08.590Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://fvpreussen-eberswalde.de/verein/geschichte</loc><lastmod>2026-03-30T03:22:08.590Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://fvpreussen-eberswalde.de/verein/stadion</loc><lastmod>2026-03-30T03:22:08.590Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://fvpreussen-eberswalde.de/verein/vorstand</loc><lastmod>2026-03-30T03:22:08.590Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
 </urlset>
