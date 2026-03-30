@@ -85,7 +85,12 @@ const nav: NavEntry[] = [
   {
     label: "FANS",
     href: "/fan-shop",
-    children: [{ label: "Fanshop", href: "/fan-shop" }],
+    children: [
+      { label: "Fan Shop", href: "/fan-shop" },
+      { label: "Trikots", href: "/fan-shop#produkte" },
+      { label: "Fanwear", href: "/fan-shop#produkte" },
+      { label: "Kinder", href: "/fan-shop#produkte" },
+    ],
   },
   { label: "KONTAKT", href: "/kontakt" },
 ];
