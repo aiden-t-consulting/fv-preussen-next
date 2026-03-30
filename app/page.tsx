@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import { Hero } from "@/components/home/Hero";
+import { QuickMatchStrip } from "@/components/home/QuickMatchStrip";
+import { Spielcenter } from "@/components/home/Spielcenter";
 import { LatestNews } from "@/components/home/LatestNews";
-import { MatchSection } from "@/components/home/MatchSection";
-import { StatsCounter } from "@/components/home/StatsCounter";
-import { SponsorsStrip } from "@/components/home/SponsorsStrip";
-import { SponsorsCarousel } from "@/components/home/SponsorsCarousel";
-import { getLatestArticles, getAllSponsors } from "@/lib/sanity/queries";
+import { TeamsOverview } from "@/components/home/TeamsOverview";
+import { ClubBlock } from "@/components/home/ClubBlock";
+import { SponsorsTiered } from "@/components/home/SponsorsTiered";
+import { ConversionBand } from "@/components/home/ConversionBand";
+import { getLatestArticles, getAllSponsors, getAllTeams } from "@/lib/sanity/queries";
 import {
   getNextMatch,
   getUpcomingMatches,
@@ -27,15 +29,26 @@ export const metadata: Metadata = {
 export const revalidate = 60;
 
 export default async function HomePage() {
-  const [articles, sponsors, nextMatch, upcoming, results, table] =
+  const [articles, sponsors, teams, nextMatch, upcoming, results, table] =
     await Promise.allSettled([
-      getLatestArticles(3),
+      getLatestArticles(4),
       getAllSponsors(),
+      getAllTeams(),
       getNextMatch(),
       getUpcomingMatches(5),
       getRecentResults(5),
       getLeagueTable(),
     ]);
+
+  const tableData = table.status === "fulfilled" ? table.value : [];
+  const tableEntry =
+    tableData.find((e) => e.isCurrentTeam) ??
+    tableData.find(
+      (e) =>
+        e.team.toLowerCase().includes("preussen") ||
+        e.team.toLowerCase().includes("eberswalde")
+    ) ??
+    null;
 
   return (
     <>
@@ -65,17 +78,34 @@ export default async function HomePage() {
       />
 
       <Hero nextMatch={nextMatch.status === "fulfilled" ? nextMatch.value : null} />
-      <LatestNews articles={articles.status === "fulfilled" ? articles.value : undefined} />
-      <MatchSection
+
+      <QuickMatchStrip
+        nextMatch={nextMatch.status === "fulfilled" ? nextMatch.value : null}
+        lastResult={
+          results.status === "fulfilled" ? results.value[0] ?? null : null
+        }
+        tableEntry={tableEntry}
+      />
+
+      <Spielcenter
         upcoming={upcoming.status === "fulfilled" ? upcoming.value : []}
         results={results.status === "fulfilled" ? results.value : []}
-        table={table.status === "fulfilled" ? table.value : []}
+        table={tableData}
       />
-      <StatsCounter />
-      <SponsorsCarousel />
-      {sponsors.status === "fulfilled" && sponsors.value.length > 0 && (
-        <SponsorsStrip sponsors={sponsors.value} />
-      )}
+
+      <LatestNews
+        articles={articles.status === "fulfilled" ? articles.value : undefined}
+      />
+
+      <TeamsOverview teams={teams.status === "fulfilled" ? teams.value : []} />
+
+      <ClubBlock />
+
+      <SponsorsTiered
+        sponsors={sponsors.status === "fulfilled" ? sponsors.value : []}
+      />
+
+      <ConversionBand />
     </>
   );
 }

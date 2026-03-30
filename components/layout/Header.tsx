@@ -3,10 +3,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { FacebookIcon, GooglePlusIcon, InstagramIcon, YoutubeIcon } from "@/components/ui/SocialIcons";
+import { FacebookIcon, InstagramIcon, YoutubeIcon } from "@/components/ui/SocialIcons";
 
 const nav = [
   {
@@ -71,6 +71,13 @@ export function Header() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const closeMobileMenu = () => {
     setMobileOpen(false);
@@ -81,76 +88,44 @@ export function Header() {
     href === "/" ? pathname === "/" : pathname.startsWith(href);
 
   return (
-    <header
-      className="fixed inset-x-0 top-0 z-50 shadow-2xl"
-    >
-      <nav
-        className="border-b border-white/25 bg-[#252331]/95 backdrop-blur-md transition-all duration-300"
-      >
+    <header className="fixed inset-x-0 top-0 z-50 shadow-2xl">
+      <nav className="border-b border-white/25 bg-[#252331]/95 backdrop-blur-md transition-all duration-300">
         <div className="mx-auto max-w-[1280px] px-4">
-          <div className="hidden h-11 items-end justify-center border-b border-white/20 pb-2 lg:flex">
+          {/* Social bar — collapses on scroll */}
+          <div
+            className={cn(
+              "hidden items-end justify-center border-b border-white/20 pb-2 lg:flex transition-all duration-300 overflow-hidden",
+              scrolled ? "max-h-0 opacity-0 pb-0" : "max-h-11"
+            )}
+          >
             <ul className="flex items-center gap-5 text-white/80">
               <li>
-                <a
-                  href="https://www.facebook.com/fvpreusseneberswalde"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Facebook"
-                  className="transition-colors duration-200 hover:text-[#039139]"
-                >
+                <a href="https://www.facebook.com/fvpreusseneberswalde" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="transition-colors duration-200 hover:text-[#039139]">
                   <FacebookIcon className="h-3.5 w-3.5" />
                 </a>
               </li>
               <li>
-                <a
-                  href="https://www.instagram.com/fvpreusseneberswalde"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Instagram"
-                  className="transition-colors duration-200 hover:text-[#039139]"
-                >
+                <a href="https://www.instagram.com/fvpreusseneberswalde" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="transition-colors duration-200 hover:text-[#039139]">
                   <InstagramIcon className="h-3.5 w-3.5" />
                 </a>
               </li>
               <li>
-                <a
-                  href="https://www.youtube.com/@fvpreusseneberswalde"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="YouTube"
-                  className="transition-colors duration-200 hover:text-[#039139]"
-                >
+                <a href="https://www.youtube.com/@fvpreusseneberswalde" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="transition-colors duration-200 hover:text-[#039139]">
                   <YoutubeIcon className="h-3.5 w-3.5" />
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://plus.google.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Google Plus"
-                  className="transition-colors duration-200 hover:text-[#039139]"
-                >
-                  <GooglePlusIcon className="h-3.5 w-3.5" />
                 </a>
               </li>
             </ul>
           </div>
 
-          <div className="relative flex h-16 items-center justify-between lg:h-[76px]">
-            <Link
-              href="/"
-              className="flex-shrink-0 lg:hidden"
-              aria-label="FV Preussen Eberswalde – Startseite"
-            >
-              <Image
-                src="/logo.png"
-                alt="FV Preussen Eberswalde"
-                width={60}
-                height={60}
-                className="h-12 w-auto drop-shadow-md"
-                priority
-              />
+          {/* Main nav bar — shrinks on scroll */}
+          <div
+            className={cn(
+              "relative flex items-center justify-between transition-all duration-300",
+              scrolled ? "h-[64px] lg:h-[72px]" : "h-16 lg:h-[76px]"
+            )}
+          >
+            <Link href="/" className="flex-shrink-0 lg:hidden" aria-label="FV Preussen Eberswalde – Startseite">
+              <Image src="/logo.png" alt="FV Preussen Eberswalde" width={60} height={60} className="h-12 w-auto drop-shadow-md" priority />
             </Link>
 
             <div className="hidden flex-1 items-center gap-0 pr-20 lg:flex">
@@ -162,17 +137,13 @@ export function Header() {
               ))}
             </div>
 
-            <Link
-              href="/"
-              className="absolute left-1/2 hidden -translate-x-1/2 lg:block"
-              aria-label="FV Preussen Eberswalde – Startseite"
-            >
+            <Link href="/" className="absolute left-1/2 hidden -translate-x-1/2 lg:block" aria-label="FV Preussen Eberswalde – Startseite">
               <Image
                 src="/logo.png"
                 alt="FV Preussen Eberswalde"
                 width={112}
                 height={112}
-                className="h-[108px] w-auto translate-y-1 drop-shadow-lg"
+                className={cn("w-auto drop-shadow-lg transition-all duration-300", scrolled ? "h-[80px] translate-y-0" : "h-[108px] translate-y-1")}
                 priority
               />
             </Link>
@@ -184,6 +155,20 @@ export function Header() {
                   <NavItem item={item} isActive={isActive} />
                 </div>
               ))}
+              <div className="ml-4 flex items-center gap-2 border-l border-white/20 pl-4">
+                <Link
+                  href="/verein/dokumente"
+                  className="whitespace-nowrap rounded-full border border-white/40 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.08em] text-white/85 transition-colors hover:border-white hover:text-white [font-family:var(--font-club)]"
+                >
+                  Mitglied werden
+                </Link>
+                <Link
+                  href="/sponsoren"
+                  className="whitespace-nowrap rounded-full bg-[#039139] px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.08em] text-white transition-colors hover:bg-[#026b29] [font-family:var(--font-club)]"
+                >
+                  Sponsor werden
+                </Link>
+              </div>
             </div>
 
             <button
