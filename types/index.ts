@@ -76,6 +76,37 @@ export interface SiteSettings {
   badge?: SanityImage;
 }
 
+export interface Event {
+  _id: string;
+  _type: "event";
+  title: string;
+  slug: { current: string };
+  category: "heimspiel" | "auswaertsspiel" | "training" | "veranstaltung" | "sonstiges";
+  date: string;
+  endDate?: string;
+  location?: string;
+  description?: string;
+  coverImage?: SanityImage;
+}
+
+export interface GalleryPhoto {
+  _key: string;
+  _type: "image";
+  asset: { _ref: string; _type: "reference" };
+  alt?: string;
+  caption?: string;
+}
+
+export interface Gallery {
+  _id: string;
+  _type: "gallery";
+  title: string;
+  slug: { current: string };
+  date?: string;
+  description?: string;
+  photos?: GalleryPhoto[];
+}
+
 // FuPa match data shapes
 export interface FuPaMatch {
   id: string;

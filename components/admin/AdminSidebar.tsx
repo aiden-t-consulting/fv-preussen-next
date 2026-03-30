@@ -7,6 +7,8 @@ import {
   BarChart3,
   FileText,
   Newspaper,
+  Calendar,
+  Images,
   ExternalLink,
   LogOut,
   ChevronRight,
@@ -17,6 +19,8 @@ const NAV = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard, exact: true },
   { href: "/admin/analytics", label: "Traffic & Analytics", icon: BarChart3, exact: false },
   { href: "/admin/news", label: "Beiträge", icon: Newspaper, exact: false },
+  { href: "/admin/events", label: "Veranstaltungen", icon: Calendar, exact: false },
+  { href: "/admin/gallery", label: "Fotogalerien", icon: Images, exact: false },
   { href: "/admin/content", label: "Inhalte", icon: FileText, exact: false },
 ];
 

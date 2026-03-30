@@ -128,6 +128,113 @@ export async function deleteArticle(id: string): Promise<boolean> {
   return true;
 }
 
+// ── Events ────────────────────────────────────────────────────────────────────
+
+export interface EventInput {
+  title: string;
+  slug: string;
+  category: string;
+  date: string;
+  endDate?: string;
+  location?: string;
+  description?: string;
+  coverImageRef?: string;
+  coverImageAlt?: string;
+}
+
+function buildEventDoc(input: EventInput | Partial<EventInput>) {
+  const doc: Record<string, unknown> = {};
+  if (input.title !== undefined) doc.title = input.title;
+  if (input.slug !== undefined) doc.slug = { _type: "slug", current: input.slug };
+  if (input.category !== undefined) doc.category = input.category;
+  if (input.date !== undefined) doc.date = input.date;
+  if (input.endDate !== undefined) doc.endDate = input.endDate || null;
+  if (input.location !== undefined) doc.location = input.location;
+  if (input.description !== undefined) doc.description = input.description;
+  if (input.coverImageRef !== undefined) {
+    doc.coverImage = {
+      _type: "image",
+      asset: { _type: "reference", _ref: input.coverImageRef },
+      alt: input.coverImageAlt ?? "",
+    };
+  }
+  return doc;
+}
+
+export async function createEvent(input: EventInput): Promise<{ _id: string } | null> {
+  const client = getWriteClient();
+  if (!client) return null;
+  return client.create({ _type: "event", ...buildEventDoc(input) } as Parameters<typeof client.create>[0]);
+}
+
+export async function updateEvent(id: string, input: Partial<EventInput>): Promise<{ _id: string } | null> {
+  const client = getWriteClient();
+  if (!client) return null;
+  return client.patch(id).set(buildEventDoc(input)).commit();
+}
+
+export async function deleteEvent(id: string): Promise<boolean> {
+  const client = getWriteClient();
+  if (!client) return false;
+  await client.delete(id);
+  return true;
+}
+
+// ── Galleries ─────────────────────────────────────────────────────────────────
+
+export interface GalleryPhotoInput {
+  assetRef: string;
+  alt?: string;
+  caption?: string;
+}
+
+export interface GalleryInput {
+  title: string;
+  slug: string;
+  date?: string;
+  description?: string;
+  photos: GalleryPhotoInput[];
+}
+
+function buildGalleryPhotos(photos: GalleryPhotoInput[]) {
+  return photos.map((p, i) => ({
+    _type: "image",
+    _key: `photo_${Date.now()}_${i}`,
+    asset: { _type: "reference", _ref: p.assetRef },
+    alt: p.alt ?? "",
+    caption: p.caption ?? "",
+  }));
+}
+
+function buildGalleryDoc(input: GalleryInput | Partial<GalleryInput>) {
+  const doc: Record<string, unknown> = {};
+  if (input.title !== undefined) doc.title = input.title;
+  if (input.slug !== undefined) doc.slug = { _type: "slug", current: input.slug };
+  if (input.date !== undefined) doc.date = input.date || null;
+  if (input.description !== undefined) doc.description = input.description;
+  if (input.photos !== undefined) doc.photos = buildGalleryPhotos(input.photos);
+  return doc;
+}
+
+export async function createGallery(input: GalleryInput): Promise<{ _id: string } | null> {
+  const client = getWriteClient();
+  if (!client) return null;
+  return client.create({ _type: "gallery", ...buildGalleryDoc(input) } as Parameters<typeof client.create>[0]);
+}
+
+export async function updateGallery(id: string, input: Partial<GalleryInput>): Promise<{ _id: string } | null> {
+  const client = getWriteClient();
+  if (!client) return null;
+  return client.patch(id).set(buildGalleryDoc(input)).commit();
+}
+
+export async function deleteGallery(id: string): Promise<boolean> {
+  const client = getWriteClient();
+  if (!client) return false;
+  await client.delete(id);
+  return true;
+}
+
 // ── Image upload ──────────────────────────────────────────────────────────────
 
 export async function uploadImage(
