@@ -73,7 +73,16 @@ const nav: NavEntry[] = [
     ],
   },
   { label: "SPIELE", href: "/berichte" },
-  { label: "SPONSOREN", href: "/sponsoren" },
+  {
+    label: "SPONSOREN",
+    href: "/sponsoren",
+    children: [
+      { label: "Hauptsponsor", href: "/sponsoren#hauptsponsor" },
+      { label: "Premium Partner", href: "/sponsoren#premium" },
+      { label: "Business Partner", href: "/sponsoren#partner" },
+      { label: "Sponsor werden", href: "/kontakt?betreff=sponsoring" },
+    ],
+  },
   {
     label: "FANS",
     href: "/fan-shop",
@@ -135,7 +144,7 @@ export function Header() {
 
             {/* Desktop left nav */}
             <div className="hidden flex-1 items-center gap-0 lg:flex">
-              {nav.slice(0, 4).map((item, index) => (
+              {nav.slice(0, 5).map((item, index) => (
                 <div key={item.href} className="flex items-center">
                   {index > 0 && (
                     <span className="mx-0.5 text-[10px] text-gray-300">·</span>
@@ -167,7 +176,7 @@ export function Header() {
 
             {/* Desktop right nav + CTAs */}
             <div className="hidden flex-1 items-center justify-end gap-0 lg:flex">
-              {nav.slice(4).map((item, index) => (
+              {nav.slice(5).map((item, index) => (
                 <div key={item.href} className="flex items-center">
                   {index > 0 && (
                     <span className="mx-0.5 text-[10px] text-gray-300">·</span>
