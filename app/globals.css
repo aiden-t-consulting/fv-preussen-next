@@ -3,11 +3,11 @@
 @import "tailwindcss";
 
 @theme inline {
-  /* Brand colours */
-  --color-brand-green: #21a530;
-  --color-brand-green-dark: #15540a;
-  --color-brand-green-light: #81d742;
-  --color-brand-green-pale: #e8f5e9;
+  /* Brand colours — exact values from original color.css */
+  --color-brand-green: #039139;
+  --color-brand-green-dark: #026b29;
+  --color-brand-green-light: #05b347;
+  --color-brand-green-pale: #e6f5ec;
 
   /* Neutral palette */
   --color-neutral-50:  #f9fafb;

@@ -1,7 +1,7 @@
 import Link from "next/link";
+import Image from "next/image";
 import { MapPin, Phone, Mail } from "lucide-react";
 
-// Inline SVG brand icons (lucide-react v1.x removed brand icons)
 function FacebookIcon({ className }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -21,7 +21,8 @@ function InstagramIcon({ className }: { className?: string }) {
 function YoutubeIcon({ className }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z" /><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="white" />
+      <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z" />
+      <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="white" />
     </svg>
   );
 }
@@ -30,19 +31,19 @@ const footerLinks = {
   verein: [
     { label: "Über uns", href: "/verein" },
     { label: "Geschichte", href: "/verein/geschichte" },
-    { label: "Vorstand", href: "/verein/vorstand" },
+    { label: "Präsidium", href: "/verein/vorstand" },
     { label: "Satzung & Dokumente", href: "/verein/dokumente" },
     { label: "Stadion", href: "/verein/stadion" },
   ],
   teams: [
-    { label: "Herren (Landesliga Nord)", href: "/teams/herren" },
-    { label: "Herren II", href: "/teams/herren-ii" },
-    { label: "A-Junioren (U19)", href: "/teams/u19" },
-    { label: "B-Junioren (U17)", href: "/teams/u17" },
-    { label: "Jugend-Teams", href: "/teams" },
-    { label: "Ü50", href: "/teams/ue50" },
+    { label: "Männer (Landesliga Nord)", href: "/teams/herren" },
+    { label: "Männer II", href: "/teams/herren-ii" },
+    { label: "A-Junioren U19", href: "/teams/u19" },
+    { label: "B-Junioren U17", href: "/teams/u17" },
+    { label: "Alle Mannschaften", href: "/teams" },
+    { label: "Männer Ü50", href: "/teams/ue50" },
   ],
-  aktuelles: [
+  fans: [
     { label: "Aktuelle News", href: "/aktuelles" },
     { label: "Spielberichte", href: "/berichte" },
     { label: "Sponsoren", href: "/sponsoren" },
@@ -55,74 +56,61 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-[#0e3a07] text-gray-300">
-      {/* Green top bar */}
-      <div className="h-1.5 bg-gradient-to-r from-[#81d742] via-[#21a530] to-[#15540a]" />
+    <footer className="bg-[#111111] text-gray-400">
+      {/* Green top border */}
+      <div className="h-1 bg-[#039139]" />
 
-      <div className="max-w-7xl mx-auto px-4 pt-16 pb-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
+      <div className="max-w-7xl mx-auto px-4 pt-14 pb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
 
           {/* Brand block */}
           <div>
-            <div className="flex items-center gap-3 mb-5">
-              <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-[#15540a] font-bold text-lg font-['Playfair_Display',serif] shrink-0">
-                FVP
-              </div>
-              <div>
-                <div className="text-white font-bold text-base font-['Playfair_Display',serif]">
-                  FV Preussen Eberswalde
-                </div>
-                <div className="text-[#81d742] text-xs">Gegründet 1919</div>
-              </div>
+            <div className="mb-5">
+              <Image
+                src="/logo.png"
+                alt="FV Preussen Eberswalde"
+                width={80}
+                height={80}
+                className="h-20 w-auto"
+              />
             </div>
-            <p className="text-sm text-gray-400 leading-relaxed mb-5">
-              Motor des Barnim – Fußball ist unsere Zukunft.
-              Leidenschaft, Zusammenhalt und Tradition seit über 100 Jahren.
+            <p className="text-white font-bold text-sm uppercase tracking-widest mb-1">
+              FV Preussen Eberswalde e.V.
             </p>
-            {/* Social links */}
-            <div className="flex gap-3">
-              <a
-                href="https://www.facebook.com/fvpreusseneberswalde"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-9 h-9 rounded-lg bg-white/10 hover:bg-[#21a530] flex items-center justify-center transition-colors"
-                aria-label="Facebook"
-              >
-                <FacebookIcon className="w-4 h-4 text-white" />
-              </a>
-              <a
-                href="https://www.instagram.com/fvpreusseneberswalde"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-9 h-9 rounded-lg bg-white/10 hover:bg-[#21a530] flex items-center justify-center transition-colors"
-                aria-label="Instagram"
-              >
-                <InstagramIcon className="w-4 h-4 text-white" />
-              </a>
-              <a
-                href="https://www.youtube.com/@fvpreusseneberswalde"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-9 h-9 rounded-lg bg-white/10 hover:bg-[#21a530] flex items-center justify-center transition-colors"
-                aria-label="YouTube"
-              >
-                <YoutubeIcon className="w-4 h-4 text-white" />
-              </a>
+            <p className="text-xs text-gray-500 mb-1">Registernummer: VR 5837 FF</p>
+            <p className="text-xs text-gray-500 mb-5">USt-IdNr.: 065/140/05883</p>
+
+            {/* Social */}
+            <div className="flex gap-2">
+              {[
+                { Icon: FacebookIcon, href: "https://www.facebook.com/fvpreusseneberswalde", label: "Facebook" },
+                { Icon: InstagramIcon, href: "https://www.instagram.com/fvpreusseneberswalde", label: "Instagram" },
+                { Icon: YoutubeIcon, href: "https://www.youtube.com/@fvpreusseneberswalde", label: "YouTube" },
+              ].map(({ Icon, href, label }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="w-8 h-8 border border-[#039139]/40 hover:border-[#039139] hover:bg-[#039139] flex items-center justify-center transition-all duration-200"
+                >
+                  <Icon className="w-3.5 h-3.5 text-gray-400 group-hover:text-white" />
+                </a>
+              ))}
             </div>
           </div>
 
           {/* Verein links */}
           <div>
-            <h3 className="text-white font-bold text-sm uppercase tracking-widest mb-5">
+            <h3 className="text-white font-bold text-xs uppercase tracking-[0.2em] border-b border-[#039139]/30 pb-3 mb-5">
               Verein
             </h3>
             <ul className="space-y-2.5">
               {footerLinks.verein.map((link) => (
                 <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm hover:text-[#81d742] transition-colors"
-                  >
+                  <Link href={link.href} className="text-sm hover:text-[#039139] transition-colors flex items-center gap-2">
+                    <span className="w-1 h-1 bg-[#039139] rounded-full shrink-0" />
                     {link.label}
                   </Link>
                 </li>
@@ -132,16 +120,14 @@ export function Footer() {
 
           {/* Teams links */}
           <div>
-            <h3 className="text-white font-bold text-sm uppercase tracking-widest mb-5">
+            <h3 className="text-white font-bold text-xs uppercase tracking-[0.2em] border-b border-[#039139]/30 pb-3 mb-5">
               Teams
             </h3>
             <ul className="space-y-2.5">
               {footerLinks.teams.map((link) => (
                 <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm hover:text-[#81d742] transition-colors"
-                  >
+                  <Link href={link.href} className="text-sm hover:text-[#039139] transition-colors flex items-center gap-2">
+                    <span className="w-1 h-1 bg-[#039139] rounded-full shrink-0" />
                     {link.label}
                   </Link>
                 </li>
@@ -151,29 +137,26 @@ export function Footer() {
 
           {/* Contact */}
           <div>
-            <h3 className="text-white font-bold text-sm uppercase tracking-widest mb-5">
+            <h3 className="text-white font-bold text-xs uppercase tracking-[0.2em] border-b border-[#039139]/30 pb-3 mb-5">
               Kontakt
             </h3>
             <ul className="space-y-4">
               <li className="flex gap-3 text-sm">
-                <MapPin className="w-4 h-4 text-[#81d742] shrink-0 mt-0.5" />
-                <span>
-                  Pfefferwerkerstraße 9<br />
+                <MapPin className="w-4 h-4 text-[#039139] shrink-0 mt-0.5" />
+                <address className="not-italic text-gray-400 leading-relaxed">
+                  Heegermühler Str. 69a<br />
                   16225 Eberswalde
-                </span>
+                </address>
               </li>
               <li className="flex gap-3 text-sm">
-                <Phone className="w-4 h-4 text-[#81d742] shrink-0 mt-0.5" />
-                <a href="tel:+4933342000" className="hover:text-[#81d742] transition-colors">
-                  +49 3334 2000
+                <Phone className="w-4 h-4 text-[#039139] shrink-0 mt-0.5" />
+                <a href="tel:+4933342358 48" className="hover:text-[#039139] transition-colors">
+                  +49 3334 235848
                 </a>
               </li>
               <li className="flex gap-3 text-sm">
-                <Mail className="w-4 h-4 text-[#81d742] shrink-0 mt-0.5" />
-                <a
-                  href="mailto:info@fvpreussen-eberswalde.de"
-                  className="hover:text-[#81d742] transition-colors break-all"
-                >
+                <Mail className="w-4 h-4 text-[#039139] shrink-0 mt-0.5" />
+                <a href="mailto:info@fvpreussen-eberswalde.de" className="hover:text-[#039139] transition-colors break-all">
                   info@fvpreussen-eberswalde.de
                 </a>
               </li>
@@ -181,24 +164,21 @@ export function Footer() {
             <div className="mt-6">
               <Link
                 href="/kontakt"
-                className="inline-flex items-center px-4 py-2 bg-[#21a530] text-white text-sm font-semibold rounded-lg hover:bg-[#1a8f28] transition-colors"
+                className="relative inline-flex items-center px-5 py-2.5 text-xs font-bold uppercase tracking-widest text-white border border-[#039139] overflow-hidden group"
               >
-                Nachricht senden
+                <span className="absolute inset-0 bg-[#039139] -translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
+                <span className="relative">Nachricht senden</span>
               </Link>
             </div>
           </div>
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-12 pt-6 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-gray-500">
+        <div className="mt-12 pt-6 border-t border-white/5 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-gray-600">
           <p>© {year} FV Preussen Eberswalde e.V. Alle Rechte vorbehalten.</p>
-          <div className="flex gap-4">
-            <Link href="/impressum" className="hover:text-gray-300 transition-colors">
-              Impressum
-            </Link>
-            <Link href="/datenschutz" className="hover:text-gray-300 transition-colors">
-              Datenschutz
-            </Link>
+          <div className="flex gap-5">
+            <Link href="/impressum" className="hover:text-gray-400 transition-colors uppercase tracking-wider">Impressum</Link>
+            <Link href="/datenschutz" className="hover:text-gray-400 transition-colors uppercase tracking-wider">Datenschutz</Link>
           </div>
         </div>
       </div>

@@ -4,6 +4,7 @@ import { LatestNews } from "@/components/home/LatestNews";
 import { MatchSection } from "@/components/home/MatchSection";
 import { StatsCounter } from "@/components/home/StatsCounter";
 import { SponsorsStrip } from "@/components/home/SponsorsStrip";
+import { SponsorsCarousel } from "@/components/home/SponsorsCarousel";
 import { getLatestArticles, getAllSponsors } from "@/lib/sanity/queries";
 import {
   getNextMatch,
@@ -71,7 +72,10 @@ export default async function HomePage() {
         table={table.status === "fulfilled" ? table.value : []}
       />
       <StatsCounter />
-      <SponsorsStrip sponsors={sponsors.status === "fulfilled" ? sponsors.value : []} />
+      <SponsorsCarousel />
+      {sponsors.status === "fulfilled" && sponsors.value.length > 0 && (
+        <SponsorsStrip sponsors={sponsors.value} />
+      )}
     </>
   );
 }
