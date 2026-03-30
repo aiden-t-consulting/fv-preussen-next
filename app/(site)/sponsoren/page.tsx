@@ -264,7 +264,7 @@ export default async function SponsorenPage() {
 
           {/* Hauptsponsor */}
           {(hasSanityData ? hauptsponsors.length > 0 : fallbackHaupt.length > 0) && (
-            <div>
+            <div id="hauptsponsor">
               <div className="flex items-center gap-3 mb-8">
                 <div className="w-9 h-9 rounded-xl bg-[#2e7d32]/15 flex items-center justify-center">
                   <Star className="w-5 h-5 text-[#2e7d32]" />
@@ -281,7 +281,7 @@ export default async function SponsorenPage() {
 
           {/* Premium Partner */}
           {(hasSanityData ? premiumsponsors.length > 0 : fallbackPremium.length > 0) && (
-            <div>
+            <div id="premium">
               <div className="flex items-center gap-3 mb-8">
                 <div className="w-9 h-9 rounded-xl bg-[#2e7d32]/15 flex items-center justify-center">
                   <Award className="w-5 h-5 text-[#2e7d32]" />
@@ -298,7 +298,7 @@ export default async function SponsorenPage() {
 
           {/* Partner */}
           {(hasSanityData ? partners.length > 0 : fallbackPartner.length > 0) && (
-            <div>
+            <div id="partner">
               <div className="flex items-center gap-3 mb-8">
                 <div className="w-9 h-9 rounded-xl bg-[#2e7d32]/15 flex items-center justify-center">
                   <Handshake className="w-5 h-5 text-[#2e7d32]" />

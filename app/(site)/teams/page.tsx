@@ -76,6 +76,7 @@ export default async function TeamsPage() {
   if (teams.length === 0) teams = FALLBACK_TEAMS;
 
   const herren = teams.filter((t) =>
+    t.name?.toLowerCase().includes("männer") ||
     t.name?.toLowerCase().includes("manner") ||
     t.name?.toLowerCase().includes("herren")
   );
@@ -106,15 +107,15 @@ export default async function TeamsPage() {
             className="inline-flex items-center gap-2 text-[#a5d6a7] hover:text-white transition-colors text-sm font-semibold mb-6"
           >
             <ArrowLeft className="w-4 h-4" />
-            Zuruck zur Startseite
+            Zurück zur Startseite
           </Link>
           <p className="text-[#a5d6a7] text-sm font-bold uppercase tracking-[0.2em] mb-3">
             Mannschaften
           </p>
           <h1 className="text-3xl md:text-5xl font-bold">Unsere Teams</h1>
           <p className="mt-4 text-gray-300 max-w-xl">
-            Ubersicht unserer Mannschaften von Grossfeld bis Nachwuchs.
-            Teamfotos basieren auf den veroffentlichten Vereinsinformationen.
+            Übersicht unserer Mannschaften von Großfeld bis Nachwuchs.
+            Teamfotos basieren auf den veröffentlichten Vereinsinformationen.
           </p>
         </div>
       </div>

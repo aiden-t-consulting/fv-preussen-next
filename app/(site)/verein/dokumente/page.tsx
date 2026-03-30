@@ -17,14 +17,14 @@ const documents = [
     items: [
       {
         title: "DIE SATZUNG",
-        description: "Satzung des FV Preussen Eberswalde in der auf der Bestandsseite veroffentlichten Fassung.",
+        description: "Satzung des FV Preussen Eberswalde in der auf der Bestandsseite veröffentlichten Fassung.",
         type: "PDF",
         available: true,
         url: "https://fvpreussen-eberswalde.de/wp-content/uploads/2024/08/Satzung-FVP-16-11-2023.pdf",
       },
       {
         title: "Die Finanz- und Beitragsordnung",
-        description: "Regelung zu Beitragen und finanziellen Rahmenbedingungen des Vereins.",
+        description: "Regelung zu Beiträgen und finanziellen Rahmenbedingungen des Vereins.",
         type: "PDF",
         available: true,
         url: "https://fvpreussen-eberswalde.de/wp-content/uploads/2024/08/Finanz-und-Beitragsordnung-2024-2.pdf",
@@ -36,7 +36,7 @@ const documents = [
     items: [
       {
         title: "DER AUFNAHMEANTRAG",
-        description: "Mitgliedsantrag in der auf der Bestandsseite veroffentlichten Fassung.",
+        description: "Mitgliedsantrag in der auf der Bestandsseite veröffentlichten Fassung.",
         type: "PDF",
         available: true,
         url: "https://fvpreussen-eberswalde.de/wp-content/uploads/2024/07/FVP-Mitgliedsantrag-Neu-2024.pdf",
