@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 
 const boardMembers = [
   {
-    role: "Präsident",
+    role: "Prasident",
     name: "Danko Jur",
     email: "info@fvpreussen-eberswalde.de",
     photo: "/images/legacy/board/danko-jur.jpg",
@@ -33,15 +33,15 @@ const boardMembers = [
   },
   {
     role: "2. Stellvertreter / Nachwuchsleiter",
-    name: "Marcus Buelow",
-    email: "marcus.buelow@fvpreussen-eberswalde.de",
-    photo: "",
+    name: "Marcus Blow",
+    email: "",
+    photo: "/images/legacy/board/marcus-blow.jpg",
   },
   {
     role: "Schatzmeister",
     name: "Christian Mertinkat",
     email: "",
-    photo: "/images/legacy/board/christian-melchert.jpg",
+    photo: "",
   },
   {
     role: "Vorstandsmitglied",
@@ -83,7 +83,7 @@ export default function VereinPage() {
             <span className="text-white font-bold text-3xl font-['Playfair_Display',serif]">FVP</span>
           </div>
           <p className="text-[#81d742] text-sm font-bold uppercase tracking-[0.2em] mb-3">
-            Seit 1919
+            Seit 1909
           </p>
           <h1 className="text-4xl md:text-6xl font-bold mb-4">FV Preussen Eberswalde</h1>
           <p className="text-xl text-gray-200 max-w-2xl mx-auto">
@@ -136,7 +136,7 @@ export default function VereinPage() {
                 mit Hauptplatz, Kunstrasen und Nebenplatz bildet dabei das sportliche Zentrum.
               </p>
               <p>
-                Als "Motor des Barnim" steht der Verein für Nachwuchsförderung,
+                Als &quot;Motor des Barnim&quot; steht der Verein fur Nachwuchsforderung,
                 gesellschaftliches Engagement und eine starke lokale Gemeinschaft.
               </p>
             </div>
@@ -154,7 +154,7 @@ export default function VereinPage() {
           {/* Stats */}
           <div className="grid grid-cols-2 gap-4">
             {[
-              { icon: Calendar, value: "1919", label: "Gründungsjahr" },
+              { icon: Calendar, value: "1909", label: "Grundungsjahr" },
               { icon: Users, value: "600+", label: "Mitglieder" },
               { icon: Trophy, value: "16", label: "Mannschaften" },
               { icon: MapPin, value: "Barnim", label: "Heimat" },
@@ -179,8 +179,8 @@ export default function VereinPage() {
             align="left"
           />
           <div className="relative pl-6 border-l-2 border-[#21a530]/30 space-y-8">
-            {milestones.map((m, i) => (
-              <div key={i} className="relative">
+            {milestones.map((m) => (
+              <div key={m.year} className="relative">
                 <div className="absolute -left-[25px] w-5 h-5 rounded-full bg-[#21a530] border-2 border-white shadow" />
                 <div className="bg-white rounded-xl border border-gray-100 p-5">
                   <span className="text-[#21a530] font-bold text-sm">{m.year}</span>
@@ -200,7 +200,7 @@ export default function VereinPage() {
           />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {boardMembers.map((member) => (
-              <div key={member.role} className="bg-white rounded-xl border border-gray-100 p-5">
+              <div key={`${member.role}-${member.name}`} className="bg-white rounded-xl border border-gray-100 p-5">
                 {member.photo ? (
                   <div className="mb-3 overflow-hidden rounded-xl border border-gray-100">
                     <Image

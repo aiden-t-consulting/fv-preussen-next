@@ -35,28 +35,65 @@ const FALLBACK_SPONSORS: Array<{
   url?: string;
 }> = [
   {
-    id: "spk",
+    id: "sparkasse-barnim",
     name: "Sparkasse Barnim",
     tier: "hauptsponsor",
-    src: "/images/sponsors/spk-barnim.png",
+    src: "/images/sponsors/sparkasse-barnim.jpg",
+    url: "https://www.spk-barnim.de/",
   },
   {
-    id: "s1",
-    name: "Partner 1",
+    id: "fielmann",
+    name: "Fielmann",
     tier: "premiumsponsor",
-    src: "/images/sponsors/sponsor-01.png",
+    src: "/images/legacy/sponsors/fielmann.png",
   },
   {
-    id: "s2",
-    name: "Partner 2",
+    id: "sportstiftung",
+    name: "Sportstiftung der Sparkasse Barnim",
     tier: "premiumsponsor",
-    src: "/images/sponsors/sponsor-02.png",
+    src: "/images/legacy/sponsors/sportstiftung.jpg",
   },
   {
-    id: "s3",
-    name: "Partner 3",
+    id: "hotel-am-markt",
+    name: "Hotel Am Markt",
+    tier: "premiumsponsor",
+    src: "/images/legacy/sponsors/hotel-am-markt.png",
+  },
+  {
+    id: "hts",
+    name: "HTS",
     tier: "partner",
-    src: "/images/sponsors/sponsor-03.png",
+    src: "/images/legacy/sponsors/hts.jpg",
+  },
+  {
+    id: "accurat",
+    name: "ACCURAT",
+    tier: "partner",
+    src: "/images/legacy/sponsors/accurat.jpg",
+  },
+  {
+    id: "fitolino",
+    name: "Fitolino",
+    tier: "partner",
+    src: "/images/legacy/sponsors/fitolino.png",
+  },
+  {
+    id: "ksb",
+    name: "Kreissportbund Barnim",
+    tier: "partner",
+    src: "/images/legacy/sponsors/ksb.jpg",
+  },
+  {
+    id: "twe",
+    name: "TWE",
+    tier: "partner",
+    src: "/images/legacy/sponsors/twe.jpg",
+  },
+  {
+    id: "glg",
+    name: "GLG",
+    tier: "partner",
+    src: "/images/legacy/sponsors/glg.jpg",
   },
 ];
 
@@ -279,6 +316,11 @@ export default async function SponsorenPage() {
           {hasSanityData && sponsors.length === 0 && (
             <p className="text-center text-gray-400 py-20">
               Sponsoreninformationen werden in Kürze veröffentlicht.
+            </p>
+          )}
+          {!hasSanityData && FALLBACK_SPONSORS.length === 0 && (
+            <p className="text-center text-gray-400 py-20">
+              Sponsoreninformationen werden in Kurze veroffentlicht.
             </p>
           )}
         </section>

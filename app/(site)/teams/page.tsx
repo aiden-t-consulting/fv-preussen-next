@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { Users, Trophy } from "lucide-react";
+import { Users, Trophy, ArrowLeft } from "lucide-react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { getAllTeams } from "@/lib/sanity/queries";
 import { urlFor } from "@/lib/sanity/client";
@@ -16,27 +16,111 @@ export const metadata: Metadata = {
 export const revalidate = 3600;
 
 // Fallback teams if Sanity is not yet connected
-const FALLBACK_TEAMS: Partial<Team>[] = [
-  { _id: "1", name: "Herren (Landesliga Nord)", slug: { current: "herren" }, division: "Landesliga Nord", coach: "N.N." },
-  { _id: "2", name: "Herren II", slug: { current: "herren-ii" }, division: "Kreisliga", coach: "N.N." },
-  { _id: "3", name: "A-Junioren (U19)", slug: { current: "u19" }, division: "A-Junioren", coach: "N.N." },
-  { _id: "4", name: "B-Junioren (U17)", slug: { current: "u17" }, division: "B-Junioren", coach: "N.N." },
-  { _id: "5", name: "C-Junioren (U15)", slug: { current: "u15" }, division: "C-Junioren", coach: "N.N." },
-  { _id: "6", name: "D-Junioren (U13)", slug: { current: "u13" }, division: "D-Junioren", coach: "N.N." },
-  { _id: "7", name: "E-Junioren (U11)", slug: { current: "u11" }, division: "E-Junioren", coach: "N.N." },
-  { _id: "8", name: "F-Junioren (U9)", slug: { current: "u9" }, division: "F-Junioren", coach: "N.N." },
-  { _id: "9", name: "G-Junioren (U7)", slug: { current: "u7" }, division: "G-Junioren", coach: "N.N." },
-  { _id: "10", name: "Ü50", slug: { current: "ue50" }, division: "Freizeit", coach: "N.N." },
+type FallbackTeam = Partial<Team> & {
+  photo?: string;
+  source?: string;
+};
+
+// Legacy fallback teams sourced from the old Vereinsseite
+const FALLBACK_TEAMS: FallbackTeam[] = [
+  {
+    _id: "legacy-1-herren",
+    name: "1. Manner",
+    slug: { current: "herren" },
+    division: "Grossfeld",
+    coach: "N.N.",
+    photo: "/images/legacy/teams/1-mannschaft.jpg",
+    source: "https://fvpreussen-eberswalde.de/grossfeld/",
+  },
+  {
+    _id: "legacy-2-herren",
+    name: "2. Manner",
+    slug: { current: "herren-ii" },
+    division: "Grossfeld",
+    coach: "N.N.",
+    photo: "/images/legacy/teams/2-mannschaft.jpg",
+    source: "https://fvpreussen-eberswalde.de/grossfeld/",
+  },
+  {
+    _id: "legacy-u19",
+    name: "A-Junioren (U19)",
+    slug: { current: "u19" },
+    division: "Nachwuchs",
+    coach: "N.N.",
+  },
+  {
+    _id: "legacy-u17",
+    name: "B-Junioren (U17)",
+    slug: { current: "u17" },
+    division: "Nachwuchs",
+    coach: "N.N.",
+  },
+  {
+    _id: "legacy-u15",
+    name: "C-Junioren (U15)",
+    slug: { current: "u15" },
+    division: "Nachwuchs",
+    coach: "N.N.",
+  },
+  {
+    _id: "legacy-u13",
+    name: "D-Junioren (U13)",
+    slug: { current: "u13" },
+    division: "Nachwuchs",
+    coach: "N.N.",
+  },
+  {
+    _id: "legacy-u11",
+    name: "E-Junioren (U11)",
+    slug: { current: "u11" },
+    division: "Nachwuchs",
+    coach: "N.N.",
+  },
+  {
+    _id: "legacy-u9",
+    name: "F-Junioren (U9)",
+    slug: { current: "u9" },
+    division: "Nachwuchs",
+    coach: "N.N.",
+  },
+  {
+    _id: "legacy-u7",
+    name: "G-Junioren (U7)",
+    slug: { current: "u7" },
+    division: "Nachwuchs",
+    coach: "N.N.",
+  },
+  {
+    _id: "legacy-ue35",
+    name: "U35",
+    slug: { current: "u35" },
+    division: "Altherren",
+    coach: "N.N.",
+  },
+  {
+    _id: "legacy-ue45",
+    name: "U45",
+    slug: { current: "u45" },
+    division: "Altherren",
+    coach: "N.N.",
+  },
+  {
+    _id: "legacy-ue50",
+    name: "U50",
+    slug: { current: "u50" },
+    division: "Altherren",
+    coach: "N.N.",
+  },
 ];
 
-function TeamCard({ team }: { team: Partial<Team> }) {
+function TeamCard({ team }: { team: FallbackTeam }) {
   return (
     <Link
       href={`/teams/${team.slug?.current}`}
       className="group bg-white rounded-2xl border border-gray-100 hover:border-[#21a530]/40 hover:shadow-lg transition-all duration-300 overflow-hidden flex flex-col"
     >
-      {/* Badge area */}
-      <div className="relative h-36 bg-gradient-to-br from-[#15540a] to-[#21a530] flex items-center justify-center">
+      {/* Badge / photo area */}
+      <div className="relative h-36 bg-gradient-to-br from-[#15540a] to-[#21a530] flex items-center justify-center overflow-hidden">
         {team.badge ? (
           <Image
             src={urlFor(team.badge).width(120).height(120).url()}
@@ -45,6 +129,16 @@ function TeamCard({ team }: { team: Partial<Team> }) {
             height={80}
             className="object-contain drop-shadow-md group-hover:scale-110 transition-transform duration-300"
           />
+        ) : team.photo ? (
+          <>
+            <Image
+              src={team.photo}
+              alt={team.name ?? "Teamfoto"}
+              fill
+              className="object-cover group-hover:scale-105 transition-transform duration-300"
+            />
+            <div className="absolute inset-0 bg-black/25" />
+          </>
         ) : (
           <div className="w-20 h-20 rounded-full bg-white/20 flex items-center justify-center">
             <span className="text-white font-bold text-2xl font-['Playfair_Display',serif]">
@@ -75,20 +169,28 @@ function TeamCard({ team }: { team: Partial<Team> }) {
 }
 
 export default async function TeamsPage() {
-  let teams: Partial<Team>[] = await getAllTeams();
+  let teams: FallbackTeam[] = await getAllTeams();
   if (teams.length === 0) teams = FALLBACK_TEAMS;
 
-  const herren = teams.filter(
-    (t) => t.division?.toLowerCase().includes("liga") || t.name?.toLowerCase().includes("herren")
+  const herren = teams.filter((t) =>
+    t.name?.toLowerCase().includes("manner") ||
+    t.name?.toLowerCase().includes("herren")
   );
-  const jugend = teams.filter(
-    (t) =>
-      !t.division?.toLowerCase().includes("liga") &&
-      !t.name?.toLowerCase().includes("herren") &&
-      !t.name?.toLowerCase().includes("ü50")
+  const jugend = teams.filter((t) =>
+    t.name?.toLowerCase().includes("junior") ||
+    t.name?.toLowerCase().includes("u7") ||
+    t.name?.toLowerCase().includes("u9") ||
+    t.name?.toLowerCase().includes("u11") ||
+    t.name?.toLowerCase().includes("u13") ||
+    t.name?.toLowerCase().includes("u15") ||
+    t.name?.toLowerCase().includes("u17") ||
+    t.name?.toLowerCase().includes("u19")
   );
-  const freizeitAlte = teams.filter(
-    (t) => t.name?.toLowerCase().includes("ü50")
+  const freizeitAlte = teams.filter((t) =>
+    t.name?.toLowerCase().includes("u35") ||
+    t.name?.toLowerCase().includes("u45") ||
+    t.name?.toLowerCase().includes("u50") ||
+    t.name?.toLowerCase().includes("altherren")
   );
 
   return (
@@ -96,13 +198,20 @@ export default async function TeamsPage() {
       {/* Header */}
       <div className="bg-[#15540a] text-white py-16 lg:py-20">
         <div className="max-w-7xl mx-auto px-4">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 text-[#81d742] hover:text-white transition-colors text-sm font-semibold mb-6"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Zuruck zur Startseite
+          </Link>
           <p className="text-[#81d742] text-sm font-bold uppercase tracking-[0.2em] mb-3">
             Mannschaften
           </p>
           <h1 className="text-3xl md:text-5xl font-bold">Unsere Teams</h1>
           <p className="mt-4 text-gray-300 max-w-xl">
-            Von den Herren in der Landesliga bis zur G-Jugend — bei uns findet
-            jeder seinen Platz auf dem Platz.
+            Ubersicht unserer Mannschaften von Grossfeld bis Nachwuchs.
+            Teamfotos basieren auf den veroffentlichten Vereinsinformationen.
           </p>
         </div>
       </div>

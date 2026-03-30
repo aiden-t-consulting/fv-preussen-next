@@ -9,12 +9,64 @@ interface SponsorsStripProps {
   sponsors?: Sponsor[];
 }
 
-const FALLBACK_SPONSORS = [
-  { _id: "1", name: "Hauptsponsor 1", tier: "hauptsponsor" as const },
-  { _id: "2", name: "Premium Partner", tier: "premiumsponsor" as const },
-  { _id: "3", name: "Partner 1", tier: "partner" as const },
-  { _id: "4", name: "Partner 2", tier: "partner" as const },
-  { _id: "5", name: "Partner 3", tier: "partner" as const },
+interface FallbackSponsor {
+  _id: string;
+  name: string;
+  tier: "hauptsponsor" | "premiumsponsor" | "partner";
+  src: string;
+  url?: string;
+}
+
+const FALLBACK_SPONSORS: FallbackSponsor[] = [
+  {
+    _id: "sparkasse-barnim",
+    name: "Sparkasse Barnim",
+    tier: "hauptsponsor" as const,
+    src: "/images/sponsors/sparkasse-barnim.jpg",
+    url: "https://www.spk-barnim.de/",
+  },
+  {
+    _id: "fielmann",
+    name: "Fielmann",
+    tier: "premiumsponsor" as const,
+    src: "/images/legacy/sponsors/fielmann.png",
+  },
+  {
+    _id: "sportstiftung",
+    name: "Sportstiftung der Sparkasse Barnim",
+    tier: "premiumsponsor" as const,
+    src: "/images/legacy/sponsors/sportstiftung.jpg",
+  },
+  {
+    _id: "hotel-am-markt",
+    name: "Hotel Am Markt",
+    tier: "premiumsponsor" as const,
+    src: "/images/legacy/sponsors/hotel-am-markt.png",
+  },
+  {
+    _id: "fitolino",
+    name: "Fitolino",
+    tier: "partner" as const,
+    src: "/images/legacy/sponsors/fitolino.png",
+  },
+  {
+    _id: "ksb",
+    name: "Kreissportbund Barnim",
+    tier: "partner" as const,
+    src: "/images/legacy/sponsors/ksb.jpg",
+  },
+  {
+    _id: "twe",
+    name: "TWE",
+    tier: "partner" as const,
+    src: "/images/legacy/sponsors/twe.jpg",
+  },
+  {
+    _id: "glg",
+    name: "GLG",
+    tier: "partner" as const,
+    src: "/images/legacy/sponsors/glg.jpg",
+  },
 ];
 
 export function SponsorsStrip({ sponsors = [] }: SponsorsStripProps) {
@@ -110,7 +162,7 @@ function SponsorCard({
   sponsor,
   size,
 }: {
-  sponsor: (typeof FALLBACK_SPONSORS)[0] & { logo?: Sponsor["logo"]; url?: string };
+  sponsor: Sponsor | FallbackSponsor;
   size: "sm" | "md" | "lg";
 }) {
   const dimensions = {
@@ -131,6 +183,14 @@ function SponsorCard({
           height={dimensions.h}
           className="object-contain max-h-full"
         />
+      ) : "src" in sponsor ? (
+        <Image
+          src={sponsor.src}
+          alt={sponsor.name}
+          width={dimensions.w}
+          height={dimensions.h}
+          className="object-contain max-h-full"
+        />
       ) : (
         <span className="text-gray-400 text-sm font-semibold text-center line-clamp-2">
           {sponsor.name}
@@ -139,7 +199,7 @@ function SponsorCard({
     </div>
   );
 
-  if ("url" in sponsor && sponsor.url) {
+  if (sponsor.url) {
     return (
       <a href={sponsor.url} target="_blank" rel="noopener noreferrer" aria-label={sponsor.name}>
         {content}

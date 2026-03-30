@@ -14,11 +14,11 @@ export const revalidate = 3600;
 
 const vorstand = [
   {
-    role: "Präsident",
+    role: "Prasident",
     name: "Danko Jur",
     email: "info@fvpreussen-eberswalde.de",
     phone: "",
-    bio: "Trägt die Gesamtverantwortung für den Verein und repräsentiert den FV Preussen Eberswalde nach außen.",
+    bio: "Tragt die Gesamtverantwortung fur den Verein und reprasentiert den FV Preussen Eberswalde nach aussen.",
     photo: "/images/legacy/board/danko-jur.jpg",
   },
   {
@@ -26,31 +26,31 @@ const vorstand = [
     name: "Kristian Stelse",
     email: "",
     phone: "",
-    bio: "Unterstützt den Präsidenten bei allen Vereinsangelegenheiten und leitet den Verein bei dessen Abwesenheit.",
+    bio: "Unterstutzt den Prasidenten bei allen Vereinsangelegenheiten und leitet den Verein bei dessen Abwesenheit.",
     photo: "/images/legacy/board/kristian-stelse.jpg",
   },
   {
     role: "2. Stellvertreter / Nachwuchsleiter",
-    name: "Marcus Buelow",
-    email: "marcus.buelow@fvpreussen-eberswalde.de",
+    name: "Marcus Blow",
+    email: "",
     phone: "",
-    bio: "Verantwortet die Nachwuchsarbeit und koordiniert alle Jugendmannschaften des Vereins.",
-    photo: "",
+    bio: "Verantwortet die Nachwuchsarbeit und koordiniert die Jugendarbeit des Vereins.",
+    photo: "/images/legacy/board/marcus-blow.jpg",
   },
   {
     role: "Schatzmeister",
     name: "Christian Mertinkat",
     email: "",
     phone: "",
-    bio: "Verantwortlich für die Finanzen des Vereins und die ordnungsgemäße Buchführung.",
-    photo: "/images/legacy/board/christian-melchert.jpg",
+    bio: "Verantwortlich fur die Finanzen des Vereins und die ordnungsgemasse Buchfuhrung.",
+    photo: "",
   },
   {
     role: "Vorstandsmitglied",
     name: "Christian Melchert",
     email: "",
     phone: "",
-    bio: "Aktives Vorstandsmitglied mit Zuständigkeit für vereinsinterne Projekte und Veranstaltungen.",
+    bio: "Aktives Vorstandsmitglied mit Zustandigkeit fur vereinsinterne Projekte und Veranstaltungen.",
     photo: "/images/legacy/board/christian-melchert.jpg",
   },
   {
@@ -58,7 +58,7 @@ const vorstand = [
     name: "Maik Wendland",
     email: "",
     phone: "",
-    bio: "Aktives Vorstandsmitglied und Ansprechpartner für Sponsoring und Öffentlichkeitsarbeit.",
+    bio: "Aktives Vorstandsmitglied und Ansprechpartner fur Sponsoring und Offentlichkeitsarbeit.",
     photo: "/images/legacy/board/maik-wendland.jpg",
   },
 ];
@@ -106,7 +106,7 @@ export default function VorstandPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {vorstand.map((member) => (
               <div
-                key={member.role}
+                key={`${member.role}-${member.name}`}
                 className="bg-white rounded-2xl border border-gray-100 overflow-hidden hover:shadow-md transition-shadow"
               >
                 {member.photo ? (
@@ -210,5 +210,3 @@ export default function VorstandPage() {
     </div>
   );
 }
-
-
