@@ -1,0 +1,14 @@
+# *
+User-agent: *
+Allow: /
+
+# *
+User-agent: *
+Disallow: /api/
+Disallow: /studio/
+
+# Host
+Host: https://fvpreussen-eberswalde.de
+
+# Sitemaps
+Sitemap: https://fvpreussen-eberswalde.de/sitemap.xml
