@@ -132,7 +132,7 @@ export function Spielcenter({
   const [teamFilter, setTeamFilter] = useState<TeamFilter>("Alle");
 
   return (
-    <section className="bg-gray-50 py-20 lg:py-24">
+    <section className="bg-[#1e2030] py-20 lg:py-24">
       <div className="mx-auto max-w-[1280px] px-4">
         <div className="flex flex-col lg:flex-row lg:gap-16">
           {/* Left: intro */}
@@ -140,10 +140,10 @@ export function Spielcenter({
             <p className="mb-3 text-[11px] font-bold uppercase tracking-widest text-[#039139]">
               Offizielle Spielinformationen
             </p>
-            <h2 className="mb-4 text-3xl font-bold text-gray-900 [font-family:var(--font-club)] lg:text-4xl">
+            <h2 className="mb-4 text-3xl font-bold text-white [font-family:var(--font-club)] lg:text-4xl">
               Spielcenter
             </h2>
-            <p className="mb-6 text-sm leading-relaxed text-gray-500">
+            <p className="mb-6 text-sm leading-relaxed text-gray-400">
               Alle wichtigen Spielinformationen auf Basis offizieller Daten — von den
               nächsten Spielen bis zur aktuellen Tabelle.
             </p>
@@ -166,7 +166,7 @@ export function Spielcenter({
                     "rounded-full border px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wider transition-colors",
                     teamFilter === f
                       ? "border-[#039139] bg-[#039139] text-white"
-                      : "border-gray-200 bg-white text-gray-600 hover:border-[#039139]/50 hover:text-[#039139]"
+                      : "border-white/20 bg-white/10 text-gray-300 hover:border-[#039139]/60 hover:text-white"
                   )}
                 >
                   {f}
@@ -177,7 +177,7 @@ export function Spielcenter({
 
           {/* Right: tabs + content */}
           <div className="min-w-0 flex-1">
-            <div className="mb-6 flex gap-1 overflow-x-auto border-b border-gray-200">
+            <div className="mb-6 flex gap-1 overflow-x-auto border-b border-white/10">
               {TABS.map((tab) => (
                 <button
                   key={tab}
@@ -186,7 +186,7 @@ export function Spielcenter({
                     "-mb-px shrink-0 border-b-2 px-4 pb-3 text-[12px] font-semibold uppercase tracking-wider transition-colors",
                     activeTab === tab
                       ? "border-[#039139] text-[#039139]"
-                      : "border-transparent text-gray-400 hover:text-gray-700"
+                      : "border-transparent text-gray-500 hover:text-white"
                   )}
                 >
                   {tab}
@@ -194,7 +194,7 @@ export function Spielcenter({
               ))}
             </div>
 
-            <div className="rounded-[20px] border border-gray-100 bg-white p-6 shadow-sm">
+            <div className="rounded-[20px] border border-white/8 bg-white/5 p-6">
               {activeTab === "Nächste Spiele" &&
                 (upcoming.length > 0 ? (
                   upcoming.slice(0, 5).map((m) => <MatchRow key={m.id} match={m} />)

@@ -49,7 +49,7 @@ export function LatestNews({ articles = FALLBACK_ARTICLES }: LatestNewsProps) {
   const [featured, ...rest] = articles;
 
   return (
-    <section className="py-20 lg:py-28 bg-white">
+    <section className="py-20 lg:py-28 bg-[#f8f7f5]">
       <div className="max-w-7xl mx-auto px-4">
         <FadeIn className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
           <SectionHeading
