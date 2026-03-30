@@ -25,7 +25,7 @@ async function getArticles() {
   const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
   if (!projectId || projectId === "your-project-id") return [];
   try {
-    return sanityClient.fetch<
+    return await sanityClient.fetch<
       { _id: string; title: string; slug: string; category: string; publishedAt: string; author?: string }[]
     >(
       `*[_type == "article"] | order(publishedAt desc) {
